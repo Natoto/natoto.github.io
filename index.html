@@ -146,6 +146,50 @@
       <div class="body-wrap">
         
   
+    <article id="post-react-native" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/react-native/">react-native</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/react-native/" class="archive-article-date">
+  	<time datetime="2016-11-22T08:31:03.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-22</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-GitHub Pages 绑定来自阿里云的域名" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -348,61 +392,65 @@ AVAudioSession *session = [AVAudioSession sharedInstance];
 
 
   
-    <article id="post-2016-04-02-CocoaPod_Use" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2016-06-12-HEXO_Advanced" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/2016-06-12-HEXO_Advanced/">HEXO进阶</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<p>layout: post<br>title: CocoaPods使用心得<br>date: 2016-04-02</p>
-<h2 id="tag-iOS"><a href="#tag-iOS" class="headerlink" title="tag: iOS "></a>tag: iOS </h2><h3 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h3><p>　本章介绍什么是 <code>CocoaPods</code> ,如何使用 <code>CocoaPods</code> , 以及 <code>CocoaPods</code> 的原理,和使用 <code>CocoaPods</code> 时经常出现的一些问题。</p>
-<p>　Cocoapods 是 OS X 和 iOS 下的一个第三方库管理工具。我们能使用CocoaPods添加被称作 “Pods”的依赖库,并轻松管理它们的版本,CocoaPods会帮我们配置好这些三方库的路径及开发环境,极大的提升了开发者的工作效率。</p>
-<h3 id="安装CocoaPods"><a href="#安装CocoaPods" class="headerlink" title="安装CocoaPods　"></a>安装CocoaPods　</h3><p>　Mac下自带ruby,使用ruby的gem命令安装,ruby的软件源被墙了,把官方的ruby源替换成国内的淘宝源。</p>
-<h3 id="更换Gem源"><a href="#更换Gem源" class="headerlink" title="更换Gem源"></a>更换Gem源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ gem sources --remove https://rubygems.org/</div><div class="line">$ gem sources <span class="_">-a</span> https://ruby.taobao.org/</div><div class="line">$ gem sources <span class="_">-l</span></div></pre></td></tr></table></figure>
+        <p>HEXO接近是最近有一些朋友提出的问题，然后我做了总结，如果你也在使用HEXO，不妨看看，应该会有些帮助。</p>
 <ul>
-<li>1.移除掉原有的源（服务器在国外，速度较慢）。</li>
-<li>2.等1有反应之后再敲2命令（替换成淘宝上的ruby镜像https）。</li>
-<li>3.验证是否成功。成功如下：</li>
+<li>1、博客部署样式出问题了怎么办？</li>
+<li>2、电脑重装或者误删了本地博客怎么办？</li>
+<li>3、想使用两台电脑写博客怎么办？</li>
+<li>4、为何使用百度搜不到我的博客？</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">*** CURRENT SOURCES ***</div><div class="line"></div><div class="line">http://ruby.taobao.org/</div></pre></td></tr></table></figure>
-<h3 id="更新Gem源"><a href="#更新Gem源" class="headerlink" title="更新Gem源"></a>更新Gem源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">sudo gem update --system</div></pre></td></tr></table></figure>
-<h3 id="安装cocoapods"><a href="#安装cocoapods" class="headerlink" title="安装cocoapods"></a>安装cocoapods</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">$ sudo gem install cocoapods</div><div class="line">$ pod setup</div></pre></td></tr></table></figure>
-<p>pod setup 在执行时会比较慢，因为Cocoapods 要将它的信息下载到 ~/.cocoapods目录下, 耐心等待…</p>
-<h4 id="提升cocoapods的安装速度"><a href="#提升cocoapods的安装速度" class="headerlink" title="提升cocoapods的安装速度"></a>提升cocoapods的安装速度</h4><p>所有的项目的 Podspec 文件都托管在<a href="https://github.com/CocoaPods/Specs。第一次执行" target="_blank" rel="external">https://github.com/CocoaPods/Specs。第一次执行</a> pod setup 时，CocoaPods 会将这些podspec索引文件更新到本地的 ~/.cocoapods/目录下，这个索引文件比较大，有 80M 左右。<br>作者akinliu 在 gitcafe 和 oschina 上建立了 CocoaPods 索引库的镜像(在国内),我们可以使用CocoaPods国内的镜像索引，操作时会快多了,如gitcafe：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">pod repo remove master</div><div class="line">pod repo add master https://gitcafe.com/akuandev/Specs.git</div><div class="line">pod repo update</div></pre></td></tr></table></figure>
-<h3 id="使用cocoapods"><a href="#使用cocoapods" class="headerlink" title="使用cocoapods"></a>使用cocoapods</h3><p>cocoapods安装完成后，使用 pod search 命令来验证一下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">pod search AFNetworking</div></pre></td></tr></table></figure>
-<p>终端将会有如下结果：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">-&gt; AFNetworking (3.0.4)</div><div class="line">A delightful iOS and OS X networking framework.</div><div class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 3.0.4'</span></div><div class="line">- Homepage: https://github.com/AFNetworking/AFNetworking</div><div class="line">- Source:   https://github.com/AFNetworking/AFNetworking.git</div><div class="line">- Versions: 3.0.4, 3.0.3, 3.0.2, 3.0.1, 3.0.0, 3.0.0-beta.3, 3.0.0-beta.2,</div><div class="line">3.0.0-beta.1, 2.6.3, 2.6.2, 2.6.1, 2.6.0, 2.5.4, 2.5.3, 2.5.2, 2.5.1, 2.5.0,</div><div class="line">2.4.1, 2.4.0, 2.3.1, 2.3.0, 2.2.4, 2.2.3, 2.2.2, 2.2.1, 2.2.0, 2.1.0, 2.0.3,</div><div class="line">2.0.2, 2.0.1, 2.0.0, 2.0.0-RC3, 2.0.0-RC2, 2.0.0-RC1, 1.3.4, 1.3.3, 1.3.2,</div><div class="line">1.3.1, 1.3.0, 1.2.1, 1.2.0, 1.1.0, 1.0.1, 1.0, 1.0RC3, 1.0RC2, 1.0RC1,</div><div class="line">0.10.1, 0.10.0, 0.9.2, 0.9.1, 0.9.0, 0.7.0, 0.5.1 [master repo]</div><div class="line">- Subspecs:</div><div class="line">- AFNetworking/Serialization (3.0.4)</div><div class="line">- AFNetworking/Security (3.0.4)</div><div class="line">- AFNetworking/Reachability (3.0.4)</div><div class="line">- AFNetworking/NSURLSession (3.0.4)</div><div class="line">- AFNetworking/UIKit (3.0.4)</div><div class="line"></div><div class="line"></div><div class="line">-&gt; AFNetworking+AutoRetry (0.0.5)</div><div class="line">Auto Retries <span class="keyword">for</span> AFNetworking requests</div><div class="line">pod <span class="string">'AFNetworking+AutoRetry'</span>, <span class="string">'~&gt; 0.0.5'</span></div><div class="line">- Homepage: https://github.com/shaioz/AFNetworking-AutoRetry</div><div class="line">- Source:   https://github.com/shaioz/AFNetworking-AutoRetry.git</div><div class="line">- Versions: 0.0.5, 0.0.4, 0.0.3, 0.0.2, 0.0.1 [master repo]</div><div class="line"></div><div class="line">.........太多了，省略</div></pre></td></tr></table></figure>
-<p>pod search 是CocoaPods的一个搜索命令,我们可以用来搜索任何托管在CocoaPods上的三方库。    </p>
-<p>使用CocoaPods时需要新建一个 Podfile 的文件,cd 到 我的Demo项目里，Demo目录下有三个文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Demo 、  Demo.xcodeproj  、 DemoTests</div></pre></td></tr></table></figure>
-<p>新建 Podfile</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">touch Podfile</div></pre></td></tr></table></figure>
-<p>vim 编辑 Podfile</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim Podfile</div></pre></td></tr></table></figure>
-<p>由于是新建的 Podfile 里面应该是空白的。然后我们在里面添加依赖库，格式如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">platform :ios</div><div class="line">pod <span class="string">'Reachability'</span>,  <span class="string">'~&gt; 3.0.0'</span></div><div class="line">pod <span class="string">'ASIHTTPRequest'</span></div></pre></td></tr></table></figure>
-<p>‘~&gt; 3.0.0’ 是 Reachability 的版本号, 设定了版本号CocoaPods就会下载对应的版本,ASIHTTPRequest没指定版本号,CocoaPods就会下载最新版本的ASIHTTPRequest。<br>退出编辑，执行 pod install 下载三方库。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">pod install</div></pre></td></tr></table></figure>
-<p>完成后我Demo项目下的文件多了几个:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Demo 、  Demo.xcodeproj  、 DemoTests （之前的三个）</div><div class="line"></div><div class="line">Demo.xcworkspace 、Podfile 、Podfile.lock 、Pods</div></pre></td></tr></table></figure>
-<p>这个时候我们打开Demo项目是点击 Demo.xcworkspace 文件了，到此CocoaPods的基本使用已经讲完了，接下来的CocoaPods的原理，和让我们自己的三方库也支持CocoaPods。</p>
-<p>待续…</p>
-<p><a href="http://blog.jobbole.com/53365/" target="_blank" rel="external">深入理解 CocoaPods</a>    </p>
-<p><a href="http://baixin.io/2016/04/CocoaPod_Use/" target="_blank" rel="external">点击阅读原文</a>     </p>
+<h3 id="使用Jekyll解决前三个问题。"><a href="#使用Jekyll解决前三个问题。" class="headerlink" title="使用Jekyll解决前三个问题。"></a>使用Jekyll解决前三个问题。</h3><p>不得不说 <code>Jekyll</code> 确实可以解决我上面三个问题, 因为 <code>Jekyll</code> 是直接把Markdown格式的文章直接放在github仓库里的, 相当于直接用git来管理博客了, <code>Github</code> 官方也很推荐 <code>Jekyll</code> 。 你可以先看下 <code>Jekyll</code> 搭建博客的<a href="voyagelab.github.io">voyagelab</a>, <a href="https://github.com/voyagelab/voyagelab.github.io" target="_blank" rel="external">github地址</a>, 当然了这只是很普通的, Jekyll 也有很多主题可以选择的, 更详细的请看<a href="http://jekyll.bootcss.com/" target="_blank" rel="external">Jekyll中文文档</a>、<a href="https://jekyllrb.com/" target="_blank" rel="external">Jekyll英文文档</a>、<a href="http://jekyllthemes.org/" target="_blank" rel="external">Jekyll主题列表</a>。<br>在 <code>Jekyll</code> 上逛了一个星期的我又回到了 <code>Hexo</code> , 发现 目前 <code>Jekyll</code> 对主题和一些插件的支持相对 <code>Hexo</code> 来说, 没那么友好, 可能有一些其它的方法只是我没找到而已,关于 <code>Jekyll</code> 搭建博客就介绍到这, 如果有问题的话可以评论, 或者联系我。</p>
+<h3 id="使用Hexo解决上面前三个问题"><a href="#使用Hexo解决上面前三个问题" class="headerlink" title="使用Hexo解决上面前三个问题"></a>使用Hexo解决上面前三个问题</h3><p>是的, 我大<code>Hexo</code>同样可以解决上面三个问题, 那就是使用git。关于如何使用 <code>Hexo</code> 搭建博客请看我另一篇文章<a href="http://www.baixin.io/2015/08/25/HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" target="_blank" rel="external">HEXO搭建个人博客</a>, 如果搭建的过程中出现了问题, 我们可以交流交流。现在我假设你已经能基本使用 <code>Hexo</code> 了, 接下来就看看如何来管理博客。</p>
+<h2 id="使用git管理博客"><a href="#使用git管理博客" class="headerlink" title="使用git管理博客"></a>使用git管理博客</h2><p><a href="https://github.com/leopardpan/Blog-Growing" target="_blank" rel="external">Blog-Growing</a>是我管理博客的仓库地址。结构大致是:</p>
+<blockquote>
+<p>– Blog-Growing<br>　　|– .git<br>　　|– .gitignore<br>　　|– Hexo<br>　　　　|   ..<br>　　　　|   ..<br>　　　　|   整个博客的配置信息    </p>
+</blockquote>
+<p>你可以把我的的<a href="https://github.com/leopardpan/Blog-Growing" target="_blank" rel="external">Blog-Growing</a> clone下来, 看看一些基本配置是怎么配置的。需要提醒的是, <code>要把主题下的.git给删除掉</code> , 当然了你也可以使用 <code>git submodule</code> 来管理, 具体的管理方法我这里就不做多的介绍了, 想了解的话可以私信我。<br>上面的过程基本做完后, 怎么来解决我开篇提的前三个问题了。</p>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现:"></a>具体实现:</h3><p><strong>一：家里电脑使用博客</strong><br>　　建立git远端仓库管理博客,并使用家里的电脑把本地博客的配置推送到远端仓库。<br><strong>二：公司电脑使用博客</strong><br>　　到了公司只需要执行<code>sudo npm install -g hexo</code>,然后cd到你的博客目录下,如我cd 到Hexo目录下, 然后执行 <code>hexo server</code> 就可以在本地预览博客了。<br><strong>三：使用Git保存</strong><br>　　修改好博客后记得先使用git来提交下, 即使下次把博客的样式修改坏了, 也可以使用 <code>git reset --hard</code> 来回退。如: 我cd 到 <code>Blog-Growing</code> 目录下使用git提交。<br><strong>四：博客提交</strong><br>　　1、修改好的博客使用 <code>hexo d</code> 展示到博客页上。<br>　　2、git push 整个本地博客。    </p>
+<p><strong>提示:</strong> 在这里 <code>git</code> 仅仅只是用户做博客的版本管理的, 博客的样式修改、基本部署还是使用 <code>hexo</code> 来操作的。</p>
+<h2 id="让百度能搜索到你的博客"><a href="#让百度能搜索到你的博客" class="headerlink" title="让百度能搜索到你的博客"></a>让百度能搜索到你的博客</h2><h3 id="为什么要使用百度搜索？"><a href="#为什么要使用百度搜索？" class="headerlink" title="为什么要使用百度搜索？"></a>为什么要使用百度搜索？</h3><p>　　有人可能会说作为一个开发人员, 你不会用 <code>Google</code> 啊。 是的, Google是能搜到我们搭建在 <code>Github Page</code> 的博客, 会用<code>Google</code> 也是一个开发人员必备技能之一。但是, 我们生活在天朝, 所以百度还是总有会用到的时候, 或者是你想让更多的天朝人能搜到你。</p>
+<h3 id="为什么使用百度搜索不到-Github-Page-上的博客？"><a href="#为什么使用百度搜索不到-Github-Page-上的博客？" class="headerlink" title="为什么使用百度搜索不到 Github Page 上的博客？"></a>为什么使用百度搜索不到 Github Page 上的博客？</h3><p>有人联系过 Github Support 部门 , 给出大致的意思就是: 百度爬虫爬得太猛烈，已经对很多 Github 用户造成了问题。所以 Github 将禁止百度爬虫的爬取。    </p>
+<h3 id="如何让百度能搜索你的博客"><a href="#如何让百度能搜索你的博客" class="headerlink" title="如何让百度能搜索你的博客?"></a>如何让百度能搜索你的博客?</h3><p>　　根据上面说的, 目前发现只是Github Page禁止了百度搜索, 所以让百度能搜索到你的博客还是有一些方法的。例如:</p>
+<ul>
+<li>自己搞个VPS,博客部署在VPS上。</li>
+<li>博客部署 <code>Coding.net</code> 上, <code>GitCafe</code>已经合并到 <code>Coding</code> 。<br>我使用的是第二种方法, 博客部署在 <code>Coding.net</code> 上也相对简单些。</li>
+</ul>
+<h4 id="在Coding上部署你的博客。"><a href="#在Coding上部署你的博客。" class="headerlink" title="在Coding上部署你的博客。"></a>在Coding上部署你的博客。</h4><p>　　Coding同样支持Hexo、Jekyll等博客的部署, Coding 跟Github还是挺像的,而且是中文。 同样的在Coding里面建一个项目,项目名字跟你的用户名一样,这里我就不啰嗦了, 说几个需要注意的地方:<br><strong>注意一:</strong><br>　　在<code>Coding Page</code> 上部署博客,需要把博客推送到<code>coding-pages</code> 分支上, 分支名字是固定的。<br><strong>注意二:</strong><br>　　<code>Coding Page</code> 不支持自定义CNAME, 你需要点击到Page模块,然后添加一个域名来绑定。   </p>
+<p>更详细的请看<a href="https://coding.net/help/doc/pages/index.html" target="_blank" rel="external">Coding Pages 官网介绍</a>.</p>
+<p><a href="http://baixin.io/2016/06/HEXO_Advanced/" target="_blank" rel="external">点击阅读原文</a>     </p>
+<p>参考文章:<br><a href="http://jerryzou.com/posts/feasibility-of-allowing-baiduSpider-for-Github-Pages/" target="_blank" rel="external">解决 Github Pages 禁止百度爬虫的方法与可行性分析</a></p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/11/2016-04-02-CocoaPod_Use/" class="archive-article-date">
+      <a href="/2016/11/2016-06-12-HEXO_Advanced/" class="archive-article-date">
   	<time datetime="2016-11-03T22:16:26.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-04</time>
 </a>
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
+	</div>
+
       
 
       <div class="clearfix"></div>
@@ -463,65 +511,61 @@ AVAudioSession *session = [AVAudioSession sharedInstance];
 
 
   
-    <article id="post-2016-06-12-HEXO_Advanced" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2016-04-02-CocoaPod_Use" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
     
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/2016-06-12-HEXO_Advanced/">HEXO进阶</a>
-    </h1>
-  
-
-      </header>
-    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>HEXO接近是最近有一些朋友提出的问题，然后我做了总结，如果你也在使用HEXO，不妨看看，应该会有些帮助。</p>
+        <hr>
+<p>layout: post<br>title: CocoaPods使用心得<br>date: 2016-04-02</p>
+<h2 id="tag-iOS"><a href="#tag-iOS" class="headerlink" title="tag: iOS "></a>tag: iOS </h2><h3 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h3><p>　本章介绍什么是 <code>CocoaPods</code> ,如何使用 <code>CocoaPods</code> , 以及 <code>CocoaPods</code> 的原理,和使用 <code>CocoaPods</code> 时经常出现的一些问题。</p>
+<p>　Cocoapods 是 OS X 和 iOS 下的一个第三方库管理工具。我们能使用CocoaPods添加被称作 “Pods”的依赖库,并轻松管理它们的版本,CocoaPods会帮我们配置好这些三方库的路径及开发环境,极大的提升了开发者的工作效率。</p>
+<h3 id="安装CocoaPods"><a href="#安装CocoaPods" class="headerlink" title="安装CocoaPods　"></a>安装CocoaPods　</h3><p>　Mac下自带ruby,使用ruby的gem命令安装,ruby的软件源被墙了,把官方的ruby源替换成国内的淘宝源。</p>
+<h3 id="更换Gem源"><a href="#更换Gem源" class="headerlink" title="更换Gem源"></a>更换Gem源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ gem sources --remove https://rubygems.org/</div><div class="line">$ gem sources <span class="_">-a</span> https://ruby.taobao.org/</div><div class="line">$ gem sources <span class="_">-l</span></div></pre></td></tr></table></figure>
 <ul>
-<li>1、博客部署样式出问题了怎么办？</li>
-<li>2、电脑重装或者误删了本地博客怎么办？</li>
-<li>3、想使用两台电脑写博客怎么办？</li>
-<li>4、为何使用百度搜不到我的博客？</li>
+<li>1.移除掉原有的源（服务器在国外，速度较慢）。</li>
+<li>2.等1有反应之后再敲2命令（替换成淘宝上的ruby镜像https）。</li>
+<li>3.验证是否成功。成功如下：</li>
 </ul>
-<h3 id="使用Jekyll解决前三个问题。"><a href="#使用Jekyll解决前三个问题。" class="headerlink" title="使用Jekyll解决前三个问题。"></a>使用Jekyll解决前三个问题。</h3><p>不得不说 <code>Jekyll</code> 确实可以解决我上面三个问题, 因为 <code>Jekyll</code> 是直接把Markdown格式的文章直接放在github仓库里的, 相当于直接用git来管理博客了, <code>Github</code> 官方也很推荐 <code>Jekyll</code> 。 你可以先看下 <code>Jekyll</code> 搭建博客的<a href="voyagelab.github.io">voyagelab</a>, <a href="https://github.com/voyagelab/voyagelab.github.io" target="_blank" rel="external">github地址</a>, 当然了这只是很普通的, Jekyll 也有很多主题可以选择的, 更详细的请看<a href="http://jekyll.bootcss.com/" target="_blank" rel="external">Jekyll中文文档</a>、<a href="https://jekyllrb.com/" target="_blank" rel="external">Jekyll英文文档</a>、<a href="http://jekyllthemes.org/" target="_blank" rel="external">Jekyll主题列表</a>。<br>在 <code>Jekyll</code> 上逛了一个星期的我又回到了 <code>Hexo</code> , 发现 目前 <code>Jekyll</code> 对主题和一些插件的支持相对 <code>Hexo</code> 来说, 没那么友好, 可能有一些其它的方法只是我没找到而已,关于 <code>Jekyll</code> 搭建博客就介绍到这, 如果有问题的话可以评论, 或者联系我。</p>
-<h3 id="使用Hexo解决上面前三个问题"><a href="#使用Hexo解决上面前三个问题" class="headerlink" title="使用Hexo解决上面前三个问题"></a>使用Hexo解决上面前三个问题</h3><p>是的, 我大<code>Hexo</code>同样可以解决上面三个问题, 那就是使用git。关于如何使用 <code>Hexo</code> 搭建博客请看我另一篇文章<a href="http://www.baixin.io/2015/08/25/HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" target="_blank" rel="external">HEXO搭建个人博客</a>, 如果搭建的过程中出现了问题, 我们可以交流交流。现在我假设你已经能基本使用 <code>Hexo</code> 了, 接下来就看看如何来管理博客。</p>
-<h2 id="使用git管理博客"><a href="#使用git管理博客" class="headerlink" title="使用git管理博客"></a>使用git管理博客</h2><p><a href="https://github.com/leopardpan/Blog-Growing" target="_blank" rel="external">Blog-Growing</a>是我管理博客的仓库地址。结构大致是:</p>
-<blockquote>
-<p>– Blog-Growing<br>　　|– .git<br>　　|– .gitignore<br>　　|– Hexo<br>　　　　|   ..<br>　　　　|   ..<br>　　　　|   整个博客的配置信息    </p>
-</blockquote>
-<p>你可以把我的的<a href="https://github.com/leopardpan/Blog-Growing" target="_blank" rel="external">Blog-Growing</a> clone下来, 看看一些基本配置是怎么配置的。需要提醒的是, <code>要把主题下的.git给删除掉</code> , 当然了你也可以使用 <code>git submodule</code> 来管理, 具体的管理方法我这里就不做多的介绍了, 想了解的话可以私信我。<br>上面的过程基本做完后, 怎么来解决我开篇提的前三个问题了。</p>
-<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现:"></a>具体实现:</h3><p><strong>一：家里电脑使用博客</strong><br>　　建立git远端仓库管理博客,并使用家里的电脑把本地博客的配置推送到远端仓库。<br><strong>二：公司电脑使用博客</strong><br>　　到了公司只需要执行<code>sudo npm install -g hexo</code>,然后cd到你的博客目录下,如我cd 到Hexo目录下, 然后执行 <code>hexo server</code> 就可以在本地预览博客了。<br><strong>三：使用Git保存</strong><br>　　修改好博客后记得先使用git来提交下, 即使下次把博客的样式修改坏了, 也可以使用 <code>git reset --hard</code> 来回退。如: 我cd 到 <code>Blog-Growing</code> 目录下使用git提交。<br><strong>四：博客提交</strong><br>　　1、修改好的博客使用 <code>hexo d</code> 展示到博客页上。<br>　　2、git push 整个本地博客。    </p>
-<p><strong>提示:</strong> 在这里 <code>git</code> 仅仅只是用户做博客的版本管理的, 博客的样式修改、基本部署还是使用 <code>hexo</code> 来操作的。</p>
-<h2 id="让百度能搜索到你的博客"><a href="#让百度能搜索到你的博客" class="headerlink" title="让百度能搜索到你的博客"></a>让百度能搜索到你的博客</h2><h3 id="为什么要使用百度搜索？"><a href="#为什么要使用百度搜索？" class="headerlink" title="为什么要使用百度搜索？"></a>为什么要使用百度搜索？</h3><p>　　有人可能会说作为一个开发人员, 你不会用 <code>Google</code> 啊。 是的, Google是能搜到我们搭建在 <code>Github Page</code> 的博客, 会用<code>Google</code> 也是一个开发人员必备技能之一。但是, 我们生活在天朝, 所以百度还是总有会用到的时候, 或者是你想让更多的天朝人能搜到你。</p>
-<h3 id="为什么使用百度搜索不到-Github-Page-上的博客？"><a href="#为什么使用百度搜索不到-Github-Page-上的博客？" class="headerlink" title="为什么使用百度搜索不到 Github Page 上的博客？"></a>为什么使用百度搜索不到 Github Page 上的博客？</h3><p>有人联系过 Github Support 部门 , 给出大致的意思就是: 百度爬虫爬得太猛烈，已经对很多 Github 用户造成了问题。所以 Github 将禁止百度爬虫的爬取。    </p>
-<h3 id="如何让百度能搜索你的博客"><a href="#如何让百度能搜索你的博客" class="headerlink" title="如何让百度能搜索你的博客?"></a>如何让百度能搜索你的博客?</h3><p>　　根据上面说的, 目前发现只是Github Page禁止了百度搜索, 所以让百度能搜索到你的博客还是有一些方法的。例如:</p>
-<ul>
-<li>自己搞个VPS,博客部署在VPS上。</li>
-<li>博客部署 <code>Coding.net</code> 上, <code>GitCafe</code>已经合并到 <code>Coding</code> 。<br>我使用的是第二种方法, 博客部署在 <code>Coding.net</code> 上也相对简单些。</li>
-</ul>
-<h4 id="在Coding上部署你的博客。"><a href="#在Coding上部署你的博客。" class="headerlink" title="在Coding上部署你的博客。"></a>在Coding上部署你的博客。</h4><p>　　Coding同样支持Hexo、Jekyll等博客的部署, Coding 跟Github还是挺像的,而且是中文。 同样的在Coding里面建一个项目,项目名字跟你的用户名一样,这里我就不啰嗦了, 说几个需要注意的地方:<br><strong>注意一:</strong><br>　　在<code>Coding Page</code> 上部署博客,需要把博客推送到<code>coding-pages</code> 分支上, 分支名字是固定的。<br><strong>注意二:</strong><br>　　<code>Coding Page</code> 不支持自定义CNAME, 你需要点击到Page模块,然后添加一个域名来绑定。   </p>
-<p>更详细的请看<a href="https://coding.net/help/doc/pages/index.html" target="_blank" rel="external">Coding Pages 官网介绍</a>.</p>
-<p><a href="http://baixin.io/2016/06/HEXO_Advanced/" target="_blank" rel="external">点击阅读原文</a>     </p>
-<p>参考文章:<br><a href="http://jerryzou.com/posts/feasibility-of-allowing-baiduSpider-for-Github-Pages/" target="_blank" rel="external">解决 Github Pages 禁止百度爬虫的方法与可行性分析</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">*** CURRENT SOURCES ***</div><div class="line"></div><div class="line">http://ruby.taobao.org/</div></pre></td></tr></table></figure>
+<h3 id="更新Gem源"><a href="#更新Gem源" class="headerlink" title="更新Gem源"></a>更新Gem源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">sudo gem update --system</div></pre></td></tr></table></figure>
+<h3 id="安装cocoapods"><a href="#安装cocoapods" class="headerlink" title="安装cocoapods"></a>安装cocoapods</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">$ sudo gem install cocoapods</div><div class="line">$ pod setup</div></pre></td></tr></table></figure>
+<p>pod setup 在执行时会比较慢，因为Cocoapods 要将它的信息下载到 ~/.cocoapods目录下, 耐心等待…</p>
+<h4 id="提升cocoapods的安装速度"><a href="#提升cocoapods的安装速度" class="headerlink" title="提升cocoapods的安装速度"></a>提升cocoapods的安装速度</h4><p>所有的项目的 Podspec 文件都托管在<a href="https://github.com/CocoaPods/Specs。第一次执行" target="_blank" rel="external">https://github.com/CocoaPods/Specs。第一次执行</a> pod setup 时，CocoaPods 会将这些podspec索引文件更新到本地的 ~/.cocoapods/目录下，这个索引文件比较大，有 80M 左右。<br>作者akinliu 在 gitcafe 和 oschina 上建立了 CocoaPods 索引库的镜像(在国内),我们可以使用CocoaPods国内的镜像索引，操作时会快多了,如gitcafe：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">pod repo remove master</div><div class="line">pod repo add master https://gitcafe.com/akuandev/Specs.git</div><div class="line">pod repo update</div></pre></td></tr></table></figure>
+<h3 id="使用cocoapods"><a href="#使用cocoapods" class="headerlink" title="使用cocoapods"></a>使用cocoapods</h3><p>cocoapods安装完成后，使用 pod search 命令来验证一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">pod search AFNetworking</div></pre></td></tr></table></figure>
+<p>终端将会有如下结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">-&gt; AFNetworking (3.0.4)</div><div class="line">A delightful iOS and OS X networking framework.</div><div class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 3.0.4'</span></div><div class="line">- Homepage: https://github.com/AFNetworking/AFNetworking</div><div class="line">- Source:   https://github.com/AFNetworking/AFNetworking.git</div><div class="line">- Versions: 3.0.4, 3.0.3, 3.0.2, 3.0.1, 3.0.0, 3.0.0-beta.3, 3.0.0-beta.2,</div><div class="line">3.0.0-beta.1, 2.6.3, 2.6.2, 2.6.1, 2.6.0, 2.5.4, 2.5.3, 2.5.2, 2.5.1, 2.5.0,</div><div class="line">2.4.1, 2.4.0, 2.3.1, 2.3.0, 2.2.4, 2.2.3, 2.2.2, 2.2.1, 2.2.0, 2.1.0, 2.0.3,</div><div class="line">2.0.2, 2.0.1, 2.0.0, 2.0.0-RC3, 2.0.0-RC2, 2.0.0-RC1, 1.3.4, 1.3.3, 1.3.2,</div><div class="line">1.3.1, 1.3.0, 1.2.1, 1.2.0, 1.1.0, 1.0.1, 1.0, 1.0RC3, 1.0RC2, 1.0RC1,</div><div class="line">0.10.1, 0.10.0, 0.9.2, 0.9.1, 0.9.0, 0.7.0, 0.5.1 [master repo]</div><div class="line">- Subspecs:</div><div class="line">- AFNetworking/Serialization (3.0.4)</div><div class="line">- AFNetworking/Security (3.0.4)</div><div class="line">- AFNetworking/Reachability (3.0.4)</div><div class="line">- AFNetworking/NSURLSession (3.0.4)</div><div class="line">- AFNetworking/UIKit (3.0.4)</div><div class="line"></div><div class="line"></div><div class="line">-&gt; AFNetworking+AutoRetry (0.0.5)</div><div class="line">Auto Retries <span class="keyword">for</span> AFNetworking requests</div><div class="line">pod <span class="string">'AFNetworking+AutoRetry'</span>, <span class="string">'~&gt; 0.0.5'</span></div><div class="line">- Homepage: https://github.com/shaioz/AFNetworking-AutoRetry</div><div class="line">- Source:   https://github.com/shaioz/AFNetworking-AutoRetry.git</div><div class="line">- Versions: 0.0.5, 0.0.4, 0.0.3, 0.0.2, 0.0.1 [master repo]</div><div class="line"></div><div class="line">.........太多了，省略</div></pre></td></tr></table></figure>
+<p>pod search 是CocoaPods的一个搜索命令,我们可以用来搜索任何托管在CocoaPods上的三方库。    </p>
+<p>使用CocoaPods时需要新建一个 Podfile 的文件,cd 到 我的Demo项目里，Demo目录下有三个文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Demo 、  Demo.xcodeproj  、 DemoTests</div></pre></td></tr></table></figure>
+<p>新建 Podfile</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">touch Podfile</div></pre></td></tr></table></figure>
+<p>vim 编辑 Podfile</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim Podfile</div></pre></td></tr></table></figure>
+<p>由于是新建的 Podfile 里面应该是空白的。然后我们在里面添加依赖库，格式如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">platform :ios</div><div class="line">pod <span class="string">'Reachability'</span>,  <span class="string">'~&gt; 3.0.0'</span></div><div class="line">pod <span class="string">'ASIHTTPRequest'</span></div></pre></td></tr></table></figure>
+<p>‘~&gt; 3.0.0’ 是 Reachability 的版本号, 设定了版本号CocoaPods就会下载对应的版本,ASIHTTPRequest没指定版本号,CocoaPods就会下载最新版本的ASIHTTPRequest。<br>退出编辑，执行 pod install 下载三方库。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">pod install</div></pre></td></tr></table></figure>
+<p>完成后我Demo项目下的文件多了几个:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Demo 、  Demo.xcodeproj  、 DemoTests （之前的三个）</div><div class="line"></div><div class="line">Demo.xcworkspace 、Podfile 、Podfile.lock 、Pods</div></pre></td></tr></table></figure>
+<p>这个时候我们打开Demo项目是点击 Demo.xcworkspace 文件了，到此CocoaPods的基本使用已经讲完了，接下来的CocoaPods的原理，和让我们自己的三方库也支持CocoaPods。</p>
+<p>待续…</p>
+<p><a href="http://blog.jobbole.com/53365/" target="_blank" rel="external">深入理解 CocoaPods</a>    </p>
+<p><a href="http://baixin.io/2016/04/CocoaPod_Use/" target="_blank" rel="external">点击阅读原文</a>     </p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/11/2016-06-12-HEXO_Advanced/" class="archive-article-date">
+      <a href="/2016/11/2016-04-02-CocoaPod_Use/" class="archive-article-date">
   	<time datetime="2016-11-03T22:16:26.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-04</time>
 </a>
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
-	</div>
-
       
 
       <div class="clearfix"></div>
@@ -922,96 +966,6 @@ send_mail(&apos;leopardpan@icloud.com&apos;,&apos;正文&apos;,&apos;标题&apos
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2016-07-15-Codeless" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/2016-07-15-Codeless/">老司机带你剖析无码统计</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>　　无需开发介入，也可以统计移动App上按钮的点击次数，简称 <code>无码统计</code> ，只要是跟App开发相关的同学，相信都对埋点统计有些了解，特别是针对开发人员来说，做代码埋点统计基本上是看不到直接收益也是开发人员最不愿做的一件事，这篇文章讲的就是如何让开发人员摆脱代码埋点的痛苦。</p>
-<p>　　文章主要分为：使用场景、实现原理、适用范围、使用详情四个模块，不管你是产品，还是开发人员又或者是运营人员都适合读这篇文章。  </p>
-<p>　　在App开发过程中我们应该都有过类似的需求：想统计某些按钮的点击次数。例如，我们开发了一个注册模块，注册流程有些复杂，整个注册功能开发完成后，我们想知道到底有没有用户使用注册功能，而又有多少用户使用？         </p>
-<p>有什么方式能知道呢？</p>
-<blockquote>
-<ul>
-<li><p>后台看注册系统?<br>　有些麻烦，需要后台去数据库里查看，还要做成数据可视化的才方便看。      </p>
-</li>
-<li><p>查看注册按钮的点击情况?<br>　这是最直观的。 主看看两块就行，注册按钮的点击次数 和 提交注册按钮的点击次数，如果发现注册按钮被点击多次（如1W次），而提交注册的点击次数却只有几次，这就可以反映出，很多用户看到的我们的注册流程太复杂，然后选择放弃注册了。同样的道理，我们通过同样的方式可以验证我们其它的功能模块是否有用户经常使用，从而来重新规划我们的设计需求。         </p>
-</li>
-</ul>
-</blockquote>
-<p>　　一整个功能模块的完成涉及到 产品、UI设计、开发、测试 等几个部分，资源和人力的消耗还是挺大的，所以我们在开发过程是否继续维护这些功能模块，还是开发新功能是要经过慎重衡量，而衡量这些最有说服力的依据就是用户的使用数据，这些数据来源是刚才说的 按钮的点击次数，页面的停留时长 等等。</p>
-<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>　　分析用户App的使用情况当然是直接用数据说话，那么想知道某些按钮的点击次数，就一定需要App的开发人员去具体的按钮点击方法里面埋点才行，有的公司有自己的一套完整的统计埋点系统，有的公司是使用第三方统计，最终都是可以看到按钮的点击次数的，不管怎么样想知道按钮的点击必须要App的开发人员亲自去写代码埋点才行，而这篇文章主要讲的是 <code>无码统计</code> 按钮点击次数。也就是不需要开发介入，我们就能知道按钮的点击了，开发人员只要负责他的业务开发就行，下面是一张 <code>传统埋点</code> 统计和 <code>灵动分析</code> 统计，灵动是TalkingData的SDK无码统计的一个功能。</p>
-<p><img src="/images/posts/codeless/image01.png" height="300" width="600">  </p>
-<p>先大致讲下左边 <code>传统</code> 埋点统计流程</p>
-<blockquote>
-<ul>
-<li><p>首先需要制定埋点需求、设计埋点方案，需求有了后就去找开发沟通，埋点需求的讨论，双方确认需求通过后，然后准备需求文档，开发再根据文档来写具体的埋点代码。 </p>
-</li>
-<li><p>代码写完后，App打包给测试人员，测试人员进行测试，同时还要对埋点参数的数据安全审核，参数是否有包含公司敏感信息。</p>
-</li>
-<li><p>测试通过后就需要上线了，这个过程一般是开发人员去完成的。iOS需要提交到AppStore上，以前大家都知道，一个审核周期就是一两周，还有随时被拒的可能，现在虽然周期变短了，但审核也还是挺严格的（走快捷通道的除外）。Android需要在各个渠道上重新发布，也是很麻烦的。</p>
-</li>
-<li><p>如果前面几部都顺利完成了的话，接下来就等待用户更新了，如果埋点统计功能跟其它新功能一起上线的话，我们更新就有理由了，如果仅仅这一版仅仅只是埋点统计功能，那么让用户更新App的理由又是一件头疼的事情了，不管怎么样经常让用户更新App多少会对用户用些影响的。</p>
-</li>
-<li><p>最终的结果应该是部分用户更新了App，那么我们能统计到按钮点击的用户了就只是更新了App的这一部分用户了，而且他们更新的时间是不一样的，最终我们终于可以看需求上的埋点统计了。</p>
-</li>
-</ul>
-</blockquote>
-<p>再看看右边 <code>灵动</code> 统计流程</p>
-<p>同样需要制定需求，但是需求方可以直接根据自己的需求去使用 <code>灵动</code> 了，使用了灵动就可以直接看按钮的点击率了，这个过程不需要开发介入，也不需要用户去更新App。</p>
-<p>　　从这张图可以看出，不需要开发人员介入，可以开发成功，提高开发效率，而且埋点也很灵活，需求人员（可以是产品，也可以是运营）可以直接使用灵动，也不需要用户更新，那么数据反馈会比传统埋点快很多，使用了就可以立即生效，需求方的观察周期也缩短了，能更灵活的做出决策。</p>
-<h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><p>　　上面大致介绍了下 <code>灵动</code> 能给我们解决什么问题，这里讲的是 <code>灵动</code> 是通过什么样的技术手段实现，这里可能对于开发人员来说更喜欢，大家先看一张灵动使用时的一个交互</p>
-<p><img src="/images/posts/codeless/image02.png" height="300" width="500">  </p>
-<p>　　这张图分成两部分看，先看上面，一个用户在操作Client和PC，Client和PC通讯是通过一个Wss的服务器建立的长连接，这是灵动调试时的一个交互。<br>　　也就是说，用户使用灵动分析时，需要一个安装自己App的移动设备，这个App必须要集成TalkingData的统计分析SDK才行，SDK初始化时的AppID是在TalkingData创建应用时分配的。另一端用户要打开TalkingData的灵动网页，在App启动的时候摇一摇手机，然后就可以建立一个wss的长连接了。用户就可以直接在网页上给按钮添加监听事件了，添加完成后，在手机上点击该按钮，网页上就会提示被点击，调试完成后点击全部生效，配置数据就会保存到下面https的服务器。<br>　　我们的所有用户在启动App的时候，都可以从https服务器里获取到这套配置，客户端根据这套配置找到具体的按钮，监听点击事件，当按钮被点击后，就可以统计到了。</p>
-<p>接下来再看看灵动调试过程中数据是具体怎么进行数据交互的。</p>
-<p><img src="/images/posts/codeless/image03.png" height="300" width="500"> </p>
-<p>　　可以看到App客户端和Web端交互主要分为四部分：<code>设备信息</code> 、 <code>App基本结构</code> 、<code>控件绑定配置</code> 、<code>按钮点击信息</code> ，<code>设备信息</code> 主要是用来确认设备是调试者的设备，因为其它的终端用户也可能会误触发调试，<code>App基本结构</code>是用来在Web上展示移动App的，然后在Web上绑定了控件，就会把<code>控件绑定配置</code>发送给客户端，客户端根据配置监听绑定，当终端用户点击控件后，客户端就会把<code>按钮点击信息</code>传给Web端，Web显示控件被点击。</p>
-<p>　　再回头看看实现原理的第一张图片，调试完成数据就会从WSS的长连接服务器存储到HTTPS的服务器，此后其它终端用户只要在再次启动App就能获取到埋点配置了，SDK根据埋点配置去找到具体的控件(按钮)，监听点击，当用户点击控件时就可以调用自定义埋点的方法，之后的数据处理就跟自定义埋点是一样的原理了。<br>　　可能有同学会有疑问，所有的App每次启动的时候都会去获取埋点配置，是不是会很耗流量？ 答案是不会的，服务器在没有埋点配置的时候每次将获取不到信息，那么将不会有什么流量消耗。如果服务器有配置了，App才会有些流量消耗的，而且这些配置信息是经过压缩的，所以流量消耗也不大，App获取到了配置之后就会做本地缓存，服务器配置不变的情况下再次获取配置也不会有流量的消耗，只有在下一次运营人员修改了新的控件绑定时才会消耗一些流量。 所以整个无码统计对终端用户的流量的影响是很小的。<br>　　你也可以参考这套逻辑试试自己也部署这么一套无码统计，之后就不用再担心运营给的埋点统计需求了，让他们自己去用无码统计吧。 </p>
-<p><a href="http://baixin.io/2016/07/Codeless/" target="_blank" rel="external">点击阅读原文</a>     </p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/07/2016-07-15-Codeless/" class="archive-article-date">
-  	<time datetime="2016-07-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-07-15</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
 	</div>
 
       
