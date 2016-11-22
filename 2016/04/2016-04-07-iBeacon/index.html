@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>我们日常生活中的 iBeacon | 共田三皮君</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="iBeaco n技术调研与知识分享">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我们日常生活中的 iBeacon">
+<meta property="og:url" content="http://natoto.github.io/2016/04/2016-04-07-iBeacon/index.html">
+<meta property="og:site_name" content="共田三皮君">
+<meta property="og:description" content="iBeaco n技术调研与知识分享">
+<meta property="og:image" content="http://natoto.github.io/images/posts/iBeacon/iBeacon.png">
+<meta property="og:updated_time" content="2016-11-03T22:16:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="我们日常生活中的 iBeacon">
+<meta name="twitter:description" content="iBeaco n技术调研与知识分享">
+<meta name="twitter:image" content="http://natoto.github.io/images/posts/iBeacon/iBeacon.png">
+  
+    <link rel="alternate" href="/atom.xml" title="共田三皮君" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">共田三皮君</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">个人站</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://natoto.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2016-04-07-iBeacon" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/2016-04-07-iBeacon/" class="article-date">
+  <time datetime="2016-04-06T03:25:06.000Z" itemprop="datePublished">2016-04-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      我们日常生活中的 iBeacon
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　　随着低功耗蓝牙的推出，iBeacon 的使用是越来越广泛了，如：微信的附近摇一摇功能，又或者是当你进入大型商场，一些店铺给你推送通知，VR 场景识别等等，这些表示 iBeacon 已经与我们的生活精密相连了。  </p>
+<h4 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h4><ul>
+<li><p><strong>概念：</strong> iBeacon 是 iOS7 后苹果出的一项新技术，支持蓝牙4.0(或以上)的 iOS 设备，工作方式是低功耗蓝牙（Bluetooth Low Energy），向周围发送自己特有的ID，一个 <code>iBeacon</code> 硬件设备在不做任何处理的情况下一般可使用两三年左右。</p>
+</li>
+<li><p>iBeacon 的形状多种多样，大致如下图。<br><img src="/images/posts/iBeacon/iBeacon.png" alt=""></p>
+</li>
+</ul>
+<h4 id="目前哪些地方有-iBeacon："><a href="#目前哪些地方有-iBeacon：" class="headerlink" title="目前哪些地方有 iBeacon："></a>目前哪些地方有 iBeacon：</h4><ul>
+<li>1、微信摇一摇：使用微信的人应该都知道微信有一个 <code>周边摇一摇</code> 功能， 使用的就是 iBeacon 技术。 很多餐馆都部有 iBeacon 的点，如果你想验证直接监测微信的 iBeaconUUID：FDA50693-A4E2-4FB1-AFCF-C6EB07647825。  </li>
+<li>2、走进某个商场时，忽然手机里推出一个通知，也是使用 iBeacon 技术。   </li>
+<li>3、帝都的地跌站大部分也有微信 UUID 的 iBeacon 发射器，具体是用来做什么的还不是慢清楚。  </li>
+<li>4、iBeacon 还可实现地理围栏、室内定位等功能。</li>
+</ul>
+<h4 id="iBeacon-技术"><a href="#iBeacon-技术" class="headerlink" title="iBeacon 技术"></a>iBeacon 技术</h4><p>　　Apple的 <code>CoreLocation.frame</code> 里把iBeacon封装成了一个 <code>CLBeacon</code> 类，<code>CLBeacon</code> 大致有下面几个属性组成：<code>Major</code> 、<code>Minor</code> 、 <code>proximity</code> 、 <code>rssi</code> 、 <code>accuracy</code> 。   </p>
+<h4 id="开发者如何使用-iBeacopn"><a href="#开发者如何使用-iBeacopn" class="headerlink" title="开发者如何使用 iBeacopn?:"></a>开发者如何使用 iBeacopn?:</h4><ul>
+<li>1、用户需要添加 <code>CoreLocation.framework</code> ，App 才具备定位的功能。</li>
+<li>2、App 开发者需要开启定位功能需要配置：在 <code>Xcode</code> 的 <code>info.plist</code> 里面添加 <code>NSLocationAlwaysUsageDescription</code>(允许后台访问位置信息) 或 <code>requestWhenInUseAuthorization</code>(允许使用时访问位置信息) 字段。（iOS7后该添加了该字段应用才会弹出 `是否允许应用访问用户的位置信息）。</li>
+</ul>
+<p>创建和注册一个beacon区域   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (void)registerBeaconRegionWithUUID:(NSUUID *)proximityUUID andIdentifier:(NSString *)identifier</div><div class="line">&#123;</div><div class="line">    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:proximityUUID identifier:identifier];</div><div class="line">    </div><div class="line">    [manager startMonitoringForRegion:beaconRegion];</div><div class="line">&#125;</div><div class="line">``` </div><div class="line"></div><div class="line">当接受到 iBeacon 信号时回调 ，beacons 里面装了信号的对象，可能同时出现多个信号。</div></pre></td></tr></table></figure>
+<ul>
+<li>(void)locationManager:(CLLocationManager <em>)manager didRangeBeacons:(NSArray </em>)beacons inRegion:(CLBeaconRegion *)region<br>{</li>
+</ul>
+<p>}<br>``` </p>
+<p>Note: <a href="https://developer.apple.com/library/prerelease/content/samplecode/AirLocate/Introduction/Intro.html" target="_blank" rel="external">苹果iBeacon官方代码例子</a>。    </p>
+<h4 id="iBeacon-硬件设备条件："><a href="#iBeacon-硬件设备条件：" class="headerlink" title="iBeacon 硬件设备条件："></a>iBeacon 硬件设备条件：</h4><ul>
+<li>用户设备 iOS7 或更新操作系统。</li>
+<li>用户蓝牙设备4.0或更新。</li>
+<li>用户蓝牙设备必须开启。</li>
+<li>用户设备定位服务必须开启，允许应用访问位置信息。</li>
+</ul>
+<h4 id="iBeacon-能唤醒应用"><a href="#iBeacon-能唤醒应用" class="headerlink" title="iBeacon 能唤醒应用"></a>iBeacon 能唤醒应用</h4><ul>
+<li>前提：App 具备上面使用 iBeacon 的功能，并且允许后台访问位置信息。</li>
+<li>现象：App 能被 iBeacon 信号唤醒，即使 App 已经被用户手动杀死掉了，App 也能被 iBeacon 技术唤醒，并且能执行一系列操作。</li>
+<li>影响：导致 App 用户在并没有使用 <code>App</code> 的情况下, <code>App</code> 有了长达几个小时的后台使用时长。</li>
+</ul>
+<p><a href="http://baixin.io/2016/04/iBeacon/" target="_blank" rel="external">点击阅读原文</a>      </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://natoto.github.io//2016/04/2016-04-07-iBeacon/" data-id="civsyg1rq000229ve49p1aif8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/06/2016-06-02-Develop_Tool/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          开发常用工具
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/2016-01-09-iOS_OTA/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">iOS动态更新</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/技术/" style="font-size: 15px;">技术</a> <a href="/tags/机器学习/" style="font-size: 15px;">机器学习</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/11/AVAudioSession/">AVAudioSession</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/Hello-World-0/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/firstdocument/">firstdocument</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/2016-04-02-CocoaPod_Use/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
