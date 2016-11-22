@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>老司机带你剖析无码统计</title>
+  <meta name="description" content="　　无需开发介入，也可以统计移动App上按钮的点击次数，简称 无码统计 ，只要是跟App开发相关的同学，相信都对埋点统计有些了解，特别是针对开发人员来说，做代码埋点统计基本上是看不到直接收益也是开发人员最不愿做的一件事，这篇文章讲的就是如何让开发人员摆脱代码埋点的痛苦。">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://whenbar.com/2016/07/15/Codeless.html">
+  <link rel="alternate" type="application/rss+xml" title="共田三皮君" href="/feed.xml">
+  
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">共田三皮君</a>
+
+    <nav class="site-nav">
+      <span class="menu-icon">
+        <svg viewBox="0 0 18 15" width="18px" height="15px">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </span>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">老司机带你剖析无码统计</h1>
+    <p class="post-meta"><time datetime="2016-07-15T00:00:00+08:00" itemprop="datePublished">Jul 15, 2016</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>　　无需开发介入，也可以统计移动App上按钮的点击次数，简称 <code class="highlighter-rouge">无码统计</code> ，只要是跟App开发相关的同学，相信都对埋点统计有些了解，特别是针对开发人员来说，做代码埋点统计基本上是看不到直接收益也是开发人员最不愿做的一件事，这篇文章讲的就是如何让开发人员摆脱代码埋点的痛苦。</p>
+
+<p>　　文章主要分为：使用场景、实现原理、适用范围、使用详情四个模块，不管你是产品，还是开发人员又或者是运营人员都适合读这篇文章。</p>
+
+<p>　　在App开发过程中我们应该都有过类似的需求：想统计某些按钮的点击次数。例如，我们开发了一个注册模块，注册流程有些复杂，整个注册功能开发完成后，我们想知道到底有没有用户使用注册功能，而又有多少用户使用？</p>
+
+<p>有什么方式能知道呢？</p>
+
+<blockquote>
+  <ul>
+    <li>后台看注册系统?    <br />
+　有些麻烦，需要后台去数据库里查看，还要做成数据可视化的才方便看。</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <ul>
+    <li>查看注册按钮的点击情况?   <br />
+　这是最直观的。 主看看两块就行，注册按钮的点击次数 和 提交注册按钮的点击次数，如果发现注册按钮被点击多次（如1W次），而提交注册的点击次数却只有几次，这就可以反映出，很多用户看到的我们的注册流程太复杂，然后选择放弃注册了。同样的道理，我们通过同样的方式可以验证我们其它的功能模块是否有用户经常使用，从而来重新规划我们的设计需求。</li>
+  </ul>
+</blockquote>
+
+<p>　　一整个功能模块的完成涉及到 产品、UI设计、开发、测试 等几个部分，资源和人力的消耗还是挺大的，所以我们在开发过程是否继续维护这些功能模块，还是开发新功能是要经过慎重衡量，而衡量这些最有说服力的依据就是用户的使用数据，这些数据来源是刚才说的 按钮的点击次数，页面的停留时长 等等。</p>
+
+<h3 id="使用场景">使用场景</h3>
+
+<p>　　分析用户App的使用情况当然是直接用数据说话，那么想知道某些按钮的点击次数，就一定需要App的开发人员去具体的按钮点击方法里面埋点才行，有的公司有自己的一套完整的统计埋点系统，有的公司是使用第三方统计，最终都是可以看到按钮的点击次数的，不管怎么样想知道按钮的点击必须要App的开发人员亲自去写代码埋点才行，而这篇文章主要讲的是 <code class="highlighter-rouge">无码统计</code> 按钮点击次数。也就是不需要开发介入，我们就能知道按钮的点击了，开发人员只要负责他的业务开发就行，下面是一张 <code class="highlighter-rouge">传统埋点</code> 统计和 <code class="highlighter-rouge">灵动分析</code> 统计，灵动是TalkingData的SDK无码统计的一个功能。</p>
+
+<p><img src="/images/posts/codeless/image01.png" height="300" width="600" /></p>
+
+<p>先大致讲下左边 <code class="highlighter-rouge">传统</code> 埋点统计流程</p>
+
+<blockquote>
+  <ul>
+    <li>首先需要制定埋点需求、设计埋点方案，需求有了后就去找开发沟通，埋点需求的讨论，双方确认需求通过后，然后准备需求文档，开发再根据文档来写具体的埋点代码。</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <ul>
+    <li>代码写完后，App打包给测试人员，测试人员进行测试，同时还要对埋点参数的数据安全审核，参数是否有包含公司敏感信息。</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <ul>
+    <li>测试通过后就需要上线了，这个过程一般是开发人员去完成的。iOS需要提交到AppStore上，以前大家都知道，一个审核周期就是一两周，还有随时被拒的可能，现在虽然周期变短了，但审核也还是挺严格的（走快捷通道的除外）。Android需要在各个渠道上重新发布，也是很麻烦的。</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <ul>
+    <li>如果前面几部都顺利完成了的话，接下来就等待用户更新了，如果埋点统计功能跟其它新功能一起上线的话，我们更新就有理由了，如果仅仅这一版仅仅只是埋点统计功能，那么让用户更新App的理由又是一件头疼的事情了，不管怎么样经常让用户更新App多少会对用户用些影响的。</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <ul>
+    <li>最终的结果应该是部分用户更新了App，那么我们能统计到按钮点击的用户了就只是更新了App的这一部分用户了，而且他们更新的时间是不一样的，最终我们终于可以看需求上的埋点统计了。</li>
+  </ul>
+</blockquote>
+
+<p>再看看右边 <code class="highlighter-rouge">灵动</code> 统计流程</p>
+
+<p>同样需要制定需求，但是需求方可以直接根据自己的需求去使用 <code class="highlighter-rouge">灵动</code> 了，使用了灵动就可以直接看按钮的点击率了，这个过程不需要开发介入，也不需要用户去更新App。</p>
+
+<p>　　从这张图可以看出，不需要开发人员介入，可以开发成功，提高开发效率，而且埋点也很灵活，需求人员（可以是产品，也可以是运营）可以直接使用灵动，也不需要用户更新，那么数据反馈会比传统埋点快很多，使用了就可以立即生效，需求方的观察周期也缩短了，能更灵活的做出决策。</p>
+
+<h3 id="实现原理">实现原理</h3>
+
+<p>　　上面大致介绍了下 <code class="highlighter-rouge">灵动</code> 能给我们解决什么问题，这里讲的是 <code class="highlighter-rouge">灵动</code> 是通过什么样的技术手段实现，这里可能对于开发人员来说更喜欢，大家先看一张灵动使用时的一个交互</p>
+
+<p><img src="/images/posts/codeless/image02.png" height="300" width="500" /></p>
+
+<p>　　这张图分成两部分看，先看上面，一个用户在操作Client和PC，Client和PC通讯是通过一个Wss的服务器建立的长连接，这是灵动调试时的一个交互。       <br />
+　　也就是说，用户使用灵动分析时，需要一个安装自己App的移动设备，这个App必须要集成TalkingData的统计分析SDK才行，SDK初始化时的AppID是在TalkingData创建应用时分配的。另一端用户要打开TalkingData的灵动网页，在App启动的时候摇一摇手机，然后就可以建立一个wss的长连接了。用户就可以直接在网页上给按钮添加监听事件了，添加完成后，在手机上点击该按钮，网页上就会提示被点击，调试完成后点击全部生效，配置数据就会保存到下面https的服务器。       <br />
+　　我们的所有用户在启动App的时候，都可以从https服务器里获取到这套配置，客户端根据这套配置找到具体的按钮，监听点击事件，当按钮被点击后，就可以统计到了。</p>
+
+<p>接下来再看看灵动调试过程中数据是具体怎么进行数据交互的。</p>
+
+<p><img src="/images/posts/codeless/image03.png" height="300" width="500" /></p>
+
+<p>　　可以看到App客户端和Web端交互主要分为四部分：<code class="highlighter-rouge">设备信息</code> 、 <code class="highlighter-rouge">App基本结构</code> 、<code class="highlighter-rouge">控件绑定配置</code> 、<code class="highlighter-rouge">按钮点击信息</code> ，<code class="highlighter-rouge">设备信息</code> 主要是用来确认设备是调试者的设备，因为其它的终端用户也可能会误触发调试，<code class="highlighter-rouge">App基本结构</code>是用来在Web上展示移动App的，然后在Web上绑定了控件，就会把<code class="highlighter-rouge">控件绑定配置</code>发送给客户端，客户端根据配置监听绑定，当终端用户点击控件后，客户端就会把<code class="highlighter-rouge">按钮点击信息</code>传给Web端，Web显示控件被点击。</p>
+
+<p>　　再回头看看实现原理的第一张图片，调试完成数据就会从WSS的长连接服务器存储到HTTPS的服务器，此后其它终端用户只要在再次启动App就能获取到埋点配置了，SDK根据埋点配置去找到具体的控件(按钮)，监听点击，当用户点击控件时就可以调用自定义埋点的方法，之后的数据处理就跟自定义埋点是一样的原理了。   <br />
+　　可能有同学会有疑问，所有的App每次启动的时候都会去获取埋点配置，是不是会很耗流量？ 答案是不会的，服务器在没有埋点配置的时候每次将获取不到信息，那么将不会有什么流量消耗。如果服务器有配置了，App才会有些流量消耗的，而且这些配置信息是经过压缩的，所以流量消耗也不大，App获取到了配置之后就会做本地缓存，服务器配置不变的情况下再次获取配置也不会有流量的消耗，只有在下一次运营人员修改了新的控件绑定时才会消耗一些流量。 所以整个无码统计对终端用户的流量的影响是很小的。    <br />
+　　你也可以参考这套逻辑试试自己也部署这么一套无码统计，之后就不用再担心运营给的埋点统计需求了，让他们自己去用无码统计吧。</p>
+
+<p><a href="http://baixin.io/2016/07/Codeless/">点击阅读原文</a></p>
+
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">共田三皮君</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              共田三皮君
+            
+            </li>
+            
+            <li><a href="mailto:your-email@domain.com">your-email@domain.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/natoto"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">natoto</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/nonato"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">nonato</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
