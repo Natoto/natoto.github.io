@@ -20,15 +20,15 @@ Setting up a custom domain with GitHub Pages
 
 Setting up a custom domain with GitHub Pages
 创建GitHub技术博客全攻">
-<meta property="og:image" content="http://natoto.github.io/images/hexo-cname@2x.png">
-<meta property="og:updated_time" content="2016-11-22T07:45:05.000Z">
+<meta property="og:image" content="http://natoto.github.io/images/posts/hexo-cname@2x.png">
+<meta property="og:updated_time" content="2016-11-22T08:02:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GitHub Pages 绑定来自阿里云的域名">
 <meta name="twitter:description" content="GitHub Pages 绑定来自阿里云的域名简介我在阿里云上注册了一个新域名：whenbar.com，我已经在GitHub Pages上建立了自己的博客：natoto.github.io。现在我希望将whenbar.com映射到natoto.github.io。主要参考资料：
 
 Setting up a custom domain with GitHub Pages
 创建GitHub技术博客全攻">
-<meta name="twitter:image" content="http://natoto.github.io/images/hexo-cname@2x.png">
+<meta name="twitter:image" content="http://natoto.github.io/images/posts/hexo-cname@2x.png">
   
     <link rel="alternative" href="/atom.xml" title="共田三皮君" type="application/atom+xml">
   
@@ -181,10 +181,10 @@ Setting up a custom domain with GitHub Pages
 <li><a href="http://blog.fens.me/hexo-blog-github/" target="_blank" rel="external">Hexo在github上构建免费的Web应用</a> - 第4.3节：设置域名</li>
 </ol>
 <h2 id="第一步：创建CNAME"><a href="#第一步：创建CNAME" class="headerlink" title="第一步：创建CNAME"></a>第一步：创建CNAME</h2><p><a href="https://help.github.com/articles/adding-or-removing-a-custom-domain-for-your-github-pages-site/" target="_blank" rel="external">相关设置参考github说明</a></p>
-<p>最新github 不一定要创建CNAME文件，只需要做个设置就好了 </p>
+<p>最新github 不一定要手动创建CNAME文件，做个设置就好了并更新上也可以</p>
 <p>第一步的目的是，Github读取你的CNAME之后，Github服务器会设置<code>whenbar.com</code>为你的主域名，然后将<code>natoto.github.io</code>重定向到<code>whenbar.com</code>。</p>
 <h2 id="第二步：CNAME绑定域名"><a href="#第二步：CNAME绑定域名" class="headerlink" title="第二步：CNAME绑定域名"></a>第二步：CNAME绑定域名</h2><p>登录<a href="http://dc.aliyun.com/login/loginx" target="_blank" rel="external">阿里云单域名控制台</a>，在<code>域名解析</code>中添加如图所示的解析</p>
-<p><img src="/images/hexo-cname@2x.png" alt="域名解析"></p>
+<p><img src="/images/posts/hexo-cname@2x.png" alt="域名解析"></p>
 <p>默认使用阿里云提供的万网DNS服务器。当然你也可以使用<a href="https://www.dnspod.cn/" target="_blank" rel="external">DNSPOD</a>提供的DNS服务器，这样可以使你的域名在国外更快速的传播。当你使用DNSPOD提供的DNS服务器时，除了DNS服务器不一样以外，其他的设置（比如A记录和CNAME记录）均相同。以下我们简要分析我们所添加的A记录和CNAME记录的含义。</p>
 <p>在域名解析中，A记录就是直接指定一个IP，CNAME就是重命名，指向另一个域名。</p>
 <ol>
