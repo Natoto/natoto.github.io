@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Jekyll搭建个人博客 | 共田三皮君</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="之前写了一篇HEXO搭建个人博客的教程获得了很好评，尤其是在简书上目前已经累积了10W+的阅读量了，也有好心的读者主动给我打赏，在此感谢。
+　如果你看过我的文章会发现我现在的博客样式跟之前是有很大的区别的，之前我也是使用 HEXO 搭建的博客，后来发现使用 HEXO 在多台电脑上发布博客，操作起来并不是那么方便，果断就转到了 Jekyll 上，接下来我会讲如何使用 Jekyll 搭建博客，博客模">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jekyll搭建个人博客">
+<meta property="og:url" content="http://natoto.github.io/2016/10/2016-10-14-jekyll_tutorials1/index.html">
+<meta property="og:site_name" content="共田三皮君">
+<meta property="og:description" content="之前写了一篇HEXO搭建个人博客的教程获得了很好评，尤其是在简书上目前已经累积了10W+的阅读量了，也有好心的读者主动给我打赏，在此感谢。
+　如果你看过我的文章会发现我现在的博客样式跟之前是有很大的区别的，之前我也是使用 HEXO 搭建的博客，后来发现使用 HEXO 在多台电脑上发布博客，操作起来并不是那么方便，果断就转到了 Jekyll 上，接下来我会讲如何使用 Jekyll 搭建博客，博客模">
+<meta property="og:updated_time" content="2016-11-03T22:16:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jekyll搭建个人博客">
+<meta name="twitter:description" content="之前写了一篇HEXO搭建个人博客的教程获得了很好评，尤其是在简书上目前已经累积了10W+的阅读量了，也有好心的读者主动给我打赏，在此感谢。
+　如果你看过我的文章会发现我现在的博客样式跟之前是有很大的区别的，之前我也是使用 HEXO 搭建的博客，后来发现使用 HEXO 在多台电脑上发布博客，操作起来并不是那么方便，果断就转到了 Jekyll 上，接下来我会讲如何使用 Jekyll 搭建博客，博客模">
+  
+    <link rel="alternate" href="/atom.xml" title="共田三皮君" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">共田三皮君</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">个人站</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://natoto.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2016-10-14-jekyll_tutorials1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/2016-10-14-jekyll_tutorials1/" class="article-date">
+  <time datetime="2016-10-13T16:00:00.000Z" itemprop="datePublished">2016-10-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Jekyll搭建个人博客
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　之前写了一篇<a href="http://baixin.io/2015/08/HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" target="_blank" rel="external">HEXO搭建个人博客</a>的教程获得了很好评，尤其是在<a href="http://www.jianshu.com/p/465830080ea9" target="_blank" rel="external">简书</a>上目前已经累积了10W+的阅读量了，也有好心的读者主动给我打赏，在此感谢。</p>
+<p>　如果你看过我的文章会发现我现在的博客样式跟之前是有很大的区别的，之前我也是使用 HEXO 搭建的博客，后来发现使用 HEXO 在多台电脑上发布博客，操作起来并不是那么方便，果断就转到了 Jekyll 上，接下来我会讲如何使用 Jekyll 搭建博客，<a href="http://baixin.io/#blog" target="_blank" rel="external">博客模板效果</a>。</p>
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p> 　Jekyll 是一个简单的博客形态的静态站点生产机器。它有一个模版目录，其中包含原始文本格式的文档，通过 Markdown （或者 Textile） 以及 Liquid 转化成一个完整的可发布的静态网站，你可以发布在任何你喜爱的服务器上。Jekyll 也可以运行在 GitHub Page 上，也就是说，你可以使用 GitHub 的服务来搭建你的项目页面、博客或者网站，而且是完全免费的</p>
+<p>　使用 Jekyll 搭建博客之前要确认下本机环境，Git 环境（用于部署到远端）、<a href="http://www.ruby-lang.org/en/downloads/" target="_blank" rel="external">Ruby</a> 环境（Jekyll 是基于 Ruby 开发的）、包管理器 <a href="http://rubygems.org/pages/download" target="_blank" rel="external">RubyGems</a><br>　　如果你是 Mac 用户，你就需要安装 Xcode 和 Command-Line Tools了。下载方式 Preferences → Downloads → Components。</p>
+<p>　　Jekyll 是一个免费的简单静态网页生成工具，可以配合第三方服务例如： Disqus（评论）、多说(评论) 以及分享 等等扩展功能，Jekyll 可以直接部署在 Github（国外） 或 Coding（国内） 上，可以绑定自己的域名。<a href="http://jekyll.bootcss.com/" target="_blank" rel="external">Jekyll中文文档</a>、<a href="https://jekyllrb.com/" target="_blank" rel="external">Jekyll英文文档</a>、<a href="http://jekyllthemes.org/" target="_blank" rel="external">Jekyll主题列表</a>。</p>
+<h3 id="Jekyll-环境配置"><a href="#Jekyll-环境配置" class="headerlink" title="Jekyll 环境配置"></a>Jekyll 环境配置</h3><p>安装 jekyll</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ gem install jekyll     </div><div class="line">```    </div><div class="line"></div><div class="line">创建博客</div><div class="line"></div><div class="line">```    </div><div class="line">$ jekyll new myBlog    </div><div class="line">```   </div><div class="line"></div><div class="line">进入博客目录</div></pre></td></tr></table></figure>
+<p>$ cd myBlog<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">启动本地服务</div></pre></td></tr></table></figure></p>
+<p>$ jekyll serve<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">在浏览器里输入： [http://localhost:4000](http://localhost:4000)，就可以看到你的博客效果了。</div><div class="line"></div><div class="line">![](/images/posts/jekyll/image1.png)</div><div class="line"></div><div class="line">so easy !</div><div class="line"></div><div class="line">### 目录结构</div><div class="line">　</div><div class="line">　Jekyll 的核心其实是一个文本转换引擎。它的概念其实就是： 你用你最喜欢的标记语言来写文章，可以是 Markdown，也可以是 Textile,或者就是简单的 HTML, 然后 Jekyll 就会帮你套入一个或一系列的布局中。在整个过程中你可以设置URL路径, 你的文本在布局中的显示样式等等。这些都可以通过纯文本编辑来实现，最终生成的静态页面就是你的成品了。</div><div class="line"></div><div class="line"> 一个基本的 Jekyll 网站的目录结构一般是像这样的：</div></pre></td></tr></table></figure></p>
+<p>.<br>├── _config.yml<br>├── _includes<br>|   ├── footer.html<br>|   └── header.html<br>├── _layouts<br>|   ├── default.html<br>|   ├── post.html<br>|   └── page.html<br>├── _posts<br>|   └── 2016-10-08-welcome-to-jekyll.markdown<br>├── _sass<br>|   ├── _base.scss<br>|   ├── _layout.scss<br>|   └── _syntax-highlighting.scss<br>├── about.md<br>├── css<br>|   └── main.scss<br>├── feed.xml<br>└── index.html</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">这些目录结构以及具体的作用可以参考 [官网文档](http://jekyll.com.cn/docs/structure/) </div><div class="line"></div><div class="line">进入 _config.yml 里面，修改成你想看到的信息，重新 jekyll server ，刷新浏览器就可以看到你刚刚修改的信息了。</div><div class="line"></div><div class="line">到此，博客初步搭建算是完成了，</div><div class="line"></div><div class="line">### 博客部署到远端 </div><div class="line"></div><div class="line">　我这里讲的是部署到 Github Page 创建一个 github 账号，然后创建一个跟你账户名一样的仓库，如我的 github 账户名叫 [leopardpan](https://github.com/leopardpan)，我的 github 仓库名就叫 [leopardpan.github.io](https://github.com/leopardpan/leopardpan.github.io)，创建好了之后，把刚才建立的 myBlog 项目 push 到 username.github.io仓库里去（username指的是你的github用户名），检查你远端仓库已经跟你本地 myBlog 同步了，然后你在浏览器里输入 username.github.io ，就可以访问你的博客了。</div><div class="line"></div><div class="line"></div><div class="line">### 编写文章</div><div class="line"></div><div class="line">　　所有的文章都是 _posts 目录下面，文章格式为 mardown 格式，文章文件名可以是 .mardown 或者 .md。</div><div class="line"></div><div class="line">　　编写一篇新文章很简单，你可以直接从 _posts/ 目录下复制一份出来 `2016-10-16-welcome-to-jekyll副本.markdown` ，修改名字为 2016-10-16-article1.markdown ，注意：文章名的格式前面必须为 2016-10-16- ，日期可以修改，但必须为 年-月-日- 格式，后面的 article1 是整个文章的连接 URL，如果文章名为中文，那么文章的连接URL就会变成这样的：http://baixin.io/2015/08/%E6%90%AD%E5/ ， 所以建议文章名最好是英文的或者阿拉伯数字。 双击 2016-10-16-article1.markdown 打开</div></pre></td></tr></table></figure>
+<hr>
+<p>layout: post<br>title:  “Welcome to Jekyll!”<br>date:   2016-10-16 11:29:08 +0800</p>
+<h2 id="categories-jekyll-update"><a href="#categories-jekyll-update" class="headerlink" title="categories: jekyll update"></a>categories: jekyll update</h2><p>正文…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">title: 显示的文章名， 如：title: 我的第一篇文章                    </div><div class="line">date:  显示的文章发布日期，如：date: 2016-10-16                          </div><div class="line">categories: tag标签的分类，如：categories: 随笔            </div><div class="line"></div><div class="line">注意：文章头部格式必须为上面的，.... 就是文章的正文内容。</div><div class="line"></div><div class="line">我写文章使用的是 Sublime Text2 编辑器，如果你对 markdown 语法不熟悉的话，可以看看[作业部落的教程](https://www.zybuluo.com/) </div><div class="line"></div><div class="line"></div><div class="line">### 使用我的博客模板</div><div class="line"></div><div class="line">虽然博客部署完成了，你会发现博客太简单不是你想要的，如果你喜欢我的模板的话，可以使用我的模板。</div><div class="line"></div><div class="line">首先你要获取的我博客，[Github项目地址](https://github.com/leopardpan/leopardpan.github.io.git)，你可以直接[点击下载博客](https://github.com/leopardpan/leopardpan.github.io/archive/master.zip)，进去leopardpan.github.io/ 目录下， 使用命令部署本地服务</div></pre></td></tr></table></figure>
+<p>$ jekyll server<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 如果你本机没配置过任何jekyll的环境，可能会报错</div></pre></td></tr></table></figure></p>
+<p>/Users/xxxxxxxx/.rvm/rubies/ruby-2.2.2/lib/ruby/site_ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in <code>require&#39;: cannot load such file -- bundler (LoadError)
+    from /Users/xxxxxxxx/.rvm/rubies/ruby-2.2.2/lib/ruby/site_ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in</code>require’<br>    from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/gems/jekyll-3.3.0/lib/jekyll/plugin_manager.rb:34:in <code>require_from_bundler&#39;
+    from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/gems/jekyll-3.3.0/exe/jekyll:9:in</code><top (required)="">‘<br>    from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/jekyll:23:in <code>load&#39;
+    from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/jekyll:23:in</code><main>‘<br>    from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/ruby_executable_hooks:15:in <code>eval&#39;
+    from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/ruby_executable_hooks:15:in</code><main>‘</main></main></top></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">原因： 没有安装 bundler ，执行安装 bundler 命令</div></pre></td></tr></table></figure>
+<p>$ gem install bundler</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">提示：</div></pre></td></tr></table></figure>
+<p>Fetching: bundler-1.13.5.gem (100%)<br>Successfully installed bundler-1.13.5<br>Parsing documentation for bundler-1.13.5<br>Installing ri documentation for bundler-1.13.5<br>Done installing documentation for bundler after 5 seconds<br>1 gem installed</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">再次执行 $ jekyll server  ，提示</div></pre></td></tr></table></figure>
+<p>Could not find proper version of jekyll (3.1.1) in any of the sources<br>Run <code>bundle install</code> to install missing gems.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">跟着提示运行命令</div></pre></td></tr></table></figure>
+<p>$ bundle install<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">这个时候你可能会发现 bundle install 运行卡主不动了。</div><div class="line"></div><div class="line">如果很长时间都没任何提示的话，你可以尝试修改 gem 的 source</div></pre></td></tr></table></figure></p>
+<p>$ gem sources –remove <a href="https://rubygems.org/" target="_blank" rel="external">https://rubygems.org/</a><br>$ gem sources -a <a href="http://ruby.taobao.org/" target="_blank" rel="external">http://ruby.taobao.org/</a><br>$ gem sources -l<br><strong><em> CURRENT SOURCES </em></strong></p>
+<p><a href="http://ruby.taobao.org" target="_blank" rel="external">http://ruby.taobao.org</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">再次执行命令 $ bundle install，发现开始有动静了</div></pre></td></tr></table></figure>
+<p>Fetching gem metadata from <a href="https://rubygems.org/" target="_blank" rel="external">https://rubygems.org/</a>………..<br>Fetching version metadata from <a href="https://rubygems.org/" target="_blank" rel="external">https://rubygems.org/</a>..<br>Fetching dependency metadata from <a href="https://rubygems.org/" target="_blank" rel="external">https://rubygems.org/</a>.<br>。。。<br>Installing jekyll-watch 1.3.1<br>Installing jekyll 3.1.1<br>Bundle complete! 3 Gemfile dependencies, 17 gems now installed.<br>Use <code>bundle show [gemname]</code> to see where a bundled gem is installed.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">bundler安装完成，后再次启动本地服务</div></pre></td></tr></table></figure>
+<p>$ jekyll server</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">继续报错</div></pre></td></tr></table></figure>
+<p>Configuration file: /Users/tendcloud-Caroline/Desktop/leopardpan.github.io/_config.yml<br>  Dependency Error: Yikes! It looks like you don’t have jekyll-sitemap or one of its dependencies installed. In order to use Jekyll as currently configured, you’ll need to install this gem. The full error message from Ruby is: ‘cannot load such file – jekyll-sitemap’ If you run into trouble, you can find helpful resources at <a href="http://jekyllrb.com/help/!" target="_blank" rel="external">http://jekyllrb.com/help/!</a><br>jekyll 3.1.1 | Error:  jekyll-sitemap</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">表示 当前的 jekyll 版本是 3.1.1 ，无法使用 jekyll-sitemap </div><div class="line"></div><div class="line">解决方法有两个</div><div class="line"></div><div class="line">&gt; 1、打开当前目录下的 _config.yml 文件，把 gems: [jekyll-paginate,jekyll-sitemap] 换成 gems: [jekyll-paginate] ，也就是去掉jekyll-sitemap。</div><div class="line"></div><div class="line">&gt; 2、升级 jekyll 版本，我当前的是 jekyll 3.1.2 。</div><div class="line"></div><div class="line">修改完成后保存配置，再次执行</div></pre></td></tr></table></figure>
+<p>$ jekyll server</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">提示</div></pre></td></tr></table></figure>
+<p>Configuration file: /Users/baixinpan/Desktop/OpenSource/Mine/Page-Blog/leopardpan.github.io-github/_config.yml<br>            Source: /Users/baixinpan/Desktop/OpenSource/Mine/Page-Blog/leopardpan.github.io-github<br>       Destination: /Users/baixinpan/Desktop/OpenSource/Mine/Page-Blog/leopardpan.github.io-github/_site<br> Incremental build: disabled. Enable with –incremental<br>      Generating…<br>                    done in 0.901 seconds.<br> Auto-regeneration: enabled for ‘/Users/baixinpan/Desktop/OpenSource/Mine/Page-Blog/leopardpan.github.io-github’<br>Configuration file: /Users/baixinpan/Desktop/OpenSource/Mine/Page-Blog/leopardpan.github.io-github/_config.yml<br>    Server address: <a href="http://127.0.0.1:4000/" target="_blank" rel="external">http://127.0.0.1:4000/</a><br>  Server running… press ctrl-c to stop.</p>
+<p>```</p>
+<p>表示本地服务部署成功。</p>
+<p>在浏览器输入 <a href="127.0.0.1:4000" target="_blank" rel="external">127.0.0.1:4000</a> ， 就可以看到<a href="http://baixin.io" target="_blank" rel="external">baixin.io</a>博客效果了。</p>
+<h3 id="修改成你自己的博客"><a href="#修改成你自己的博客" class="headerlink" title="修改成你自己的博客"></a>修改成你自己的博客</h3><blockquote>
+<ul>
+<li>如果你想使用我的模板请把 _posts/ 目录下的文章都去掉。</li>
+<li>修改 _config.yml 文件里面的内容为你自己的。</li>
+</ul>
+</blockquote>
+<p>然后使用 git push 到你自己的仓库里面去，检查你远端仓库，在浏览器输入 username.github.io 就会发现，你有一个漂亮的主题模板了。      </p>
+<h4 id="【-如果想修改博客样式却不知道怎么修改，可以直接在评论里给我提问-】"><a href="#【-如果想修改博客样式却不知道怎么修改，可以直接在评论里给我提问-】" class="headerlink" title="【 如果想修改博客样式却不知道怎么修改，可以直接在评论里给我提问 】"></a>【 如果想修改博客样式却不知道怎么修改，可以直接在评论里给我提问 】</h4><h3 id="为什么要是用-Jekyll"><a href="#为什么要是用-Jekyll" class="headerlink" title="为什么要是用 Jekyll"></a>为什么要是用 Jekyll</h3><p>使用了 Jekyll 你会发现如果你想使用多台电脑发博客都很方便，只要把远端 github 仓库里的博客 clone 下来，写文章后再提交就可以了，Hexo 由于远端提交的是静态网页，所有无法直接写 Markdown 的文章。如果你想看 Hexo 搭建博客，可以看看我的另一篇<a href="http://baixin.io/2015/08/HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" target="_blank" rel="external">HEXO搭建个人博客</a>的教程。</p>
+<p>如果你在搭建博客遇到问题，可以在<a href="http://baixin.io/2016/06/jekyll_tutorials1/" target="_blank" rel="external">原文博客</a>的评论里给我提问。</p>
+<p>后面会继续介绍，在我的博客基础上，如何修改成你自己喜欢的 Style，欢迎继续关注我博客的更新。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://natoto.github.io//2016/10/2016-10-14-jekyll_tutorials1/" data-id="civt1l9ad000nwnve3hccvvi8" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/10/2016-10-25-Xcode8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          Xcode 8 使用笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/2016-09-23-iOSLowerLeftAppicon/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">iOS设备左下角出现Appicon</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/技术/" style="font-size: 15px;">技术</a> <a href="/tags/机器学习/" style="font-size: 15px;">机器学习</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/11/AVAudioSession/">AVAudioSession</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/Hello-World-0/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/firstdocument/">firstdocument</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/2015-08-25-HEXO搭建个人博客/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 John Doe<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

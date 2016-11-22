@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>TensorFlow 在 iOS 平台上的使用(一) | 共田三皮君</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="距离上次使用 TensorFlow 在iOS平台上做的小 Demo，已经过了四个月了，今天忽然想再看看,发现 Demo 已经不见了，我只能从头在编一次，这次发现编译 iOS 库，简单多了。
+　　tensorflow 下载地址，tensorflow 最近提交的时间：2016-11-03，commit：7b7c02de56e013482b5fe5ab05e576dc98fe5742 。
+　　下载完">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TensorFlow 在 iOS 平台上的使用(一)">
+<meta property="og:url" content="http://natoto.github.io/2016/11/2016-11-03-TensorFlowOniOSUse1/index.html">
+<meta property="og:site_name" content="共田三皮君">
+<meta property="og:description" content="距离上次使用 TensorFlow 在iOS平台上做的小 Demo，已经过了四个月了，今天忽然想再看看,发现 Demo 已经不见了，我只能从头在编一次，这次发现编译 iOS 库，简单多了。
+　　tensorflow 下载地址，tensorflow 最近提交的时间：2016-11-03，commit：7b7c02de56e013482b5fe5ab05e576dc98fe5742 。
+　　下载完">
+<meta property="og:updated_time" content="2016-11-03T22:16:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TensorFlow 在 iOS 平台上的使用(一)">
+<meta name="twitter:description" content="距离上次使用 TensorFlow 在iOS平台上做的小 Demo，已经过了四个月了，今天忽然想再看看,发现 Demo 已经不见了，我只能从头在编一次，这次发现编译 iOS 库，简单多了。
+　　tensorflow 下载地址，tensorflow 最近提交的时间：2016-11-03，commit：7b7c02de56e013482b5fe5ab05e576dc98fe5742 。
+　　下载完">
+  
+    <link rel="alternate" href="/atom.xml" title="共田三皮君" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">共田三皮君</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">个人站</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://natoto.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2016-11-03-TensorFlowOniOSUse1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/2016-11-03-TensorFlowOniOSUse1/" class="article-date">
+  <time datetime="2016-11-02T16:00:00.000Z" itemprop="datePublished">2016-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      TensorFlow 在 iOS 平台上的使用(一)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　　距离上次使用 TensorFlow 在iOS平台上做的小 Demo，已经过了四个月了，今天忽然想再看看,发现 Demo 已经不见了，我只能从头在编一次，这次发现编译 iOS 库，简单多了。</p>
+<p>　　tensorflow <a href="https://github.com/tensorflow/tensorflow/archive/master.zip" target="_blank" rel="external">下载地址</a>，tensorflow 最近提交的时间：2016-11-03，commit：<code>7b7c02de56e013482b5fe5ab05e576dc98fe5742</code> 。</p>
+<p>　　下载完成后打开文件，找到目录 <code>tensorflow-master/tensorflow/contrib/ios_examples</code> 你会发现目录下有三个项目和一个 README.md 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">benchmark 、 camera 、 simple 、README.md</div></pre></td></tr></table></figure>
+<h3 id="如果你发现项目无法运行，请看这里"><a href="#如果你发现项目无法运行，请看这里" class="headerlink" title="如果你发现项目无法运行，请看这里"></a>如果你发现项目无法运行，请看这里</h3><p>　　对于任何项目我们首先打开的应该是 README.md ，里面一般情况都会有介绍如何使用这个项目，tensorflow 也不会例外。README 开头就说了，这个目录里有如何在 iOS 平台上使用 tensorflow 的例子，但是需要注意几点：</p>
+<ul>
+<li>你的 Xcode 版本必须是 7.3 或更高版本，并且有安装 command-line 工具 。</li>
+<li>项目(Examples) 里必须包含一个静态库：<code>libtensorflow-core.a</code> 。</li>
+<li>下载 <a href="https://storage.googleapis.com/download.tensorflow.org/models/inception5h.zip" target="_blank" rel="external">Inception v1</a>，解压后将 label 和 graph 放在 simple 和 camera 的项目中。</li>
+</ul>
+<h3 id="camera-项目的使用"><a href="#camera-项目的使用" class="headerlink" title="camera 项目的使用"></a>camera 项目的使用</h3><p>　　camera 项目在 tensorflow-master/tensorflow/contrib/ios_examples 目录下，如果你是直接打开 camera 项目，编译你会发现报错缺少 imagenet_comp_graph_label_strings.txt 和 tensorflow_inception_graph.pb 两个文件，这两个文件上面已经说到了下载 <a href="https://storage.googleapis.com/download.tensorflow.org/models/inception5h.zip" target="_blank" rel="external">Inception v1</a> 解压得到。现在还差 静态库：<code>libtensorflow-core.a</code> ，这个需要我们自己编译。</p>
+<h4 id="编译静态库：libtensorflow-core-a"><a href="#编译静态库：libtensorflow-core-a" class="headerlink" title="编译静态库：libtensorflow-core.a"></a>编译静态库：libtensorflow-core.a</h4><p>进入目录：tensorflow-master/tensorflow/contrib/makefile，你可以看到一大堆 .sh 结尾的文件，找到 build_all_ios.sh ，Mac 上可以直接在 termina（终端）上运行命令编译</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sh build_all_ios.sh</div></pre></td></tr></table></figure>
+<p>这个编译的过程是很漫长的，一般在一个小时左右。也有可能你在编译的过程中会遇到问题，这次我只遇到一个问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">configure.ac:30: error: required file &apos;build-aux/ltmain.sh&apos; not found</div><div class="line">configure.ac:24: installing &apos;build-aux/missing&apos;</div><div class="line">Makefile.am: installing &apos;build-aux/depcomp&apos;</div><div class="line">parallel-tests: installing &apos;build-aux/test-driver&apos;</div><div class="line">autoreconf: automake failed with exit status: 1</div></pre></td></tr></table></figure>
+<p>解决方法是：先卸载 libtool 在重新安装，<code>brew uninstall libtool</code> &amp;&amp; <code>brew install libtool</code></p>
+<p>如果你还遇到了其它问题，可以看看我之前的一片文章 <a href="http://baixin.io/2016/07/iOSMachineLearning_TensorFlow/" target="_blank" rel="external">iOS开发迎来机器学习的春天—TensorFlow</a> ，或者是直接去 tensorflow 的 <a href="https://github.com/tensorflow/tensorflow/issues" target="_blank" rel="external">Issues</a> 里面找。 </p>
+<p>一个小时后。。。　如果编译没出问题，你可以在目录　<code>tensorflow-master/tensorflow/contrib/makefile／gen/lib</code> 下找到一个静态库：<code>libtensorflow-core.a</code> ，把这个静态库拷贝到 camera 项目中，然后编译运行。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://natoto.github.io//2016/11/2016-11-03-TensorFlowOniOSUse1/" data-id="civt1l9ai000swnveirf3i33l" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/11/2016-07-05-MachineLearning_introduce/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/2016-10-25-Xcode8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Xcode 8 使用笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/技术/" style="font-size: 15px;">技术</a> <a href="/tags/机器学习/" style="font-size: 15px;">机器学习</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/11/AVAudioSession/">AVAudioSession</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/Hello-World-0/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/firstdocument/">firstdocument</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/2015-08-25-HEXO搭建个人博客/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 John Doe<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
