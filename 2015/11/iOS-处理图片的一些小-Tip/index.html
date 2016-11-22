@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://natoto.github.io">
+  <title>iOS 处理图片的一些小 Tip | 共田三皮君</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="如何把 GIF 动图保存到相册？
+iOS 的相册是支持保存 GIF 和 APNG 动图的，只是不能直接播放。用 [ALAssetsLibrary writeImageDataToSavedPhotosAlbum:metadata:completionBlock] 可以直接把 APNG、GIF 的数据写入相册。如果图省事直接用 UIImageWriteToSavedPhotosAlbum() 写相册">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 处理图片的一些小 Tip">
+<meta property="og:url" content="http://natoto.github.io/2015/11/iOS-处理图片的一些小-Tip/index.html">
+<meta property="og:site_name" content="共田三皮君">
+<meta property="og:description" content="如何把 GIF 动图保存到相册？
+iOS 的相册是支持保存 GIF 和 APNG 动图的，只是不能直接播放。用 [ALAssetsLibrary writeImageDataToSavedPhotosAlbum:metadata:completionBlock] 可以直接把 APNG、GIF 的数据写入相册。如果图省事直接用 UIImageWriteToSavedPhotosAlbum() 写相册">
+<meta property="og:image" content="http://blog.ibireme.com/wp-content/uploads/2015/11/image_baseline.gif">
+<meta property="og:image" content="http://blog.ibireme.com/wp-content/uploads/2015/11/image_interlaced.gif">
+<meta property="og:image" content="http://blog.ibireme.com/wp-content/uploads/2015/11/image_progressive.gif">
+<meta property="og:updated_time" content="2016-11-22T09:02:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 处理图片的一些小 Tip">
+<meta name="twitter:description" content="如何把 GIF 动图保存到相册？
+iOS 的相册是支持保存 GIF 和 APNG 动图的，只是不能直接播放。用 [ALAssetsLibrary writeImageDataToSavedPhotosAlbum:metadata:completionBlock] 可以直接把 APNG、GIF 的数据写入相册。如果图省事直接用 UIImageWriteToSavedPhotosAlbum() 写相册">
+<meta name="twitter:image" content="http://blog.ibireme.com/wp-content/uploads/2015/11/image_baseline.gif">
+  
+    <link rel="alternative" href="/atom.xml" title="共田三皮君" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/smallIcon.jpg">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/images/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">nonato</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">YY.INC混泥土瞬间移动工程师</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Natoto" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/huangbo0913?is_hot=1" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+					<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">nonato</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/images/avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">nonato</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">YY.INC混泥土瞬间移动工程师</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Natoto" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/huangbo0913?is_hot=1" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-iOS-处理图片的一些小-Tip" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS 处理图片的一些小 Tip
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span style="color: #a2c700;"><strong>如何把 GIF 动图保存到相册？</strong></span></p>
+<p>iOS 的相册是支持保存 GIF 和 APNG 动图的，只是不能直接播放。用 [ALAssetsLibrary writeImageDataToSavedPhotosAlbum:metadata:completionBlock] 可以直接把 APNG、GIF 的数据写入相册。如果图省事直接用 UIImageWriteToSavedPhotosAlbum() 写相册，那么图像会被强制转码为 PNG。</p>
+<p><span style="color: #a2c700;"><strong>将 UIImage 保存到磁盘，用什么方式最好？</strong></span></p>
+<p>目前来说，保存 UIImage 有三种方式：1.直接用 NSKeyedArchiver 把 UIImage 序列化保存，2.用 UIImagePNGRepresentation() 先把图片转为 PNG 保存，3.用 UIImageJPEGRepresentation() 把图片压缩成 JPEG 保存。</p>
+<p>实际上，NSKeyedArchiver 是调用了 UIImagePNGRepresentation 进行序列化的，用它来保存图片是消耗最大的。苹果对 JPEG 有硬编码和硬解码，保存成 JPEG 会大大缩减编码解码时间，也能减小文件体积。所以如果图片不包含透明像素时，UIImageJPEGRepresentation(0.9) 是最佳的图片保存方式，其次是 UIImagePNGRepresentation()。</p>
+<p><span style="color: #a2c700;"><strong>UIImage 缓存是怎么回事？</strong></span></p>
+<p>通过 imageNamed 创建 UIImage 时，系统实际上只是在 Bundle 内查找到文件名，然后把这个文件名放到 UIImage 里返回，并没有进行实际的文件读取和解码。当 UIImage 第一次显示到屏幕上时，其内部的解码方法才会被调用，同时解码结果会保存到一个全局缓存去。据我观察，在图片解码后，App 第一次退到后台和收到内存警告时，该图片的缓存才会被清空，其他情况下缓存会一直存在。</p>
+<p><span style="color: #a2c700;"><strong>我要是用 imageWithData 能不能避免缓存呢？</strong></span></p>
+<p>不能。通过数据创建 UIImage 时，UIImage 底层是调用 ImageIO 的 CGImageSourceCreateWithData() 方法。该方法有个参数叫 ShouldCache，在 64 位的设备上，这个参数是默认开启的。这个图片也是同样在第一次显示到屏幕时才会被解码，随后解码数据被缓存到 CGImage 内部。与 imageNamed 创建的图片不同，如果这个图片被释放掉，其内部的解码数据也会被立刻释放。</p>
+<p><span style="color: #a2c700;"><strong>怎么能避免缓存呢？</strong></span></p>
+<p>1. 手动调用 CGImageSourceCreateWithData() 来创建图片，并把 ShouldCache 和 ShouldCacheImmediately 关掉。这么做会导致每次图片显示到屏幕时，解码方法都会被调用，造成很大的 CPU 占用。</p>
+<p>2. 把图片用 CGContextDrawImage() 绘制到画布上，然后把画布的数据取出来当作图片。这也是常见的网络图片库的做法。</p>
+<p><span style="color: #a2c700;"><strong>我能直接取到图片解码后的数据，而不是通过画布取到吗？</strong></span></p>
+<p>1.CGImageSourceCreateWithData(data) 创建 ImageSource。</p>
+<p>2.CGImageSourceCreateImageAtIndex(source) 创建一个未解码的 CGImage。</p>
+<p>3.CGImageGetDataProvider(image) 获取这个图片的数据源。</p>
+<p>4.CGDataProviderCopyData(provider) 从数据源获取直接解码的数据。</p>
+<p>ImageIO 解码发生在最后一步，这样获得的数据是没有经过颜色类型转换的原生数据（比如灰度图像）。</p>
+<p><span style="color: #a2c700;"><strong>如何判断一个文件的图片类型？</strong></span></p>
+<p>通过读取文件或数据的头几个字节然后和对应图片格式标准进行比对。我在<a href="https://github.com/ibireme/YYImage/blob/master/YYImage/YYImageCoder.m#L1066-L1141" target="_blank" rel="external">这里</a>写了一个简单的函数，能很快速的判断图片格式。</p>
+<p><span style="color: #a2c700;"><strong>怎样像浏览器那样边下载边显示图片？</strong></span></p>
+<p>首先，图片本身有 3 种常见的编码方式：</p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/11/image_baseline.gif" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/image_baseline.gif" alt="image_baseline"></a> <a href="http://blog.ibireme.com/wp-content/uploads/2015/11/image_interlaced.gif" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/image_interlaced.gif" alt="image_interlaced"></a> <a href="http://blog.ibireme.com/wp-content/uploads/2015/11/image_progressive.gif" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/image_progressive.gif" alt="image_progressive"></a></p>
+<p>第一种是 baseline，即逐行扫描。默认情况下，JPEG、PNG、GIF 都是这种保存方式。</p>
+<p>第二种是 interlaced，即隔行扫描。PNG 和 GIF 在保存时可以选择这种格式。</p>
+<p>第三种是 progressive，即渐进式。JPEG 在保存时可以选择这种方式。</p>
+<p>在下载图片时，首先用 CGImageSourceCreateIncremental(NULL) 创建一个空的图片源，随后在获得新数据时调用</p>
+<p>CGImageSourceUpdateData(data, false) 来更新图片源，最后在用 CGImageSourceCreateImageAtIndex() 创建图片来显示。</p>
+<p>你可以用 <a href="https://github.com/pinterest/PINRemoteImage" target="_blank" rel="external">PINRemoteImage</a> 或者我写的 <a href="https://github.com/ibireme/YYWebImage" target="_blank" rel="external">YYWebImage</a> 来实现这个效果。SDWebImage 并没有用 Incremental 方式解码，所以显示效果很差。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2015/11/iOS-处理图片的一些小-Tip/" class="archive-article-date">
+  	<time datetime="2015-11-01T18:13:39.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-11-02</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2015/11/iOS-保持界面流畅的技巧/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          iOS 保持界面流畅的技巧
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/移动端图片格式调研/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">移动端图片格式调研</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="iOS-处理图片的一些小-Tip" data-title="iOS 处理图片的一些小 Tip" data-url="http://natoto.github.io/2015/11/iOS-处理图片的一些小-Tip/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 nonato
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/github-domain-cname/" style="font-size: 10px;">github,domain,cname</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/其他/" style="font-size: 10px;">其他</a> <a href="/tags/博客/" style="font-size: 13.33px;">博客</a> <a href="/tags/吐槽/" style="font-size: 10px;">吐槽</a> <a href="/tags/工具/" style="font-size: 13.33px;">工具</a> <a href="/tags/技术/" style="font-size: 16.67px;">技术</a> <a href="/tags/机器学习/" style="font-size: 13.33px;">机器学习</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.jianshu.com/users/cc52a4f9fcc5/latest_articles">简书</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://weibo.com/huangbo0913">微博</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/nonato">博客园</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://github.com/natoto">github</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">&lt;br&gt;长方体混凝土瞬间移动工程师&lt;br&gt;&lt;br&gt;专注移动开发，&lt;br&gt;略懂前端，&lt;br&gt;略懂脚本，&lt;br&gt;略懂机器学习&lt;br&gt;&lt;br&gt;感谢大家光临</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

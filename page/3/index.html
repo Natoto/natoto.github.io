@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://natoto.github.io">
+  <title>共田三皮君</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="欢迎来到我的个人站~">
+<meta property="og:type" content="website">
+<meta property="og:title" content="共田三皮君">
+<meta property="og:url" content="http://natoto.github.io/page/3/index.html">
+<meta property="og:site_name" content="共田三皮君">
+<meta property="og:description" content="欢迎来到我的个人站~">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="共田三皮君">
+<meta name="twitter:description" content="欢迎来到我的个人站~">
+  
+    <link rel="alternative" href="/atom.xml" title="共田三皮君" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/smallIcon.jpg">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/images/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">nonato</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">YY.INC混泥土瞬间移动工程师</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Natoto" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/huangbo0913?is_hot=1" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+					<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">nonato</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/images/avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">nonato</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">YY.INC混泥土瞬间移动工程师</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Natoto" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/huangbo0913?is_hot=1" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        
+  
+    <article id="post-iOS-处理图片的一些小-Tip" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/iOS-处理图片的一些小-Tip/">iOS 处理图片的一些小 Tip</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span style="color: #a2c700;"><strong>如何把 GIF 动图保存到相册？</strong></span></p>
+<p>iOS 的相册是支持保存 GIF 和 APNG 动图的，只是不能直接播放。用 [ALAssetsLibrary writeImageDataToSavedPhotosAlbum:metadata:completionBlock] 可以直接把 APNG、GIF 的数据写入相册。如果图省事直接用 UIImageWriteToSavedPhotosAlbum() 写相册，那么图像会被强制转码为 PNG。</p>
+<p><span style="color: #a2c700;"><strong>将 UIImage 保存到磁盘，用什么方式最好？</strong></span></p>
+<p>目前来说，保存 UIImage 有三种方式：1.直接用 NSKeyedArchiver 把 UIImage 序列化保存，2.用 UIImagePNGRepresentation() 先把图片转为 PNG 保存，3.用 UIImageJPEGRepresentation() 把图片压缩成 JPEG 保存。</p>
+<p>实际上，NSKeyedArchiver 是调用了 UIImagePNGRepresentation 进行序列化的，用它来保存图片是消耗最大的。苹果对 JPEG 有硬编码和硬解码，保存成 JPEG 会大大缩减编码解码时间，也能减小文件体积。所以如果图片不包含透明像素时，UIImageJPEGRepresentation(0.9) 是最佳的图片保存方式，其次是 UIImagePNGRepresentation()。</p>
+<p><span style="color: #a2c700;"><strong>UIImage 缓存是怎么回事？</strong></span></p>
+<p>通过 imageNamed 创建 UIImage 时，系统实际上只是在 Bundle 内查找到文件名，然后把这个文件名放到 UIImage 里返回，并没有进行实际的文件读取和解码。当 UIImage 第一次显示到屏幕上时，其内部的解码方法才会被调用，同时解码结果会保存到一个全局缓存去。据我观察，在图片解码后，App 第一次退到后台和收到内存警告时，该图片的缓存才会被清空，其他情况下缓存会一直存在。</p>
+<p><span style="color: #a2c700;"><strong>我要是用 imageWithData 能不能避免缓存呢？</strong></span></p>
+<p>不能。通过数据创建 UIImage 时，UIImage 底层是调用 ImageIO 的 CGImageSourceCreateWithData() 方法。该方法有个参数叫 ShouldCache，在 64 位的设备上，这个参数是默认开启的。这个图片也是同样在第一次显示到屏幕时才会被解码，随后解码数据被缓存到 CGImage 内部。与 imageNamed 创建的图片不同，如果这个图片被释放掉，其内部的解码数据也会被立刻释放。</p>
+<p><span style="color: #a2c700;"><strong>怎么能避免缓存呢？</strong></span></p>
+<p>1. 手动调用 CGImageSourceCreateWithData() 来创建图片，并把 ShouldCache 和 ShouldCacheImmediately 关掉。这么做会导致每次图片显示到屏幕时，解码方法都会被调用，造成很大的 CPU 占用。</p>
+<p>2. 把图片用 CGContextDrawImage() 绘制到画布上，然后把画布的数据取出来当作图片。这也是常见的网络图片库的做法。</p>
+<p><span style="color: #a2c700;"><strong>我能直接取到图片解码后的数据，而不是通过画布取到吗？</strong></span></p>
+<p>1.CGImageSourceCreateWithData(data) 创建 ImageSource。</p>
+<p>2.CGImageSourceCreateImageAtIndex(source) 创建一个未解码的 CGImage。</p>
+<p>3.CGImageGetDataProvider(image) 获取这个图片的数据源。</p>
+<p>4.CGDataProviderCopyData(provider) 从数据源获取直接解码的数据。</p>
+<p>ImageIO 解码发生在最后一步，这样获得的数据是没有经过颜色类型转换的原生数据（比如灰度图像）。</p>
+<p><span style="color: #a2c700;"><strong>如何判断一个文件的图片类型？</strong></span></p>
+<p>通过读取文件或数据的头几个字节然后和对应图片格式标准进行比对。我在<a href="https://github.com/ibireme/YYImage/blob/master/YYImage/YYImageCoder.m#L1066-L1141" target="_blank" rel="external">这里</a>写了一个简单的函数，能很快速的判断图片格式。</p>
+<p><span style="color: #a2c700;"><strong>怎样像浏览器那样边下载边显示图片？</strong></span></p>
+<p>首先，图片本身有 3 种常见的编码方式：</p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/11/image_baseline.gif" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/image_baseline.gif" alt="image_baseline"></a> <a href="http://blog.ibireme.com/wp-content/uploads/2015/11/image_interlaced.gif" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/image_interlaced.gif" alt="image_interlaced"></a> <a href="http://blog.ibireme.com/wp-content/uploads/2015/11/image_progressive.gif" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/image_progressive.gif" alt="image_progressive"></a></p>
+<p>第一种是 baseline，即逐行扫描。默认情况下，JPEG、PNG、GIF 都是这种保存方式。</p>
+<p>第二种是 interlaced，即隔行扫描。PNG 和 GIF 在保存时可以选择这种格式。</p>
+<p>第三种是 progressive，即渐进式。JPEG 在保存时可以选择这种方式。</p>
+<p>在下载图片时，首先用 CGImageSourceCreateIncremental(NULL) 创建一个空的图片源，随后在获得新数据时调用</p>
+<p>CGImageSourceUpdateData(data, false) 来更新图片源，最后在用 CGImageSourceCreateImageAtIndex() 创建图片来显示。</p>
+<p>你可以用 <a href="https://github.com/pinterest/PINRemoteImage" target="_blank" rel="external">PINRemoteImage</a> 或者我写的 <a href="https://github.com/ibireme/YYWebImage" target="_blank" rel="external">YYWebImage</a> 来实现这个效果。SDWebImage 并没有用 Incremental 方式解码，所以显示效果很差。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2015/11/iOS-处理图片的一些小-Tip/" class="archive-article-date">
+  	<time datetime="2015-11-01T18:13:39.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-11-02</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-移动端图片格式调研" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/移动端图片格式调研/">移动端图片格式调研</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>图片通常是移动端流量耗费最多的部分，并且占据着重要的视觉空间。合理的图片格式选用和优化可以为你节省带宽、提升视觉效果。在这篇文章里我会分析一下目前主流和新兴的几种图片格式的特点、性能分析、参数调优，以及相关开源库的选择。</p>
+<p>Index</p>
+<p><a href="#intro">几种图片格式简介</a></p>
+<p><a href="#mobile">移动端图片类型的支持情况</a></p>
+<p><a href="#still">静态图片的编码与解码</a></p>
+<p><a href="#still_jpeg">JPEG</a></p>
+<p><a href="#still_png">PNG</a></p>
+<p><a href="#still_webp">WebP</a></p>
+<p><a href="#still_bpg">BPG</a></p>
+<p><a href="#ani">动态图片的编码与解码</a></p>
+<p><a href="#ani_gif">GIF</a></p>
+<p><a href="#ani_apng">APNG</a></p>
+<p><a href="#ani_webp">WebP</a></p>
+<p><a href="#ani_bpg">BPG</a></p>
+<p><a href="#ani_bench">动图性能对比</a></p>
+<p><span id="more-41834"></span></p>
+<p><a name="intro"></a></p>
+<h2 id="几种图片格式的简介"><a href="#几种图片格式的简介" class="headerlink" title="几种图片格式的简介"></a><span class="s1">几种图片格式的简介</span></h2><p><span class="s1">首先谈一下大家耳熟能详的几种老牌的图片格式吧：</span></p>
+<p><span class="s1"><span style="color: #86b300;">JPEG</span> 是目前最常见的图片格式，它诞生于 </span><span class="s2">1992</span><span class="s1"> 年，是一个很古老的格式。它只支持有损压缩，其压缩算法可以精确控制压缩比，以图像质量换得存储空间。由于它太过常见，以至于许多移动设备的 CPU 都支持针对它的硬编码与硬解码。</span></p>
+<p><span class="s1"><span style="color: #86b300;">PNG</span> 诞生在 </span><span class="s2">1995</span><span class="s1"> 年，比 JPEG 晚几年。它本身的设计目的是替代 GIF 格式，所以它与 GIF 有更多相似的地方。PNG 只支持无损压缩，所以它的压缩比是有上限的。相对于 JPEG 和 GIF 来说，它最大的优势在于支持完整的透明通道。</span></p>
+<p><span class="s1"><span style="color: #86b300;">GIF</span> 诞生于 </span><span class="s2">1987</span><span class="s1"> 年，随着初代互联网流行开来。它有很多缺点，比如通常情况下只支持 </span><span class="s2">256</span><span class="s1"> 种颜色、透明通道只有 </span><span class="s2">1</span><span class="s1"> bit、文件压缩比不高。它唯一的优势就是支持多帧动画，凭借这个特性，它得以从 Windows </span><span class="s2">1.0</span><span class="s1"> 时代流行至今，而且仍然大受欢迎。</span></p>
+<p><span class="s1">在上面这些图片格式诞生后，也有不少公司或团体尝试对他们进行改进，或者创造其他更加优秀的图片格式，比如 JPEG 小组的 JPEG </span><span class="s2">2000</span><span class="s1">、微软的 JPEG-XR、Google 的 WebP、个人开发者发布的 BPG、FLIF 等。它们相对于老牌的那几个图片格式来说有了很大的进步，但出于各种各样的原因，只有少数几个格式能够流行开来。下面三种就是目前实力比较强的新兴格式了：</span></p>
+<p><span class="s1"><span style="color: #86b300;">APNG</span> 是 Mozilla 在 </span><span class="s2">2008</span><span class="s1"> 年发布的一种图片格式，旨在替换掉画质低劣的 GIF 动画。它实际上只是相当于 PNG 格式的一个扩展，所以 Mozilla 一直想把它合并到 PNG 标准里面去。然而 PNG 开发组并没有接受 APNG 这个扩展，而是一直在推进它自己的 MNG 动图格式。MNG 格式过于复杂以至于并没有什么系统或浏览器支持，而 APNG 格式由于简单容易实现，目前已经渐渐流行开来。Mozilla 自己的 Firefox 首先支持了 APNG，随后苹果的 Safari 也开始有了支持， Chrome 目前也<a href="https://codereview.chromium.org/1250373006/" target="_blank" rel="external">已经尝试</a>开始支持 </span><span class="s3">，可以说未来前景很好。</span></p>
+<p><span class="s1"><span style="color: #86b300;">WebP</span> 是 Google 在 </span><span class="s2">2010</span><span class="s1"> 年发布的图片格式，希望以更高的压缩比替代 JPEG。它用 VP8 视频帧内编码作为其算法基础，取得了不错的压缩效果。它支持有损和无损压缩、支持完整的透明通道、也支持多帧动画，并且没有版权问题，是一种非常理想的图片格式。借由 Google 在网络世界的影响力，WebP 在几年的时间内已经得到了广泛的应用。看看你手机里的 App：微博、微信、QQ、淘宝、网易新闻等等，每个 App 里都有 WebP 的身影。Facebook 则更进一步，用 WebP 来显示聊天界面的贴纸动画。</span></p>
+<p><span class="s1"><span style="color: #86b300;">BPG</span> 是著名程序员 Fabrice Bellard 在去年 (</span><span class="s2">2014</span><span class="s1">年) 发布的一款超高压缩比的图片格式。这个程序员有些人可能感觉面生，但说起他的作品 FFmpeg、QEMU 大家想必是都知道的。BPG 使用 HEVC (即 H</span><span class="s2">.265</span><span class="s1">) 帧内编码作为其算法基础，就这点而言，它毋庸置疑是当下最为先进的图片压缩格式。相对于 JP2、JPEG-XR、WebP 来说，同等体积下 BPG 能提供更高的图像质量。另外，得益于它本身基于视频编码算法的特性，它能以非常小的文件体积保存多帧动画。 Fabrice Bellard 聪明的地方在于，他知道自己一个人无法得到各大浏览器厂商的支持，所以他还特地开发了 Javascript 版的解码器，任何浏览器只要加载了这个 </span><span class="s2">76</span><span class="s1">KB 大小的 JS 文件，就可以直接显示 BPG 格式的图片了。目前阻碍它流行的原因就是 HEVC 的版权问题和它较长的编码解码时间。尽管这个图片格式才刚刚发布一年，但已经有不少厂子开始试用了，比如<a href="http://www.infoq.com/cn/news/2015/08/onesdk-shoutao" target="_blank" rel="external">阿里</a></span><span class="s3">和<a href="http://www.infoq.com/cn/articles/how-subject-test-works" target="_blank" rel="external">腾讯</a>。</span></p>
+<p><a name="mobile"></a></p>
+<h2 id="移动端图片类型的支持情况"><a href="#移动端图片类型的支持情况" class="headerlink" title="移动端图片类型的支持情况"></a><span class="s1">移动端图片类型的支持情况</span></h2><p><span class="s1">目前主流的移动端对图片格式的支持情况如何呢？我们分别来看一下 Android 和 iOS 目前的图片编解码架构吧：</span></p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/11/mobile_image_arch.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/mobile_image_arch.png" alt="mobile_image_arch"></a></p>
+<p><span class="s1">Android 的图片编码解码是由 Skia 图形库负责的，Skia 通过挂接第三方开源库实现了常见的图片格式的编解码支持。目前来说，Android 原生支持的格式只有 JPEG、PNG、GIF、BMP 和 WebP (Android </span><span class="s2">4.0</span><span class="s1"> 加入)，在上层能直接调用的编码方式也只有 JPEG、PNG、WebP 这三种。目前来说 Android 还不支持直接的动图编解码。</span></p>
+<p><span class="s1">iOS 底层是用 ImageIO.framework 实现的图片编解码。目前 iOS 原生支持的格式有：JPEG、JPEG2000、PNG、GIF、BMP、ICO、TIFF、PICT，自 iOS </span><span class="s2">8.0</span><span class="s1"> 起，ImageIO 又加入了 APNG、SVG、RAW 格式的支持。在上层，开发者可以直接调用 ImageIO 对上面这些图片格式进行编码和解码。对于动图来说，开发者可以解码动画 GIF 和 APNG、可以编码动画 GIF。</span></p>
+<p><span class="s1">两个平台在导入第三方编解码库时，都多少对他们进行了一些修改，比如 Android 对 libjpeg 等进行的调整以更好的控制内存，iOS 对 libpng 进行了修改以支持 APNG，并增加了多线程编解码的特性。除此之外，iOS 专门针对 JPEG 的编解码开发了 AppleJPEG.framework，实现了性能更高的硬编码和硬解码，只有当硬编码解码失败时，libjpeg 才会被用到。</span></p>
+<p><a name="still"></a></p>
+<h2 id="静态图片的编码与解码"><a href="#静态图片的编码与解码" class="headerlink" title="静态图片的编码与解码"></a><span class="s1">静态图片的编码与解码</span></h2><p><span class="s5">由于我目前主要是做 iOS 开发，所以下面的性能评测都是基于 iPhone 的，主要测试代码可以在<a href="https://github.com/ibireme/YYWebImage/blob/master/Demo/YYWebImageDemo/YYImageBenchmark.m" target="_blank" rel="external">这里</a>看到</span><span class="s1">。</span><span class="s1">测试素材很少，只有两个：</span></p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/11/dribbble512_pngcrush.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/dribbble512_pngcrush.png" alt="dribbble512_pngcrush"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/lena512_weibo.jpg" alt="lena512_weibo"></a></p>
+<p><span class="s1">第一张是Dribbble 的 Logo，包含 Alpha 通道，用于测试简单的、图形类的图像。</span></p>
+<p>第二张经典的 Lena 图，用于测试照片类的、具有丰富细节的图像。</p>
+<p>每个图像都有 64x64、128x128、256x256、512x512 四种分辨率。</p>
+<p>测试素材过少可能导致某些测试不够准确，但作为参考大致是没问题的。</p>
+<p><a name="still_jpeg"></a></p>
+<h3 id="JPEG"><a href="#JPEG" class="headerlink" title="JPEG"></a><span style="color: #86b300;"><strong><span class="s1">JPEG</span></strong></span></h3><p><span class="s1">目前比较知名的 JPEG 库有以下三个：</span></p>
+<p><span class="s5"><span class="Apple-converted-space">    </span><a href="http://libjpeg.sourceforge.net/" target="_blank" rel="external">libjpeg</a>：</span><span class="s1">开发时间最早，使用最广泛的 JPEG 库。由于 JPEG 标准过于复杂和模糊，并没有其他人去实现，所以这个库是 JPEG 的事实标准。</span></p>
+<p><span class="s5"><span class="Apple-converted-space">    </span><a href="http://libjpeg-turbo.virtualgl.org/" target="_blank" rel="external">libjpeg-turbo</a>：</span><span class="s1">一个致力于提升编解码速度的 JPEG 库。它基于 libjpeg 进行了改造，用 SIMD 指令集 (MMX、SSE2、NEON) 重写了部分代码，官网称相对于 libjpeg 有 </span><span class="s2">2</span><span class="s1"> 到 </span><span class="s2">4</span><span class="s1"> 倍的性能提升。</span></p>
+<p><span class="s5"><span class="Apple-converted-space">    </span><a href="http://mozjpeg.codelove.de/" target="_blank" rel="external">MozJPEG</a>：</span><span class="s1"> 一个致力于提升压缩比的 JPEG 库。它是 Mozilla 在 </span><span class="s2">2014</span><span class="s1"> 年发布的基于 libjpeg-turbo 进行改造的库，相对于 libjpeg 有 </span><span class="s2">5</span><span class="s1">% ~ </span><span class="s2">15</span><span class="s1">%<span class="Apple-converted-space">  </span>的压缩比提升，但相应的其编码速度也慢了很多。</span></p>
+<p><span class="s1">除了上面这三个库，苹果自己也开发了一个 AppleJPEG，但并没有开源。其调用了芯片提供的 DSP 硬编码和硬解码的功能。虽然它不如上面这三个库功能完善，但其性能非常高。在我的测试中，其编解码速度通常是 libjpeg-turbo 的 </span><span class="s2">1</span><span class="s1">~2 倍。可惜的是，目前开发者并不能直接访问这个库。</span></p>
+<p><span class="s1">下面是 ImageIO (AppleJPEG/libpng) 在 iPhone </span><span class="s2">6</span><span class="s1"> 上的编解码性能：</span></p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/11/jpeg_bench_dribbble.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/jpeg_bench_dribbble.png" alt="jpeg_bench_dribbble"></a> <a href="http://blog.ibireme.com/wp-content/uploads/2015/11/jpeg_bench_lena.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/jpeg_bench_lena.png" alt="jpeg_bench_lena"></a></p>
+<p><span class="s1">可以看到，JPEG 编码中 quality 越小，图片体积就越小，质量越也差，编码时间也越短。解码时间并没有很大的差距，可能是其大部分时间消耗在了函数调用、硬件调用上。苹果在自己的相册 Demo 中提供的 quality 的默认值是 </span><span class="s2">0.9</span><span class="s1">，在这个值附近，图像质量和体积、编码解码时间之间都能取得不错的平衡。</span></p>
+<p><a name="still_png"></a></p>
+<h3 id="PNG"><a href="#PNG" class="headerlink" title="PNG"></a><span style="color: #86b300;"><strong><span class="s1">PNG</span></strong></span></h3><p><span class="s1">相对于 JPEG 来说，PNG 标准更为清晰和简单，因此有很多公司或个人都有自己的 PNG 编码解码实现。但目前使用最广的还是 PNG 官方发布的 <a href="http://www.libpng.org/pub/png/libpng.html" target="_blank" rel="external">libpng</a> </span><span class="s3">库。iOS 和 Android 底层都是调用这个库实现的 PNG 编解码。</span></p>
+<p><span class="s1">下面是 PNG 在 iPhone </span><span class="s2">6</span><span class="s1"> 上的编解码性能：</span></p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/11/jpeg_png_bench.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/jpeg_png_bench.png" alt="jpeg_png_bench"></a></p>
+<p><span class="s1">可以看到，在编解码图形类型（颜色少、细节少）的图片时，PNG 和 JPEG 差距并不大；但是对于照片类型（颜色和细节丰富）的图片来说，PNG 在文件体积、编解码速度上都差 JPEG 不少了。</span></p>
+<p><span class="s1">和 JPEG 不同，PNG 是无损压缩，其并不能提供压缩比的选项，其压缩比是有上限的。目前网上有很多针对 PNG 进行优化的工具和服务，旨在提升 PNG 的压缩比。下面是常见的几个 PNG 压缩工具的性能对比：</span></p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/11/png_tools_bench.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/png_tools_bench.png" alt="png_tools_bench"></a></p>
+<p><span class="s1"><a href="http://pmt.sourceforge.net/pngcrush/" target="_blank" rel="external">pngcrush</a> 是 Xcode 自带的 PNG 压缩工具，相对于设计师用 Photoshop 生成的图片来说，它能取得不错的压缩效果。<a href="https://imageoptim.com/" target="_blank" rel="external">ImageOptim</a> 则更进一步，对每张图用多种缩算法进行比对，选择压缩比更高的结果，进一步缩小了文件体积。<a href="https://tinypng.com/" target="_blank" rel="external">TinyPNG.com</a> 相对于其他工具来说，压缩比高得不像话。它启用了类似 GIF 那样的颜色索引表对 PNG 进行压缩，所以会导致颜色丰富的图片丢失掉一部分细节。如果使用 TinyPNG 的话，最好在压缩完成后让设计师看一下颜色效果是否可以接受。</span></p>
+<p><a name="still_webp"></a></p>
+<h3 id="WebP"><a href="#WebP" class="headerlink" title="WebP"></a><span style="color: #86b300;"><strong><span class="s1">WebP</span></strong></span></h3><p><span class="s1">WebP 标准是 Google 定制的，迄今为止也只有 Google 发布的 <a href="https://developers.google.com/speed/webp/" target="_blank" rel="external">libwebp</a> 实现了该的编解码 </span><span class="s3">。 所以这个库也是该格式的事实标准。</span></p>
+<p><strong><span class="s1">WebP 编码主要有几个参数：</span></strong></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span><span style="color: #ff6600;">lossless</span>: </span><span class="s6">YES</span><span class="s1">:有损编码 </span><span class="s6">NO</span><span class="s1">:无损编码。WebP 主要优势在于有损编码，其无损编码的性能和压缩比表现一般。</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span><span style="color: #ff6600;">quality</span>: [</span><span class="s2">0</span><span class="s1">~100] 图像质量，</span><span class="s2">0</span><span class="s1">表示最差质量，文件体积最小，细节损失严重，</span><span class="s2">100</span><span class="s1">表示最高图像质量，文件体积较大。该参数只针对有损压缩有明显效果。Google 官方的建议是 </span><span class="s2">75</span><span class="s1">，腾讯在<a href="http://isux.tencent.com/introduction-of-webp.html" target="_blank" rel="external">对 WebP 评测</a>时</span><span class="s3">给出的建议也是 75。在这个值附近，WebP 能在压缩比、图像质量上取得较好的平衡。</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span><span style="color: #ff6600;">method</span>: [</span><span class="s2">0</span><span class="s1">~6] 压缩比，</span><span class="s2">0</span><span class="s1">表示快速压缩，耗时短，压缩质量一般，</span><span class="s2">6</span><span class="s1">表示极限压缩，耗时长，压缩质量好。该参数也只针对有损压缩有明显效果。调节该参数最高能带来 </span><span class="s2">20</span><span class="s1">% ～ </span><span class="s2">40</span><span class="s1">% 的更高压缩比，但相应的编码时间会增加 </span><span class="s2">5</span><span class="s1">～</span><span class="s2">20</span><span class="s1"> 倍。Google 推荐的值是 </span><span class="s2">4</span><span class="s1">。</span></p>
+<p><span class="s1">对于编码无损图片来说，quality=</span><span class="s2">0</span><span class="s1">, method=</span><span class="s2">0</span><span class="s1">~3 是相对来说比较合适的参数，能够节省编码时间，同时也有不错的压缩比。</span><span class="s1">无损编码图片，quality=</span><span class="s2">75</span><span class="s1">, method=</span><span class="s2">2</span><span class="s1">~4 是比较合适的参数，能在编码时间、图片质量、文件体积之间有着不错的平衡。</span></p>
+<p><strong><span class="s1">WebP 解码有三个参数：</span></strong></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span><span style="color: #ff6600;">use_threads</span>: 是否启用 pthread 多线程解码。该参数只对宽度大于 </span><span class="s2">512</span><span class="s1"> 的有损图片起作用。开启后内部会用多线程解码，CPU 占用会更高，解码时间平均能缩短 </span><span class="s2">10</span><span class="s1">%～</span><span class="s2">20</span><span class="s1">%。</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span><span style="color: #ff6600;">bypass_filtering</span>: 是否禁用滤波。该参数只对有损图片起作用，开启后大约能缩短 </span><span class="s2">5</span><span class="s1">%～</span><span class="s2">10</span><span class="s1">% 的解码时间，但会造成一些颜色过渡平滑的区域产生色带（banding）。</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span><span style="color: #ff6600;">no_fancy_upsampling</span>: 是否禁用上采样。该参数只对有损图片起作用。在我的测试中，开启该参数后，解码时间反而会增加 </span><span class="s2">5</span><span class="s1">～</span><span class="s2">25</span><span class="s1">%，同时会造成一些图像细节的丢失，线条边缘会增加杂色，显得不自然。</span></p>
+<p><span class="s1">通常情况下，这三个参数都设为 </span><span class="s6">NO</span><span class="s1"> 即可，如果要追求更高的解码速度，则可以尝试开启 use_threads 和 bypass_filtering 这两个参数。而 no_fancy_upsampling 在任何情况下都没必要开启。</span></p>
+<p><span class="s1">由于 WebP 测试数据较多，这里只贴一下 </span><span class="s2">512</span><span class="s1">x512 大小的一部分测试结果，感兴趣的可以看文章结尾处的 Excel 附件。</span></p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/11/webp_bench.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/webp_bench.png" alt="webp_bench"></a></p>
+<p><span class="s1">对于简单的图形类型的图像（比如 App 内的各种 UI 素材），WebP 无损压缩的文件体积和解码速度某些情况下已经比 PNG 还要理想了，如果你想要对 App 安装包体积进行优化，可以尝试一下 WebP。</span></p>
+<p><span class="s1">对于复杂的图像（比如照片）来说，WebP 无损编码表现并不好，但有损编码表现却非常棒。相近质量的图片解码速度 WebP 相距 JPEG 也已经相差不大了，而文件压缩比却能提升不少。</span></p>
+<p><a name="still_bpg"></a></p>
+<h3 id="BPG"><a href="#BPG" class="headerlink" title="BPG"></a><span style="color: #86b300;"><strong><span class="s1">BPG</span></strong></span></h3><p><span class="s5">BPG 是目前已知最优秀的有损压缩格式了，它能在相同质量下比 JPEG 减少 </span><span class="s2">50</span><span class="s5">% 的体积。下面是经典的 Lena 图的对比，你也可以在<a href="http://xooyoozoo.github.io/yolo-octo-bugfixes/#cologne-cathedral&amp;webp=s&amp;bpg=s" target="_blank" rel="external">这里</a></span><span class="s1">看到大量其他图片的 BPG、JPEG、JPEG2000、JPEG-XR、WebP 压缩效果的在线对比，效果非常明显。</span></p>
+<p><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/bpg_demo.png" alt="bpg_demo"></p>
+<p><span class="s5">BPG 目前只有作者发布的 <a href="http://bellard.org/bpg/" target="_blank" rel="external">libbpg</a> 可用</span><span class="s1">。但作者基于 libbpg 编译出了一个 Javascript 解码器，很大的扩展了可用范围。bpg 可以以无损和有损压缩两种方式进行编码，有损压缩时可以用 quality 参数控制压缩比，可选范围为 0～51，数值越大压缩比越高。通常来说，25 附近是一个不错的选择，BPG 官方工具默认值是 28。</span></p>
+<p><span class="s1">libbpg 目前并没有针对 ARM NEON 做优化，所以其在移动端的性能表现一般。下面是 iPhone </span><span class="s2">6</span><span class="s1"> 上的性能测试：</span></p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/11/bpg_bench.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/bpg_bench.png" alt="bpg_bench"></a></p>
+<p><span class="s1">由于 bpg 编码时间太长，我并没有将数据放到表格里。可以看到相同质量下，BPG 的解码速度还是差 JPEG 太多，大约慢了 </span><span class="s2">3</span><span class="s1">～</span><span class="s2">5</span><span class="s1"> 倍。目前来说，BPG 适用于那些对流量非常敏感，但对解码时间不敏感的地方。从网上的新闻来看，手机淘宝和手机QQ都已经有所尝试，但不清楚他们是否对 BPG 解码进行了优化。</span></p>
+<p><a name="ani"></a></p>
+<h2 id="动态图片的编码与解码"><a href="#动态图片的编码与解码" class="headerlink" title="动态图片的编码与解码"></a><span class="s1">动态图片的编码与解码</span></h2><p><span class="s1">动图在网络上非常受欢迎，它近似视频，但通常实现简单、文件体积小，应用范围非常广泛。动图的始祖是 GIF，它自 Windows </span><span class="s2">1.0</span><span class="s1"> 时代就在互联网上流行开来，直到今天仍然难以被其他格式取代。尽管它非常古老，但其所用的原理和今天几种新兴格式几乎一样。</span></p>
+<p><span class="s1">下面是一张 GIF 格式的 QQ 大表情：</span></p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/11/bench_gif_demo.gif" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/bench_gif_demo.gif" alt="bench_gif_demo"></a></p>
+<p><span class="s1">这张表情由 </span><span class="s2">6</span><span class="s1"> 幅静态图构成，每幅图片有一定的存活时间，连贯播放就形成了动画：</span></p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/11/bench_gif_demo1.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/bench_gif_demo1.png" alt="bench_gif_demo1"></a></p>
+<p><span class="s1">这几张图中，大部分内容是相近的，为了压缩文件体积，通常动图格式都支持一些特殊的方式对相似图片进行裁剪，只保留前后帧不同的部分：</span></p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/11/bench_gif_demo2.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/bench_gif_demo2.png" alt="bench_gif_demo2"></a></p>
+<p><span class="s1">在解码动图时，解码器通常采用所谓</span><span class="s7">“画布模式”</span><span class="s1">进行渲染。想象一下：播放的区域是一张画布，第一帧播放前先把画布清空，然后完整的绘制上第一帧图；播放第二帧时，不再清空画布，而是只把和第一帧不同的区域覆盖到画布上，就像油画的创作那样。</span></p>
+<p><span class="s1">像这样的第一帧就被称为关键帧（即 I 帧，帧内编码帧），而后续的那些通过补偿计算得到的帧被称为预测编码帧（P帧）。一个压缩的比较好的动图内，通常只有少量的关键帧，而其余都是预测编码帧；一个较差的压缩工具制作的动图内，则基本都是关键帧。不同的动图压缩工具通常能得到不同的结果。</span></p>
+<p><span class="s1">除此之外，动图格式通常有更为详细的参数控制每一帧的绘制过程，下面是 GIF/APNG/WebP 通用的几个参数：</span></p>
+<p><span class="s1">Disposal Method (清除方式) </span></p>
+<p><span class="s1">   Do Not Dispose：把当前帧增量绘制到画布上，不清空画布。</span></p>
+<p><span class="s1">   Restore to Background：绘制当前帧之前，先把画布清空为默认背景色。</span></p>
+<p><span class="s1">   Restore to Previous：绘制下一帧前，把先把画布恢复为当前帧的前一帧</span></p>
+<p><span class="s1">Blend Mode (混合模式) </span></p>
+<p><span class="s1">   Blend None: 绘制时，全部通道（包含Alpha通道）都会覆盖到画布，相当于绘制前先清空画布的指定区域。</span></p>
+<p><span class="s1">   Blend over：绘制时，Alpha 通道会被合成到画布，即通常情况下两张图片重叠的效果。</span></p>
+<p><span class="s1">上面这些技术，就是常见动图格式的基础了，下面分别介绍一下不同动图格式的特点。</span></p>
+<p><a name="ani_gif"></a></p>
+<h3 id="GIF"><a href="#GIF" class="headerlink" title="GIF"></a><span style="color: #86b300;"><strong><span class="s1">GIF</span></strong></span></h3><p><span class="s1">GIF 缺陷非常明显：它通常只支持 </span><span class="s2">256</span><span class="s1"> 色索引颜色，这导致它只能通过抖动、差值等方式模拟较多丰富的颜色；它的 Alpha 通道只有 </span><span class="s2">1</span><span class="s1"> bit，这意味着一个像素只能是完全透明或者完全不透明。</span></p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/11/gif_apng_demo.gif" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/gif_apng_demo.gif" alt="gif_apng_demo"></a></p>
+<p><span class="s1">上面这是腾讯博客里的一张演示图，可以看到 GIF 由于 Alpha 通道的问题，产生了严重的</span><span class="s7">“毛边”</span><span class="s1">现象。目前通常的解决方案是在图片的边缘加一圈白边，以减轻这种视觉效果：</span></p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/11/gif_wrong_demo.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/gif_wrong_demo.png" alt="gif_wrong_demo"></a></p>
+<p><span class="s1">可以仔细观察一下 QQ、微信等 App 里面的动画表情，几乎每个表情都被一圈白边所环绕，不得不说是一种很无奈的解决方案。</span></p>
+<p><span class="s1">GIF 的制作工具有很多，但效果好、压缩比高的工具非常少。对于已经制作好的 GIF 来说，用 <a href="http://www.imagemagick.org/script/index.php" target="_blank" rel="external">imagemagick</a> 处理一下可以把文件体积压缩不少。如果需要将视频转为 GIF，<a href="https://flixel.com/products/mac/cinemagraph-pro/" target="_blank" rel="external">Cinemagraph Pro</a> 是个不错的傻瓜化工具。<a href="http://www.oschina.net/translate/high-quality-gif-with-ffmpeg" target="_blank" rel="external">这里</a></span><span class="s3">有一篇文章介绍如何用 ffmpeg 压缩 GIF，虽然参数调节有点麻烦，但效果非常理想。</span></p>
+<p><span class="s1">下面是没有经过优化的 GIF 和经过 ffmpeg 优化编码的 GIF，可以看到差距非常大。</span></p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/11/bbb-nodither.gif" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/bbb-trans.gif" alt="bbb-trans"> <img src="http://blog.ibireme.com/wp-content/uploads/2015/11/bbb-nodither.gif" alt="bbb-nodither"></a></p>
+<p><a name="ani_apng"></a></p>
+<h3 id="APNG"><a href="#APNG" class="headerlink" title="APNG"></a><span style="color: #86b300;"><strong><span class="s1">APNG</span></strong></span></h3><p><span class="s1">APNG 目前并没有被 PNG 官方所接受，所以 libpng 并不能直接解码 APNG。但由于 APNG 只是基于 PNG 的一个简单扩展，所以在已经支持 PNG 的平台上，可以很轻松的用少量代码实现 APNG 的编解码。Chromium 为了支持 APNG 播放，只增加了<a href="https://codereview.chromium.org/1312843006/" target="_blank" rel="external">不到 </a></span><a href="https://codereview.chromium.org/1312843006/" target="_blank" rel="external"><span class="s2">600</span></a><span class="s1"><a href="https://codereview.chromium.org/1312843006/" target="_blank" rel="external"> 行代码</a> ，</span><span class="s3">我自己也用<a href="https://github.com/ibireme/YYWebImage/blob/master/YYWebImage/Image/YYImageCoder.m#L149-L628" target="_blank" rel="external">大概 500 行 C 代码</a>实现了一个简单的 APNG 编解码工具。</span><span class="s5">另外，在支持 canvas 的浏览器上，可以用 <a href="https://github.com/davidmz/apng-canvas" target="_blank" rel="external">apng-canvas</a></span><span class="s1"> 直接显示 APNG 动画。APNG 压缩最好的工具目前是 <a href="http://sourceforge.net/projects/apngasm/" target="_blank" rel="external">apngasm</a>，大部分图形化工具比如腾讯的 <a href="http://isparta.github.io/index.html" target="_blank" rel="external">iSparta</a> 都是基于这个工具开发的。</span></p>
+<p><span class="s1">就目前而言， APNG 是 GIF 最好的替代了：实现简单，可用范围广，压缩比不错，显示效果好。</span></p>
+<p><a name="ani_webp"></a></p>
+<h3 id="WebP-1"><a href="#WebP-1" class="headerlink" title="WebP"></a><span style="color: #86b300;"><strong><span class="s1">WebP</span></strong></span></h3><p><span class="s1">WebP 在 </span><span class="s2">2010</span><span class="s1"> 年 发布时并没有支持动图。</span><span class="s2">2012</span><span class="s1"> 年 libwebp v0</span><span class="s2">.2</span><span class="s1"> 的时候，Google 才开始尝试支持动画，但其实现有很多问题，性能也非常差，以至于 Chrome 团队一直都没有接受。直到 </span><span class="s2">2013</span><span class="s1"> 年，libwebp v0</span><span class="s2">.4</span><span class="s1"> 时，动画格式才稳定下来才被 Chrome 所接受。</span></p>
+<p><span class="s1">WebP 动图实际上是把多个单帧 WebP 数据简单打包到一个文件内，而并不是由单帧 WebP 扩展而来，以至于动图格式并不能向上兼容静态图。如果要支持动图，首先在编译 libwebp 时需要加上 demux 模块，解码 WebP 时需要先用 WebPDemuxer 尝试拆包，之后再把拆出来的单帧用 WebPDecode 解码。为了方便编译，我写了个<a href="https://github.com/ibireme/YYWebImage/blob/master/Vendor/WebP.sh" target="_blank" rel="external">脚本</a></span><span class="s3">用于打包 iOS 的静态库，加入了 mux 和 demux 模块。</span></p>
+<p><span class="s1">Google 提供了两个简单的命令行工具用于制作动图：gif2webp 能把 GIF 转换为 WebP， webpmux 能把多个 WebP 图片打包为动态图，并且有着很多参数可以调节。这两个工具对相近帧的压缩并不太理想，以至于有的情况下压缩比还不如 APNG，但除此以外也没有其他什么更好的工具可以用了。</span></p>
+<p><a name="ani_bpg"></a></p>
+<h3 id="BPG-1"><a href="#BPG-1" class="headerlink" title="BPG"></a><strong><span class="s1" style="color: #86b300;">BPG</span></strong></h3><p><span class="s1">BPG 本身是基于 HEVC (H</span><span class="s2">.265</span><span class="s1">) 视频编码的，其最开始设计时就考虑到了动图的实现。由于它充分利用了 HEVC 的高压缩比和视频编码的特性，其动图压缩比远超其他格式。<a href="http://bellard.org/bpg/animation.html" target="_blank" rel="external">这里</a></span><span class="s3">和<a href="https://kippler.com/bpg/test.html" target="_blank" rel="external">这里</a>有几张 BPG 动图示例，可以看到相同质量下 BPG 动图只有 APNG/WebP/GIF 几十分之一的大小。</span></p>
+<p><span class="s5">我在<a href="https://github.com/ibireme/YYWebImage/blob/master/Demo%2FYYWebImageDemo%2FYYBPGCoder.m#L188-L264" target="_blank" rel="external">这里</a></span><span class="s1">写了个简单的利用 libbpg 解码动图的方法，如有需要可以参考下。</span></p>
+<p><a name="ani_bench"></a></p>
+<h3 id="动图性能对比"><a href="#动图性能对比" class="headerlink" title="动图性能对比"></a><span class="s1">动图性能对比</span></h3><p><span class="s1">我把下面这张 GIF 分别转为 WebP、APNG、BPG 动图，并在 iPhone </span><span class="s2">6</span><span class="s1"> 上对其所有帧进行解码。</span></p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/11/gif_ermilio.gif" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/gif_ermilio.gif" alt="gif_ermilio"></a></p>
+<p><span class="s1">评测结果如下：</span></p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/11/anim_bench.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/11/anim_bench.png" alt="anim_bench"></a></p>
+<p><span class="s1">APNG 在文件体积上比 GIF 略有优势，解码时间相差不多。WebP 在体积和解码时间上都具有较大的优势。BPG 在体积上优势最大，但解码时间也最长。这么看来，APNG 和 WebP 都是不错的选择，而 BPG 还有待性能优化。</span></p>
+<p><span class="s1">最后做一个小广告：如果你是 iOS 平台的开发者，可以试试我开发的 <a href="https://github.com/ibireme/YYWebImage" target="_blank" rel="external">YYWebImage</a>，它支持 APNG、WebP、GIF 动图的异步加载与播放、编码与解码，支持渐进式图像加载，可以替代 SDWebImage、PINRemoteImage、FLAnimatedImage 等开源库。</span></p>
+<p><a name="refer"></a></p>
+<h2 id="评测数据"><a href="#评测数据" class="headerlink" title="评测数据"></a>评测数据</h2><p>上面提到的所有评测数据表格：<a href="http://blog.ibireme.com/wp-content/uploads/2015/11/image_benchmark.xlsx" target="_blank" rel="external">image_benchmark.xlsx</a> 推荐用 Excel 打开查看。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2015/11/移动端图片格式调研/" class="archive-article-date">
+  	<time datetime="2015-11-01T16:21:47.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-11-02</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-YYCache-设计思路" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/YYCache-设计思路/">YYCache 设计思路</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://blog.ibireme.com/wp-content/uploads/2015/10/cache_all_the_things.jpg" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/10/cache_all_the_things.jpg" alt="cache_all_the_things"></a></p>
+<p><span class="s1">iOS 开发中总会用到各种缓存，最初我是用的一些开源的缓存库，但到总觉得缺少某些功能，或某些 API 设计的不够好用。YYCache (<a href="https://github.com/ibireme/YYCache" target="_blank" rel="external">https://github.com/ibireme/YYCache</a>) 是我新造的一个轮子，下面说一下这个轮子的设计思路。</span></p>
+<h2 id="内存缓存"><a href="#内存缓存" class="headerlink" title="内存缓存"></a><span class="s1">内存缓存</span></h2><p><span class="s1">通常一个缓存是由内存缓存和磁盘缓存组成，内存缓存提供容量小但高速的存取功能，磁盘缓存提供大容量但低速的持久化存储。相对于磁盘缓存来说，内存缓存的设计要更简单些，下面是我调查的一些常见的内存缓存。</span></p>
+<p><span class="s1">NSCache 是苹果提供的一个简单的内存缓存，它有着和 NSDictionary 类似的 API，不同点是它是线程安全的，并且不会 retain key。我在测试时发现了它的几个特点：NSCache 底层并没有用 NSDictionary 等已有的类，而是直接调用了 libcache.dylib，其中线程安全是由 pthread_mutex 完成的。另外，它的性能和 key 的相似度有关，如果有大量相似的 key (比如 </span><span class="s2">“1”</span><span class="s1">, </span><span class="s2">“2”</span><span class="s1">, </span><span class="s2">“3”</span><span class="s1">, …)，NSCache 的存取性能会下降得非常厉害，大量的时间被消耗在 CFStringEqual() 上，不知这是不是 NSCache 本身设计的缺陷。</span></p>
+<p><span class="s1"><a href="https://github.com/tumblr/TMCache" target="_blank" rel="external">TMMemoryCache</a> 是 <a href="https://github.com/tumblr/TMCache" target="_blank" rel="external">TMCache</a> 的内存缓存实现，最初由 Tumblr 开发，但现在已经不再维护了。TMMemoryCache 实现有很多 NSCache 并没有提供的功能，比如数量限制、总容量限制、存活时间限制、内存警告或应用退到后台时清空缓存等。TMMemoryCache 在设计时，主要目标是线程安全，它把所有读写操作都放到了同一个 concurrent queue 中，然后用 dispatch_barrier_async 来保证任务能顺序执行。它错误的用了大量异步 block 回调来实现存取功能，以至于产生了很大的性能和死锁问题。</span></p>
+<p><span class="s1"><a href="https://github.com/pinterest/PINCache" target="_blank" rel="external">PINMemoryCache</a> 是 Tumblr 宣布不在维护 TMCache 后，由 Pinterest 维护和改进的一个内存缓存。它的功能和接口基本和 TMMemoryCache 一样，但修复了性能和死锁的问题。它同样也用 dispatch_semaphore 来保证线程安全，但去掉了dispatch_barrier_async，避免了线程切换带来的巨大开销，也避免了可能的死锁。</span></p>
+<p><span class="s1"><a href="https://github.com/ibireme/YYCache" target="_blank" rel="external">YYMemoryCache</a> 是我开发的一个内存缓存，相对于 PINMemoryCache 来说，我去掉了异步访问的接口，尽量优化了同步访问的性能，用 OSSpinLock 来保证线程安全。另外，缓存内部用双向链表和 NSDictionary 实现了 LRU 淘汰算法，相对于上面几个算是一点进步吧。</span></p>
+<p><span class="s1">下面的单线程的 Memory Cache 性能基准测试：</span></p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/10/memory_cache_bench_result.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/10/memory_cache_bench_result.png" alt="memory_cache_bench_result"></a></p>
+<p><span class="s1">可以看到 YYMemoryCache 的性能不错，仅次于 NSDictionary + OSSpinLock；</span></p>
+<p>NSCache 的写入性能稍差，读取性能不错；</p>
+<p>PINMemoryCache 的读写性能也还可以，但读取速度差于 NSCache；</p>
+<p>TMMemoryCache 性能太差以至于图上都看不出来了。</p>
+<h2 id="磁盘缓存"><a href="#磁盘缓存" class="headerlink" title="磁盘缓存"></a><span class="s1">磁盘缓存</span></h2><p><span class="s1">为了设计一个比较好的磁盘缓存，我调查了大量的开源库，包括 TMDiskCache、PINDiskCache、SDWebImage、FastImageCache 等，也调查了一些闭源的实现，包括 NSURLCache、Facebook 的 FBDiskCache 等。他们的实现技术大致分为三类：基于文件读写、基于 mmap 文件内存映射、基于数据库。</span></p>
+<p><span class="s1">TMDiskCache, PINDiskCache, SDWebImage 等缓存，都是基于文件系统的，即一个 Value 对应一个文件，通过文件读写来缓存数据。他们的实现都比较简单，性能也都相近，缺点也是同样的：不方便扩展、没有元数据、难以实现较好的淘汰算法、数据统计缓慢。</span></p>
+<p><span class="s1">FastImageCache 采用的是 mmap 将文件映射到内存。用过 MongoDB 的人应该很熟悉 mmap 的缺陷：热数据的文件不要超过物理内存大小，不然 mmap 会导致内存交换严重降低性能；另外内存中的数据是定时 flush 到文件的，如果数据还未同步时程序挂掉，就会导致数据错误。抛开这些缺陷来说，mmap 性能非常高。</span></p>
+<p><span class="s3">NSURLCache、FBDiskCache 都是基于 SQLite 数据库的。基于数据库的缓存可以很好的支持元数据、扩展方便、数据统计速度快，也很容易实现 LRU 或其他淘汰算法，唯一不确定的就是数据库读写的性能，为此我评测了一下 SQLite 在真机上的表现。iPhone </span><span class="s4">6</span> <span class="s4">64</span><span class="s3">G 下，SQLite 写入性能比直接写文件要高，但读取性能取决于数据大小：当单条数据小于 </span><span class="s4">20</span><span class="s3">K 时，数据越小 SQLite 读取性能越高；单条数据大于 </span><span class="s4">20</span><span class="s3">K 时，直接写为文件速度会更快一些。这和 <a href="http://www.sqlite.org/intern-v-extern-blob.html" target="_blank" rel="external">SQLite 官网的描述</a>基本一致。</span><span class="s1">另外，直接从官网下载最新的 SQLite 源码编译，会比 iOS 系统自带的 sqlite3.dylib 性能要高很多。基于 SQLite 的这种表现，磁盘缓存最好是把 SQLite 和文件存储结合起来：key-value 元数据保存在 SQLite 中，而 value 数据则根据大小不同选择 SQLite 或文件存储。NSURLCache 选定的数据大小的阈值是 16K；FBDiskCache 则把所有 value 数据都保存成了文件。</span></p>
+<p><span class="s1">我的 YYDiskCache 也是采用的 SQLite 配合文件的存储方式，在 iPhone </span><span class="s4">6</span> <span class="s4">64</span><span class="s1">G 上的性能基准测试结果见下图。在存取小数据 (NSNumber) 时，YYDiskCache 的性能远远高出基于文件存储的库；而较大数据的存取性能则比较接近了。但得益于 SQLite 存储的元数据，YYDiskCache 实现了 LRU 淘汰算法、更快的数据统计，更多的容量控制选项。</span></p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/10/disk_cache_bench_result.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/10/disk_cache_bench_result.png" alt="disk_cache_bench_result"></a></p>
+<h2 id="备注："><a href="#备注：" class="headerlink" title="备注："></a><span class="s1">备注：</span></h2><p><strong><span class="s1">关于锁：</span></strong></p>
+<p><span class="s1">OSSpinLock 自旋锁，性能最高的锁。原理很简单，就是一直 </span><span class="s5">do</span> <span class="s5">while</span><span class="s1"> 忙等。它的缺点是当等待时会消耗大量 CPU 资源，所以它不适用于较长时间的任务。对于内存缓存的存取来说，它非常合适。</span></p>
+<p><span class="s1">dispatch_semaphore 是信号量，但当信号总量设为 </span><span class="s4">1</span><span class="s1"> 时也可以当作锁来。在没有等待情况出现时，它的性能比 pthread_mutex 还要高，但一旦有等待情况出现时，性能就会下降许多。相对于 OSSpinLock 来说，它的优势在于等待时不会消耗 CPU 资源。对磁盘缓存来说，它比较合适。</span></p>
+<p><strong><span class="s1">关于 Realm：</span></strong></p>
+<p>Realm 是一个比较新的数据库，针对移动应用所设计。它的 API 对于开发者来说非常友好，比 SQLite、CoreData 要易用很多，但相对的坑也有不少。我在测试 SQLite 性能时，也尝试对它做了些简单的评测。我从 Realm 官网下载了它提供的 benchmark 项目，更新 SQLite 到官网最新的版本，并启用了 SQLite 的 sqlite3_stmt 缓存。我的评测结果显示 Realm 在写入性能上差于 SQLite，读取小数据时也差 SQLite 不少，读取较大数据时 Realm 有很大的优势。当然这只是我个人的评测，可能并不能反映真实项目中具体的使用情况。我想看看它的实现原理，但发现 Realm 的核心 realm-core 是闭源的（评论里 Realm 员工提到目前有在 Apache 2.0 授权下的开源计划），能知道的是 Realm 应该用 了 mmap 把文件映射到内存，所以才在较大数据读取时获得很高的性能。另外我注意到添加了 Realm 的 App 会在启动时向某几个 IP 发送数据，评论中有 Realm 员工反馈这是发送匿名统计数据，并且只针对模拟器和 Debug 模式。这部分代码目前是开源的，并且可以通过环境变量 REALM_DISABLE_ANALYTICS 来关闭，如果有使用 Realm 的可以注意一下。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2015/10/YYCache-设计思路/" class="archive-article-date">
+  	<time datetime="2015-10-25T16:06:04.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-10-26</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-iOS-JSON-模型转换库评测" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/iOS-JSON-模型转换库评测/">iOS JSON 模型转换库评测</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>iOS 开发中总会用到各种 JSON 模型转换库，这篇文章将会对常见的几个开源库进行一下评测。评测的内容主要集中在性能、功能、容错性这几个方面。</p>
+<h2 id="评测的对象："><a href="#评测的对象：" class="headerlink" title="评测的对象："></a>评测的对象：</h2><p><span style="color: #ff6600;">Manually</span></p>
+<p>手动进行 JSON/Model 转换，不用任何开源库，可以进行高效、自由的转换，但手写代码非常繁琐，而且容易出错。</p>
+<p><span style="color: #ff6600;">YYModel</span></p>
+<p>我造的一个新轮子，比较轻量（算上 .h 只有 5 个文件），支持自动的 JSON/Model 转换，支持定义映射过程。API 简洁，功能也比较简单。</p>
+<p><span style="color: #ff6600;">FastEasyMapping</span></p>
+<p>Yalantis 开发的一个 JSON 模型转换库，可以自定义详细的 Model 映射过程，支持 CoreData。使用者较少。</p>
+<p><span style="color: #ff6600;">JSONModel</span></p>
+<p>一个 JSON 模型转换库，有着比较简洁的接口。Model 需要继承自 JSONModel。</p>
+<p><span style="color: #ff6600;">Mantle</span></p>
+<p>Github 官方团队开发的 JSON 模型转换库，Model 需要继承自 MTLModel。功能丰富，文档完善，使用广泛。</p>
+<p><span style="color: #ff6600;">MJExtension</span></p>
+<p>国内开发者”小码哥”开发的 JSON 模型库，号称性能超过 JSONModel 和 Mantle，使用简单无侵入。国内有大量使用者。</p>
+<p><span id="more-41804"></span></p>
+<h2 id="性能评测："><a href="#性能评测：" class="headerlink" title="性能评测："></a>性能评测：</h2><p>所有开源库代码更新至 2015-09-18，以 Release 方式编译，运行在 iPhone 6 上，代码见 <a href="https://github.com/ibireme/YYModel/tree/master/Benchmark" target="_blank" rel="external">https://github.com/ibireme/YYModel/tree/master/Benchmark</a>。</p>
+<p><span style="color: #ff6600;">用例1：GithubUser</span></p>
+<p>从 <a href="https://api.github.com/users/facebook" target="_blank" rel="external">https://api.github.com/users/facebook</a> 获取的一条 <a href="https://github.com/ibireme/YYModel/blob/master/Benchmark/ModelBenchmark/user.json" target="_blank" rel="external">User</a> 数据，去除 NSDate 属性。</p>
+<p>该 JSON 有 30 行，大部分属性是 string，少量是 number。这个用例主要是测试最基础的 Model 相关操作。</p>
+<p>每次测试执行 10000 次，统计耗时毫秒数。</p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/10/yymodel_benchmark_1.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/10/yymodel_benchmark_1.png" alt="yymodel_benchmark_1"></a></p>
+<p><span style="color: #ff6600;">用例2: WeiboStatus</span></p>
+<p>从官方微博 App 抓取一条内容完整的<a href="https://github.com/ibireme/YYModel/blob/master/Benchmark/ModelBenchmark/weibo.json" target="_blank" rel="external">微博数据</a>，JSON 总共有 580 行（是的，一条微博需要这么大数据量），包含大量嵌套对象、容器对象、类型转换、日期解析等。这个用例主要是测试在复杂的情况下不同库的性能。</p>
+<p>每次测试执行 1000 次，统计耗时毫秒数。</p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/10/yymodel_benchmark_2.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/10/yymodel_benchmark_2.png" alt="yymodel_benchmark_2"></a></p>
+<p>测试结果如下：</p>
+<p>Mantle 在各个测试中，性能都是最差的</p>
+<p>JSONModel 和 MJExtension 性能相差不多，但都比 Mantle 性能高。</p>
+<p>FastEasyMapping 相对来说性能确实比较快。</p>
+<p>YYModel 性能高出其他几个库一个数量级，接近手写代码的效率。</p>
+<p>FastEasyMapping 不支持 NSCoding 协议，所以不能进行 Archive 的性能测试。</p>
+<p>MJExtension 在处理复杂对象转为 JSON 时，存在错误。</p>
+<p>(此处我也测试了一些 Swift 的项目，例如 ObjectMapper、JSONHelper、ModelRocket，性能比 Mantle 还差很多，这里就不进行对比了。)</p>
+<p>&nbsp;</p>
+<h2 id="容错性："><a href="#容错性：" class="headerlink" title="容错性："></a>容错性：</h2><p>容错性主要是测试在默认情况下，当 JSON 格式错误时，Model 框架是否会产生错误结果或造成 Crash。</p>
+<table><br><colgroup><br><col width="24%"></colgroup><br><thead><br><tr><br><th>用例</th><br><th>YYModel</th><br><th>FastEasyMapping</th><br><th>JSONModel</th><br><th>Mantle</th><br><th>MJExtension</th><br></tr><br></thead><br><tbody><br><tr><br><td>JSON 属性是 number<br><br>Model 属性是 NSString</td><br><td>✅ NSString</td><br><td>🚫 NSNumber</td><br><td>✅ NSString</td><br><td>⚠️ model nil</td><br><td>✅ NSString</td><br></tr><br><tr><br><td>JSON 属性是 string “100”<br><br>Model 属性是 int</td><br><td>✅ 100</td><br><td>🚫 Crash</td><br><td>🚫 Crash</td><br><td>⚠️ model nil</td><br><td>✅ 100</td><br></tr><br><tr><br><td>JSON 属性是 string “2009-04-02T03:35:22Z”<br><br>Model 属性是 NSDate</td><br><td>✅ NSDate</td><br><td>🚫 NSString</td><br><td>✅ NSDate</td><br><td>⚠️ model nil</td><br><td>🚫 NSString</td><br></tr><br><tr><br><td>JSON 属性是 string<br><br>Model 属性是 NSValue</td><br><td>✅ nil</td><br><td>🚫 NSString</td><br><td>🚫 crash</td><br><td>⚠️ model nil</td><br><td>🚫 NSString</td><br></tr><br></tbody><br></table>
+
+<p>YYModel 和 Mantle 都会进行对象类型检查，避免将错误的对象类型赋值到属性，以避免潜在的 Crash 问题。不同的是 YYModel 会尝试自动转换，转换失败时留空；而 Mantle 遇到类型不匹配时，直接把错误向上返回，从而终止了整个转换过程，但这么做更方便调试。</p>
+<p>MJExtension 会对部分对象进行自动转换（比如 NSString 和 NSNumber 之间的转换），但当自动转换不能完成时，它会直接把 JSON 对象赋值给类型不匹配的 Model 属性。这样的结果会导致稍后 Model 在使用时，造成潜在的 Crash 风险。</p>
+<p>JSONModel 并没有对错误类型的检测，并且没有对 App 的保护，当出现异常时，会导致整个 App Crash，非常危险。</p>
+<p>FastEasyMapping 表现则是最差的，它没有自动转换的机制，当遇到类型不匹配时，会导致错误的类型赋值，甚至直接 Crash。</p>
+<p>&nbsp;</p>
+<h2 id="功能："><a href="#功能：" class="headerlink" title="功能："></a>功能：</h2><table><br><colgroup><br><col width="24%"></colgroup><br><thead><br><tr><br><th>功能</th><br><th>YYModel</th><br><th>FastEasyMapping</th><br><th>JSONModel</th><br><th>Mantle</th><br><th>MJExtension</th><br></tr><br></thead><br><tbody><br><tr><br><td>相同属性名自动映射</td><br><td>✅</td><br><td>🚫</td><br><td>✅</td><br><td>✅</td><br><td>✅</td><br></tr><br><tr><br><td>自定义属性转换方式</td><br><td>🚫</td><br><td>✅</td><br><td>🚫</td><br><td>✅</td><br><td>🚫</td><br></tr><br><tr><br><td>NSCoding</td><br><td>✅</td><br><td>🚫</td><br><td>✅</td><br><td>✅</td><br><td>✅</td><br></tr><br><tr><br><td>hash/equal</td><br><td>✅</td><br><td>🚫</td><br><td>✅</td><br><td>✅</td><br><td>🚫</td><br></tr><br><tr><br><td>CoreData</td><br><td>🚫</td><br><td>✅</td><br><td>🚫</td><br><td>✅</td><br><td>✅</td><br></tr><br></tbody><br></table>
+
+<p>就功能来说，Mantle 的可定制性最高，功能相对比较丰富。</p>
+<p>YYModel、JSONModel、MJExtension 使用比较简单，但功能相对 Mantle 稍弱。</p>
+<p>FastEasyMapping 功能最少，使用也不算方便。</p>
+<h2 id="侵入性："><a href="#侵入性：" class="headerlink" title="侵入性："></a>侵入性：</h2><p>Mantle 和 JSONModel 都需要 Model 继承自某个基类，灵活性稍差，但功能丰富。</p>
+<p>YYModel、MJExtension 都是采用 Category 方式来实现功能，比较灵活，无侵入。</p>
+<p>但注意 MJExtension 为 NSObject/NSString 添加了一些没有前缀的方法，且方法命名比较通用，可能会和一个工程内的其他类有冲突。</p>
+<p>FastEasyMapping 采用工具类来实现 Model 转换的功能，最为灵活，但使用很不方便。</p>
+<h2 id="结论："><a href="#结论：" class="headerlink" title="结论："></a>结论：</h2><p>如果需要一个稳定、功能强大的 Model 框架，Mantle 是最佳选择，它唯一的缺点就是性能比较差。</p>
+<p>如果对功能要求并不多，但对性能有更高要求时，可以试试我的 YYModel。</p>
+<p>Swift 相关的几个库性能都比较差，非 Swift 项目不推荐使用。</p>
+<p>最后提一句，如果对性能、网络流量等有更高的要求，就不要再用 JSON 了，建议改用 protobuf/FlatBuffers 这样的方案。JSON 转换再怎么优化，在性能和流量方面还是远差于二进制格式的。</p>
+<h2 id="附-YYModel-性能优化的几个-Tip："><a href="#附-YYModel-性能优化的几个-Tip：" class="headerlink" title="附: YYModel 性能优化的几个 Tip："></a>附: YYModel 性能优化的几个 Tip：</h2><p>1. 缓存</p>
+<p>Model JSON 转换过程中需要很多类的元数据，如果数据足够小，则全部缓存到内存中。</p>
+<p>2. 查表</p>
+<p>当遇到多项选择的条件时，要尽量使用查表法实现，比如 switch/case，C Array，如果查表条件是对象，则可以用 NSDictionary 来实现。</p>
+<p>3. 避免 KVC</p>
+<p>Key-Value Coding 使用起来非常方便，但性能上要差于直接调用 Getter/Setter，所以如果能避免 KVC 而用 Getter/Setter 代替，性能会有较大提升。</p>
+<p>4. 避免 Getter/Setter 调用</p>
+<p>如果能直接访问 ivar，则尽量使用 ivar 而不要使用 Getter/Setter 这样也能节省一部分开销。</p>
+<p>5. 避免多余的内存管理方法</p>
+<p>在 ARC 条件下，默认声明的对象是 <strong>strong 类型的，赋值时有可能会产生 retain/release 调用，如果一个变量在其生命周期内不会被释放，则使用 </strong>unsafe_unretained 会节省很大的开销。</p>
+<p>访问具有 <strong>weak 属性的变量时，实际上会调用 objc_loadWeak() 和 objc_storeWeak() 来完成，这也会带来很大的开销，所以要避免使用 </strong>weak 属性。</p>
+<p>创建和使用对象时，要尽量避免对象进入 autoreleasepool，以避免额外的资源开销。</p>
+<p>6. 遍历容器类时，选择更高效的方法</p>
+<p>相对于 Foundation 的方法来说，CoreFoundation 的方法有更高的性能，用 CFArrayApplyFunction() 和 CFDictionaryApplyFunction() 方法来遍历容器类能带来不少性能提升，但代码写起来会非常麻烦。</p>
+<p>7. 尽量用纯 C 函数、内联函数</p>
+<p>使用纯 C 函数可以避免 ObjC 的消息发送带来的开销。如果 C 函数比较小，使用 inline 可以避免一部分压栈弹栈等函数调用的开销。</p>
+<p>8. 减少遍历的循环次数</p>
+<p>在 JSON 和 Model 转换前，Model 的属性个数和 JSON 的属性个数都是已知的，这时选择数量较少的那一方进行遍历，会节省很多时间。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2015/10/iOS-JSON-模型转换库评测/" class="archive-article-date">
+  	<time datetime="2015-10-23T09:11:22.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-10-23</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-最近一段时间的工作整理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/最近一段时间的工作整理/">最近一段时间的工作整理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span class="s1">正式转为全职 iOS 工程师已经有一年多了，这一年里工作并不忙，使得我有更多的时间和精力来研究些有意思的东西。最近整理了下这一年攒下来的代码，拆分成了几个库，在接下来的一段时间内会陆续开源：</span></p>
+<p><span class="s1"><a href="https://github.com/ibireme/YYModel" target="_blank" rel="external">YYModel</a> 类似 Mantle/JSONModel 的工具，性能比 Mantle 高一个数量级，有更好的容错性，更简洁的 API。</span></p>
+<p><span class="s1"><a href="https://github.com/ibireme/YYCache" target="_blank" rel="external">YYCache</a> 类似 TMCache 那样的工具，有着更好的性能，支持 LRU，磁盘缓存支持 SQLite。</span></p>
+<p><span class="s1"><a href="https://github.com/ibireme/YYImage" target="_blank" rel="external">YYImage</a> iOS图像库，支持高性能的 APNG/WebP/GIF 动图播放、编码和解码，支持帧动画等。</span></p>
+<p><span class="s1"><a href="https://github.com/ibireme/YYWebImage" target="_blank" rel="external">YYWebImage</a> 类似 SDWebImage 的工具，基于 YYImage 和 YYCache，有更好的性能、更丰富的功能。</span></p>
+<p><span class="s1"><span style="color: #ff6600;"><a href="https://github.com/ibireme/YYText" target="_blank" rel="external">YYText</a></span> UILabel 和 UITextView 的开源实现，支持异步排版渲染、图文混排、更多文字特效/点击效果、动画/表情输入、竖排版等。</span></p>
+<p><span class="s1"><a href="https://github.com/ibireme/YYKeyboardManager" target="_blank" rel="external">YYKeyboardManager</a> 从 YYText 分离出来的一个键盘监听工具，能实时监听和获取键盘视图、位置、动画。</span></p>
+<p><span class="s1"><a href="https://github.com/ibireme/YYDispatchQueuePool" target="_blank" rel="external">YYDispatchQueuePool</a> 从 YYText 分离出来的一个很简单的队列管理工具，用于管理全局并发任务。</span></p>
+<p><span class="s1"><a href="https://github.com/ibireme/YYAsyncLayer" target="_blank" rel="external">YYAsyncLayer</a> 从 YYText 分离出来的一个很简单的 CALayer 的子类，用于进行异步绘制和显示。</span></p>
+<p><span class="s1"><a href="https://github.com/ibireme/YYCategories" target="_blank" rel="external">YYCategories</a> Category 类型的工具库。</span></p>
+<p><span class="s1"><a href="https://github.com/ibireme/YYKit" target="_blank" rel="external">YYKit</a> 上面所有工具的打包工具集，全部工具都兼容 iOS6~9。</span></p>
+<p><span class="s1"><a href="https://github.com/ibireme/YYKit" target="_blank" rel="external">YYKitDemo</a> YYKit 的功能/性能演示，实现有 Twitter 和 Weibo 的 Feed 列表、发布视图，有着和官方 App 完全一致的 UI 和更流畅的交互体验。</span></p>
+<p><span class="s1">每个库都会配有几篇博客来介绍相关技术、性能评测，这也算是我最近一年工作的总结吧。</span></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2015/10/最近一段时间的工作整理/" class="archive-article-date">
+  	<time datetime="2015-10-22T16:10:25.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-10-23</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-深入理解RunLoop" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/深入理解RunLoop/">深入理解RunLoop</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>RunLoop 是 iOS 和 OSX 开发中非常基础的一个概念，这篇文章将从 CFRunLoop 的源码入手，介绍 RunLoop 的概念以及底层实现原理。之后会介绍一下在 iOS 中，苹果是如何利用 RunLoop 实现自动释放池、延迟回调、触摸事件、屏幕刷新等功能的。</p>
+<p>Index</p>
+<p><a href="#base">RunLoop 的概念</a></p>
+<p><a href="#thread">RunLoop 与线程的关系</a></p>
+<p><a href="#api">RunLoop 对外的接口</a></p>
+<p><a href="#mode">RunLoop 的 Mode</a></p>
+<p><a href="#inner">RunLoop 的内部逻辑</a></p>
+<p><a href="#core">RunLoop 的底层实现</a></p>
+<p><a href="#apple">苹果用 RunLoop 实现的功能</a></p>
+<p><a href="#autorelease">AutoreleasePool</a></p>
+<p><a href="#event">事件响应</a></p>
+<p><a href="#gesture">手势识别</a></p>
+<p><a href="#ui">界面更新</a></p>
+<p><a href="#timer">定时器</a></p>
+<p><a href="#perform">PerformSelecter</a></p>
+<p><a href="#gce">关于GCD</a></p>
+<p><a href="#network">关于网络请求</a></p>
+<p><a href="#example">RunLoop 的实际应用举例</a></p>
+<p><a href="#AFNetworking">AFNetworking</a></p>
+<p><a href="#AsyncDisplayKit">AsyncDisplayKit</a></p>
+<p><span id="more-41710"></span></p>
+<p><a name="base"></a></p>
+<h2 id="RunLoop-的概念"><a href="#RunLoop-的概念" class="headerlink" title="RunLoop 的概念"></a>RunLoop 的概念</h2><p>一般来讲，一个线程一次只能执行一个任务，执行完成后线程就会退出。如果我们需要一个机制，让线程能随时处理事件但并不退出，通常的代码逻辑是这样的：</p>
+<pre class="crayon-plain-tag">function loop() {
+    initialize();
+    do {
+        var message = get_next_message();
+        process_message(message);
+    } while (message != quit);
+}</pre>
+
+<p>这种模型通常被称作 <a href="http://en.wikipedia.org/wiki/Event_loop" target="_blank" rel="external">Event Loop</a>。 Event Loop 在很多系统和框架里都有实现，比如 Node.js 的事件处理，比如 Windows 程序的消息循环，再比如 OSX/iOS 里的 RunLoop。实现这种模型的关键点在于：如何管理事件/消息，如何让线程在没有处理消息时休眠以避免资源占用、在有消息到来时立刻被唤醒。</p>
+<p>所以，RunLoop 实际上就是一个对象，这个对象管理了其需要处理的事件和消息，并提供了一个入口函数来执行上面 Event Loop 的逻辑。线程执行了这个函数后，就会一直处于这个函数内部 “接受消息-&gt;等待-&gt;处理” 的循环中，直到这个循环结束（比如传入 quit 的消息），函数返回。</p>
+<p>OSX/iOS 系统中，提供了两个这样的对象：NSRunLoop 和 CFRunLoopRef。</p>
+<p>CFRunLoopRef 是在 CoreFoundation 框架内的，它提供了纯 C 函数的 API，所有这些 API 都是线程安全的。</p>
+<p>NSRunLoop 是基于 CFRunLoopRef 的封装，提供了面向对象的 API，但是这些 API 不是线程安全的。</p>
+<p>CFRunLoopRef 的代码是<a href="http://opensource.apple.com/source/CF/CF-855.17/CFRunLoop.c" target="_blank" rel="external">开源</a>的，你可以在这里 <a href="http://opensource.apple.com/tarballs/CF/" target="_blank" rel="external">http://opensource.apple.com/tarballs/CF/</a> 下载到整个 CoreFoundation 的源码来查看。</p>
+<p>(Update: Swift 开源后，苹果又维护了一个跨平台的 CoreFoundation 版本：<a href="https://github.com/apple/swift-corelibs-foundation/" target="_blank" rel="external">https://github.com/apple/swift-corelibs-foundation/</a>，这个版本的源码可能和现有 iOS 系统中的实现略不一样，但更容易编译，而且已经适配了 Linux/Windows。)</p>
+<p><a name="thread"></a></p>
+<h2 id="RunLoop-与线程的关系"><a href="#RunLoop-与线程的关系" class="headerlink" title="RunLoop 与线程的关系"></a>RunLoop 与线程的关系</h2><p>首先，iOS 开发中能遇到两个线程对象: pthread_t 和 NSThread。过去苹果有份<a href="http://www.fenestrated.net/~macman/mirrors/Apple%20Technotes%20(As%20of%202002" target="_blank" rel="external">文档</a>/tn/tn2028.html)标明了 NSThread 只是 pthread_t 的封装，但那份文档已经失效了，现在它们也有可能都是直接包装自最底层的 mach thread。苹果并没有提供这两个对象相互转换的接口，但不管怎么样，可以肯定的是 pthread_t 和 NSThread 是一一对应的。比如，你可以通过 pthread_main_thread_np() 或 [NSThread mainThread] 来获取主线程；也可以通过 pthread_self() 或 [NSThread currentThread] 来获取当前线程。CFRunLoop 是基于 pthread 来管理的。</p>
+<p>苹果不允许直接创建 RunLoop，它只提供了两个自动获取的函数：CFRunLoopGetMain() 和 CFRunLoopGetCurrent()。 这两个函数内部的逻辑大概是下面这样:</p>
+<pre class="crayon-plain-tag">/// 全局的Dictionary，key 是 pthread_t， value 是 CFRunLoopRef
+static CFMutableDictionaryRef loopsDic;
+/// 访问 loopsDic 时的锁
+static CFSpinLock_t loopsLock;
+
+/// 获取一个 pthread 对应的 RunLoop。
+CFRunLoopRef _CFRunLoopGet(pthread_t thread) {
+    OSSpinLockLock(&amp;loopsLock);
+
+    if (!loopsDic) {
+        // 第一次进入时，初始化全局Dic，并先为主线程创建一个 RunLoop。
+        loopsDic = CFDictionaryCreateMutable();
+        CFRunLoopRef mainLoop = _CFRunLoopCreate();
+        CFDictionarySetValue(loopsDic, pthread_main_thread_np(), mainLoop);
+    }
+
+    /// 直接从 Dictionary 里获取。
+    CFRunLoopRef loop = CFDictionaryGetValue(loopsDic, thread));
+
+    if (!loop) {
+        /// 取不到时，创建一个
+        loop = _CFRunLoopCreate();
+        CFDictionarySetValue(loopsDic, thread, loop);
+        /// 注册一个回调，当线程销毁时，顺便也销毁其对应的 RunLoop。
+        _CFSetTSD(..., thread, loop, __CFFinalizeRunLoop);
+    }
+
+    OSSpinLockUnLock(&amp;loopsLock);
+    return loop;
+}
+
+CFRunLoopRef CFRunLoopGetMain() {
+    return _CFRunLoopGet(pthread_main_thread_np());
+}
+
+CFRunLoopRef CFRunLoopGetCurrent() {
+    return _CFRunLoopGet(pthread_self());
+}</pre>
+
+<p>从上面的代码可以看出，线程和 RunLoop 之间是一一对应的，其关系是保存在一个全局的 Dictionary 里。线程刚创建时并没有 RunLoop，如果你不主动获取，那它一直都不会有。RunLoop 的创建是发生在第一次获取时，RunLoop 的销毁是发生在线程结束时。你只能在一个线程的内部获取其 RunLoop（主线程除外）。</p>
+<p><a name="api"></a></p>
+<h2 id="RunLoop-对外的接口"><a href="#RunLoop-对外的接口" class="headerlink" title="RunLoop 对外的接口"></a>RunLoop 对外的接口</h2><p>在 CoreFoundation 里面关于 RunLoop 有5个类:</p>
+<p>CFRunLoopRef</p>
+<p>CFRunLoopModeRef</p>
+<p>CFRunLoopSourceRef</p>
+<p>CFRunLoopTimerRef</p>
+<p>CFRunLoopObserverRef</p>
+<p>其中 CFRunLoopModeRef 类并没有对外暴露，只是通过 CFRunLoopRef 的接口进行了封装。他们的关系如下:</p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/05/RunLoop_0.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/05/RunLoop_0.png" alt="RunLoop_0"></a></p>
+<p>一个 RunLoop 包含若干个 Mode，每个 Mode 又包含若干个 Source/Timer/Observer。每次调用 RunLoop 的主函数时，只能指定其中一个 Mode，这个Mode被称作 CurrentMode。如果需要切换 Mode，只能退出 Loop，再重新指定一个 Mode 进入。这样做主要是为了分隔开不同组的 Source/Timer/Observer，让其互不影响。</p>
+<p><strong>CFRunLoopSourceRef</strong> 是事件产生的地方。Source有两个版本：Source0 和 Source1。</p>
+<p>• Source0 只包含了一个回调（函数指针），它并不能主动触发事件。使用时，你需要先调用 CFRunLoopSourceSignal(source)，将这个 Source 标记为待处理，然后手动调用 CFRunLoopWakeUp(runloop) 来唤醒 RunLoop，让其处理这个事件。</p>
+<p>• Source1 包含了一个 mach_port 和一个回调（函数指针），被用于通过内核和其他线程相互发送消息。这种 Source 能主动唤醒 RunLoop 的线程，其原理在下面会讲到。</p>
+<p><strong>CFRunLoopTimerRef</strong> 是基于时间的触发器，它和 NSTimer 是toll-free bridged 的，可以混用。其包含一个时间长度和一个回调（函数指针）。当其加入到 RunLoop 时，RunLoop会注册对应的时间点，当时间点到时，RunLoop会被唤醒以执行那个回调。</p>
+<p><strong>CFRunLoopObserverRef</strong> 是观察者，每个 Observer 都包含了一个回调（函数指针），当 RunLoop 的状态发生变化时，观察者就能通过回调接受到这个变化。可以观测的时间点有以下几个：</p>
+<pre class="crayon-plain-tag">typedef CF_OPTIONS(CFOptionFlags, CFRunLoopActivity) {
+    kCFRunLoopEntry         = (1UL &lt;&lt; 0), // 即将进入Loop
+    kCFRunLoopBeforeTimers  = (1UL &lt;&lt; 1), // 即将处理 Timer
+    kCFRunLoopBeforeSources = (1UL &lt;&lt; 2), // 即将处理 Source
+    kCFRunLoopBeforeWaiting = (1UL &lt;&lt; 5), // 即将进入休眠
+    kCFRunLoopAfterWaiting  = (1UL &lt;&lt; 6), // 刚从休眠中唤醒
+    kCFRunLoopExit          = (1UL &lt;&lt; 7), // 即将退出Loop
+};</pre>
+
+<p>上面的 Source/Timer/Observer 被统称为 <strong>mode item</strong>，一个 item 可以被同时加入多个 mode。但一个 item 被重复加入同一个 mode 时是不会有效果的。如果一个 mode 中一个 item 都没有，则 RunLoop 会直接退出，不进入循环。</p>
+<p><a name="mode"></a></p>
+<h2 id="RunLoop-的-Mode"><a href="#RunLoop-的-Mode" class="headerlink" title="RunLoop 的 Mode"></a>RunLoop 的 Mode</h2><p>CFRunLoopMode 和 CFRunLoop 的结构大致如下：</p>
+<pre class="crayon-plain-tag">struct __CFRunLoopMode {
+    CFStringRef _name;            // Mode Name, 例如 @"kCFRunLoopDefaultMode"
+    CFMutableSetRef _sources0;    // Set
+    CFMutableSetRef _sources1;    // Set
+    CFMutableArrayRef _observers; // Array
+    CFMutableArrayRef _timers;    // Array
+    ...
+};
+
+struct __CFRunLoop {
+    CFMutableSetRef _commonModes;     // Set
+    CFMutableSetRef _commonModeItems; // Set&lt;Source/Observer/Timer&gt;
+    CFRunLoopModeRef _currentMode;    // Current Runloop Mode
+    CFMutableSetRef _modes;           // Set
+    ...
+};</pre>
+
+<p>这里有个概念叫 “CommonModes”：一个 Mode 可以将自己标记为”Common”属性（通过将其 ModeName 添加到 RunLoop 的 “commonModes” 中）。每当 RunLoop 的内容发生变化时，RunLoop 都会自动将 _commonModeItems 里的 Source/Observer/Timer 同步到具有 “Common” 标记的所有Mode里。</p>
+<p>应用场景举例：主线程的 RunLoop 里有两个预置的 Mode：kCFRunLoopDefaultMode 和 UITrackingRunLoopMode。这两个 Mode 都已经被标记为”Common”属性。DefaultMode 是 App 平时所处的状态，TrackingRunLoopMode 是追踪 ScrollView 滑动时的状态。当你创建一个 Timer 并加到 DefaultMode 时，Timer 会得到重复回调，但此时滑动一个TableView时，RunLoop 会将 mode 切换为 TrackingRunLoopMode，这时 Timer 就不会被回调，并且也不会影响到滑动操作。</p>
+<p>有时你需要一个 Timer，在两个 Mode 中都能得到回调，一种办法就是将这个 Timer 分别加入这两个 Mode。还有一种方式，就是将 Timer 加入到顶层的 RunLoop 的 “commonModeItems” 中。”commonModeItems” 被 RunLoop 自动更新到所有具有”Common”属性的 Mode 里去。</p>
+<p>CFRunLoop对外暴露的管理 Mode 接口只有下面2个:</p>
+<pre class="crayon-plain-tag">CFRunLoopAddCommonMode(CFRunLoopRef runloop, CFStringRef modeName);
+CFRunLoopRunInMode(CFStringRef modeName, ...);</pre>
+
+<p>Mode 暴露的管理 mode item 的接口有下面几个：</p>
+<pre class="crayon-plain-tag">CFRunLoopAddSource(CFRunLoopRef rl, CFRunLoopSourceRef source, CFStringRef modeName);
+CFRunLoopAddObserver(CFRunLoopRef rl, CFRunLoopObserverRef observer, CFStringRef modeName);
+CFRunLoopAddTimer(CFRunLoopRef rl, CFRunLoopTimerRef timer, CFStringRef mode);
+CFRunLoopRemoveSource(CFRunLoopRef rl, CFRunLoopSourceRef source, CFStringRef modeName);
+CFRunLoopRemoveObserver(CFRunLoopRef rl, CFRunLoopObserverRef observer, CFStringRef modeName);
+CFRunLoopRemoveTimer(CFRunLoopRef rl, CFRunLoopTimerRef timer, CFStringRef mode);</pre>
+
+<p>你只能通过 mode name 来操作内部的 mode，当你传入一个新的 mode name 但 RunLoop 内部没有对应 mode 时，RunLoop会自动帮你创建对应的 CFRunLoopModeRef。对于一个 RunLoop 来说，其内部的 mode 只能增加不能删除。</p>
+<p>苹果公开提供的 Mode 有两个：kCFRunLoopDefaultMode (NSDefaultRunLoopMode) 和 UITrackingRunLoopMode，你可以用这两个 Mode Name 来操作其对应的 Mode。</p>
+<p>同时苹果还提供了一个操作 Common 标记的字符串：kCFRunLoopCommonModes (NSRunLoopCommonModes)，你可以用这个字符串来操作 Common Items，或标记一个 Mode 为 “Common”。使用时注意区分这个字符串和其他 mode name。</p>
+<p><a name="inner"></a></p>
+<h2 id="RunLoop-的内部逻辑"><a href="#RunLoop-的内部逻辑" class="headerlink" title="RunLoop 的内部逻辑"></a>RunLoop 的内部逻辑</h2><p>根据苹果在<a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Multithreading/RunLoopManagement/RunLoopManagement.html#//apple_ref/doc/uid/10000057i-CH16-SW23" target="_blank" rel="external">文档</a>里的说明，RunLoop 内部的逻辑大致如下:</p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/05/RunLoop_1.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/05/RunLoop_1.png" alt="RunLoop_1"></a></p>
+<p>其内部代码整理如下 （太长了不想看可以直接跳过去，后面会有说明）：</p>
+<pre class="crayon-plain-tag">/// 用DefaultMode启动
+void CFRunLoopRun(void) {
+    CFRunLoopRunSpecific(CFRunLoopGetCurrent(), kCFRunLoopDefaultMode, 1.0e10, false);
+}
+
+/// 用指定的Mode启动，允许设置RunLoop超时时间
+int CFRunLoopRunInMode(CFStringRef modeName, CFTimeInterval seconds, Boolean stopAfterHandle) {
+    return CFRunLoopRunSpecific(CFRunLoopGetCurrent(), modeName, seconds, returnAfterSourceHandled);
+}
+
+/// RunLoop的实现
+int CFRunLoopRunSpecific(runloop, modeName, seconds, stopAfterHandle) {
+
+    /// 首先根据modeName找到对应mode
+    CFRunLoopModeRef currentMode = __CFRunLoopFindMode(runloop, modeName, false);
+    /// 如果mode里没有source/timer/observer, 直接返回。
+    if (__CFRunLoopModeIsEmpty(currentMode)) return;
+
+    /// 1\. 通知 Observers: RunLoop 即将进入 loop。
+    __CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopEntry);
+
+    /// 内部函数，进入loop
+    __CFRunLoopRun(runloop, currentMode, seconds, returnAfterSourceHandled) {
+
+        Boolean sourceHandledThisLoop = NO;
+        int retVal = 0;
+        do {
+
+            /// 2\. 通知 Observers: RunLoop 即将触发 Timer 回调。
+            __CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopBeforeTimers);
+            /// 3\. 通知 Observers: RunLoop 即将触发 Source0 (非port) 回调。
+            __CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopBeforeSources);
+            /// 执行被加入的block
+            __CFRunLoopDoBlocks(runloop, currentMode);
+
+            /// 4\. RunLoop 触发 Source0 (非port) 回调。
+            sourceHandledThisLoop = __CFRunLoopDoSources0(runloop, currentMode, stopAfterHandle);
+            /// 执行被加入的block
+            __CFRunLoopDoBlocks(runloop, currentMode);
+
+            /// 5\. 如果有 Source1 (基于port) 处于 ready 状态，直接处理这个 Source1 然后跳转去处理消息。
+            if (__Source0DidDispatchPortLastTime) {
+                Boolean hasMsg = __CFRunLoopServiceMachPort(dispatchPort, &amp;msg)
+                if (hasMsg) goto handle_msg;
+            }
+
+            /// 通知 Observers: RunLoop 的线程即将进入休眠(sleep)。
+            if (!sourceHandledThisLoop) {
+                __CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopBeforeWaiting);
+            }
+
+            /// 7\. 调用 mach_msg 等待接受 mach_port 的消息。线程将进入休眠, 直到被下面某一个事件唤醒。
+            /// • 一个基于 port 的Source 的事件。
+            /// • 一个 Timer 到时间了
+            /// • RunLoop 自身的超时时间到了
+            /// • 被其他什么调用者手动唤醒
+            __CFRunLoopServiceMachPort(waitSet, &amp;msg, sizeof(msg_buffer), &amp;livePort) {
+                mach_msg(msg, MACH_RCV_MSG, port); // thread wait for receive msg
+            }
+
+            /// 8\. 通知 Observers: RunLoop 的线程刚刚被唤醒了。
+            __CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopAfterWaiting);
+
+            /// 收到消息，处理消息。
+            handle_msg:
+
+            /// 9.1 如果一个 Timer 到时间了，触发这个Timer的回调。
+            if (msg_is_timer) {
+                __CFRunLoopDoTimers(runloop, currentMode, mach_absolute_time())
+            } 
+
+            /// 9.2 如果有dispatch到main_queue的block，执行block。
+            else if (msg_is_dispatch) {
+                __CFRUNLOOP_IS_SERVICING_THE_MAIN_DISPATCH_QUEUE__(msg);
+            } 
+
+            /// 9.3 如果一个 Source1 (基于port) 发出事件了，处理这个事件
+            else {
+                CFRunLoopSourceRef source1 = __CFRunLoopModeFindSourceForMachPort(runloop, currentMode, livePort);
+                sourceHandledThisLoop = __CFRunLoopDoSource1(runloop, currentMode, source1, msg);
+                if (sourceHandledThisLoop) {
+                    mach_msg(reply, MACH_SEND_MSG, reply);
+                }
+            }
+
+            /// 执行加入到Loop的block
+            __CFRunLoopDoBlocks(runloop, currentMode);
+
+            if (sourceHandledThisLoop &amp;&amp; stopAfterHandle) {
+                /// 进入loop时参数说处理完事件就返回。
+                retVal = kCFRunLoopRunHandledSource;
+            } else if (timeout) {
+                /// 超出传入参数标记的超时时间了
+                retVal = kCFRunLoopRunTimedOut;
+            } else if (__CFRunLoopIsStopped(runloop)) {
+                /// 被外部调用者强制停止了
+                retVal = kCFRunLoopRunStopped;
+            } else if (__CFRunLoopModeIsEmpty(runloop, currentMode)) {
+                /// source/timer/observer一个都没有了
+                retVal = kCFRunLoopRunFinished;
+            }
+
+            /// 如果没超时，mode里没空，loop也没被停止，那继续loop。
+        } while (retVal == 0);
+    }
+
+    /// 10\. 通知 Observers: RunLoop 即将退出。
+    __CFRunLoopDoObservers(rl, currentMode, kCFRunLoopExit);
+}</pre>
+
+<p>可以看到，实际上 RunLoop 就是这样一个函数，其内部是一个 do-while 循环。当你调用 CFRunLoopRun() 时，线程就会一直停留在这个循环里；直到超时或被手动停止，该函数才会返回。</p>
+<p><a name="core"></a></p>
+<h2 id="RunLoop-的底层实现"><a href="#RunLoop-的底层实现" class="headerlink" title="RunLoop 的底层实现"></a>RunLoop 的底层实现</h2><p>从上面代码可以看到，RunLoop 的核心是基于 mach port 的，其进入休眠时调用的函数是 mach_msg()。为了解释这个逻辑，下面稍微介绍一下 OSX/iOS 的系统架构。</p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/05/RunLoop_3.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/05/RunLoop_3.png" alt="RunLoop_3"></a></p>
+<p>苹果官方将整个系统大致划分为上述4个层次：</p>
+<p>应用层包括用户能接触到的图形应用，例如 Spotlight、Aqua、SpringBoard 等。</p>
+<p>应用框架层即开发人员接触到的 Cocoa 等框架。</p>
+<p>核心框架层包括各种核心框架、OpenGL 等内容。</p>
+<p>Darwin 即操作系统的核心，包括系统内核、驱动、Shell 等内容，这一层是开源的，其所有源码都可以在 <a href="http://opensource.apple.com" target="_blank" rel="external">opensource.apple.com</a> 里找到。</p>
+<p>我们在深入看一下 Darwin 这个核心的架构：</p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/05/RunLoop_4.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/05/RunLoop_4.png" alt="RunLoop_4"></a></p>
+<p>其中，在硬件层上面的三个组成部分：Mach、BSD、IOKit (还包括一些上面没标注的内容)，共同组成了 XNU 内核。</p>
+<p>XNU 内核的内环被称作 Mach，其作为一个微内核，仅提供了诸如处理器调度、IPC (进程间通信)等非常少量的基础服务。</p>
+<p>BSD 层可以看作围绕 Mach 层的一个外环，其提供了诸如进程管理、文件系统和网络等功能。</p>
+<p>IOKit 层是为设备驱动提供了一个面向对象(C++)的一个框架。</p>
+<p>Mach 本身提供的 API 非常有限，而且苹果也不鼓励使用 Mach 的 API，但是这些API非常基础，如果没有这些API的话，其他任何工作都无法实施。在 Mach 中，所有的东西都是通过自己的对象实现的，进程、线程和虚拟内存都被称为”对象”。和其他架构不同， Mach 的对象间不能直接调用，只能通过消息传递的方式实现对象间的通信。”消息”是 Mach 中最基础的概念，消息在两个端口 (port) 之间传递，这就是 Mach 的 IPC (进程间通信) 的核心。</p>
+<p>Mach 的消息定义是在 &lt;mach/message.h&gt; 头文件的，很简单：</p>
+<pre class="crayon-plain-tag">typedef struct {
+  mach_msg_header_t header;
+  mach_msg_body_t body;
+} mach_msg_base_t;
+
+typedef struct {
+  mach_msg_bits_t msgh_bits;
+  mach_msg_size_t msgh_size;
+  mach_port_t msgh_remote_port;
+  mach_port_t msgh_local_port;
+  mach_port_name_t msgh_voucher_port;
+  mach_msg_id_t msgh_id;
+} mach_msg_header_t;</pre>
+
+<p>一条 Mach 消息实际上就是一个二进制数据包 (BLOB)，其头部定义了当前端口 local_port 和目标端口 remote_port，</p>
+<p>发送和接受消息是通过同一个 API 进行的，其 option 标记了消息传递的方向：</p>
+<pre class="crayon-plain-tag">mach_msg_return_t mach_msg(
+            mach_msg_header_t *msg,
+            mach_msg_option_t option,
+            mach_msg_size_t send_size,
+            mach_msg_size_t rcv_size,
+            mach_port_name_t rcv_name,
+            mach_msg_timeout_t timeout,
+            mach_port_name_t notify);</pre>
+
+<p>为了实现消息的发送和接收，mach_msg() 函数实际上是调用了一个 Mach 陷阱 (trap)，即函数mach_msg_trap()，陷阱这个概念在 Mach 中等同于系统调用。当你在用户态调用 mach_msg_trap() 时会触发陷阱机制，切换到内核态；内核态中内核实现的 mach_msg() 函数会完成实际的工作，如下图：</p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/05/RunLoop_5.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/05/RunLoop_5.png" alt="RunLoop_5"></a></p>
+<p>这些概念可以参考维基百科: <a href="http://en.wikipedia.org/wiki/System_call" target="_blank" rel="external">System_call</a>、<a href="http://en.wikipedia.org/wiki/Trap_(computing" target="_blank" rel="external">Trap_(computing)</a>)。</p>
+<p>RunLoop 的核心就是一个 mach_msg() (见上面代码的第7步)，RunLoop 调用这个函数去接收消息，如果没有别人发送 port 消息过来，内核会将线程置于等待状态。例如你在模拟器里跑起一个 iOS 的 App，然后在 App 静止时点击暂停，你会看到主线程调用栈是停留在 mach_msg_trap() 这个地方。</p>
+<p>关于具体的如何利用 mach port 发送信息，可以看看<a href="http://nshipster.com/inter-process-communication/" target="_blank" rel="external"> NSHipster 这一篇文章</a>，或者<a href="http://segmentfault.com/a/1190000002400329" target="_blank" rel="external">这里</a>的中文翻译 。</p>
+<p>关于Mach的历史可以看看这篇很有趣的文章：<a href="http://www.programmer.com.cn/8121/" target="_blank" rel="external">Mac OS X 背后的故事（三）Mach 之父 Avie Tevanian</a>。</p>
+<p><a name="apple"></a></p>
+<h2 id="苹果用-RunLoop-实现的功能"><a href="#苹果用-RunLoop-实现的功能" class="headerlink" title="苹果用 RunLoop 实现的功能"></a>苹果用 RunLoop 实现的功能</h2><p>首先我们可以看一下 App 启动后 RunLoop 的状态：</p>
+<pre class="crayon-plain-tag">CFRunLoop {
+    current mode = kCFRunLoopDefaultMode
+    common modes = {
+        UITrackingRunLoopMode
+        kCFRunLoopDefaultMode
+    }
+
+    common mode items = {
+
+        // source0 (manual)
+        CFRunLoopSource {order =-1, {
+            callout = _UIApplicationHandleEventQueue}}
+        CFRunLoopSource {order =-1, {
+            callout = PurpleEventSignalCallback }}
+        CFRunLoopSource {order = 0, {
+            callout = FBSSerialQueueRunLoopSourceHandler}}
+
+        // source1 (mach port)
+        CFRunLoopSource {order = 0,  {port = 17923}}
+        CFRunLoopSource {order = 0,  {port = 12039}}
+        CFRunLoopSource {order = 0,  {port = 16647}}
+        CFRunLoopSource {order =-1, {
+            callout = PurpleEventCallback}}
+        CFRunLoopSource {order = 0, {port = 2407,
+            callout = _ZL20notify_port_callbackP12__CFMachPortPvlS1_}}
+        CFRunLoopSource {order = 0, {port = 1c03,
+            callout = __IOHIDEventSystemClientAvailabilityCallback}}
+        CFRunLoopSource {order = 0, {port = 1b03,
+            callout = __IOHIDEventSystemClientQueueCallback}}
+        CFRunLoopSource {order = 1, {port = 1903,
+            callout = __IOMIGMachPortPortCallback}}
+
+        // Ovserver
+        CFRunLoopObserver {order = -2147483647, activities = 0x1, // Entry
+            callout = _wrapRunLoopWithAutoreleasePoolHandler}
+        CFRunLoopObserver {order = 0, activities = 0x20,          // BeforeWaiting
+            callout = _UIGestureRecognizerUpdateObserver}
+        CFRunLoopObserver {order = 1999000, activities = 0xa0,    // BeforeWaiting | Exit
+            callout = _afterCACommitHandler}
+        CFRunLoopObserver {order = 2000000, activities = 0xa0,    // BeforeWaiting | Exit
+            callout = _ZN2CA11Transaction17observer_callbackEP19__CFRunLoopObservermPv}
+        CFRunLoopObserver {order = 2147483647, activities = 0xa0, // BeforeWaiting | Exit
+            callout = _wrapRunLoopWithAutoreleasePoolHandler}
+
+        // Timer
+        CFRunLoopTimer {firing = No, interval = 3.1536e+09, tolerance = 0,
+            next fire date = 453098071 (-4421.76019 @ 96223387169499),
+            callout = _ZN2CAL14timer_callbackEP16__CFRunLoopTimerPv (QuartzCore.framework)}
+    },
+
+    modes ＝ {
+        CFRunLoopMode  {
+            sources0 =  { /* same as 'common mode items' */ },
+            sources1 =  { /* same as 'common mode items' */ },
+            observers = { /* same as 'common mode items' */ },
+            timers =    { /* same as 'common mode items' */ },
+        },
+
+        CFRunLoopMode  {
+            sources0 =  { /* same as 'common mode items' */ },
+            sources1 =  { /* same as 'common mode items' */ },
+            observers = { /* same as 'common mode items' */ },
+            timers =    { /* same as 'common mode items' */ },
+        },
+
+        CFRunLoopMode  {
+            sources0 = {
+                CFRunLoopSource {order = 0, {
+                    callout = FBSSerialQueueRunLoopSourceHandler}}
+            },
+            sources1 = (null),
+            observers = {
+                CFRunLoopObserver &gt;{activities = 0xa0, order = 2000000,
+                    callout = _ZN2CA11Transaction17observer_callbackEP19__CFRunLoopObservermPv}
+            )},
+            timers = (null),
+        },
+
+        CFRunLoopMode  {
+            sources0 = {
+                CFRunLoopSource {order = -1, {
+                    callout = PurpleEventSignalCallback}}
+            },
+            sources1 = {
+                CFRunLoopSource {order = -1, {
+                    callout = PurpleEventCallback}}
+            },
+            observers = (null),
+            timers = (null),
+        },
+
+        CFRunLoopMode  {
+            sources0 = (null),
+            sources1 = (null),
+            observers = (null),
+            timers = (null),
+        }
+    }
+}</pre>
+
+<p>可以看到，系统默认注册了5个Mode:</p>
+<p>1. kCFRunLoopDefaultMode: App的默认 Mode，通常主线程是在这个 Mode 下运行的。</p>
+<p>2. UITrackingRunLoopMode: 界面跟踪 Mode，用于 ScrollView 追踪触摸滑动，保证界面滑动时不受其他 Mode 影响。</p>
+<p>3. UIInitializationRunLoopMode: 在刚启动 App 时第进入的第一个 Mode，启动完成后就不再使用。</p>
+<p>4: GSEventReceiveRunLoopMode: 接受系统事件的内部 Mode，通常用不到。</p>
+<p>5: kCFRunLoopCommonModes: 这是一个占位的 Mode，没有实际作用。</p>
+<p>你可以在<a href="http://iphonedevwiki.net/index.php/CFRunLoop" target="_blank" rel="external">这里</a>看到更多的苹果内部的 Mode，但那些 Mode 在开发中就很难遇到了。</p>
+<p>当 RunLoop 进行回调时，一般都是通过一个很长的函数调用出去 (call out), 当你在你的代码中下断点调试时，通常能在调用栈上看到这些函数。下面是这几个函数的整理版本，如果你在调用栈中看到这些长函数名，在这里查找一下就能定位到具体的调用地点了：</p>
+<pre class="crayon-plain-tag">{
+    /// 1\. 通知Observers，即将进入RunLoop
+    /// 此处有Observer会创建AutoreleasePool: _objc_autoreleasePoolPush();
+    __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopEntry);
+    do {
+
+        /// 2\. 通知 Observers: 即将触发 Timer 回调。
+        __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopBeforeTimers);
+        /// 3\. 通知 Observers: 即将触发 Source (非基于port的,Source0) 回调。
+        __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopBeforeSources);
+        __CFRUNLOOP_IS_CALLING_OUT_TO_A_BLOCK__(block);
+
+        /// 4\. 触发 Source0 (非基于port的) 回调。
+        __CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__(source0);
+        __CFRUNLOOP_IS_CALLING_OUT_TO_A_BLOCK__(block);
+
+        /// 6\. 通知Observers，即将进入休眠
+        /// 此处有Observer释放并新建AutoreleasePool: _objc_autoreleasePoolPop(); _objc_autoreleasePoolPush();
+        __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopBeforeWaiting);
+
+        /// 7\. sleep to wait msg.
+        mach_msg() -&gt; mach_msg_trap();
+
+        /// 8\. 通知Observers，线程被唤醒
+        __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopAfterWaiting);
+
+        /// 9\. 如果是被Timer唤醒的，回调Timer
+        __CFRUNLOOP_IS_CALLING_OUT_TO_A_TIMER_CALLBACK_FUNCTION__(timer);
+
+        /// 9\. 如果是被dispatch唤醒的，执行所有调用 dispatch_async 等方法放入main queue 的 block
+        __CFRUNLOOP_IS_SERVICING_THE_MAIN_DISPATCH_QUEUE__(dispatched_block);
+
+        /// 9\. 如果如果Runloop是被 Source1 (基于port的) 的事件唤醒了，处理这个事件
+        __CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE1_PERFORM_FUNCTION__(source1);
+
+    } while (...);
+
+    /// 10\. 通知Observers，即将退出RunLoop
+    /// 此处有Observer释放AutoreleasePool: _objc_autoreleasePoolPop();
+    __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__(kCFRunLoopExit);
+}</pre>
+
+<p><a name="autorelease"></a></p>
+<h3 id="AutoreleasePool"><a href="#AutoreleasePool" class="headerlink" title="AutoreleasePool"></a>AutoreleasePool</h3><p>App启动后，苹果在主线程 RunLoop 里注册了两个 Observer，其回调都是 _wrapRunLoopWithAutoreleasePoolHandler()。</p>
+<p>第一个 Observer 监视的事件是 Entry(即将进入Loop)，其回调内会调用 _objc_autoreleasePoolPush() 创建自动释放池。其 order 是-2147483647，优先级最高，保证创建释放池发生在其他所有回调之前。</p>
+<p>第二个 Observer 监视了两个事件： BeforeWaiting(准备进入休眠) 时调用_objc_autoreleasePoolPop() 和 _objc_autoreleasePoolPush() 释放旧的池并创建新池；Exit(即将退出Loop) 时调用 _objc_autoreleasePoolPop() 来释放自动释放池。这个 Observer 的 order 是 2147483647，优先级最低，保证其释放池子发生在其他所有回调之后。</p>
+<p>在主线程执行的代码，通常是写在诸如事件回调、Timer回调内的。这些回调会被 RunLoop 创建好的 AutoreleasePool 环绕着，所以不会出现内存泄漏，开发者也不必显示创建 Pool 了。</p>
+<p><a name="event"></a></p>
+<h3 id="事件响应"><a href="#事件响应" class="headerlink" title="事件响应"></a>事件响应</h3><p>苹果注册了一个 Source1 (基于 mach port 的) 用来接收系统事件，其回调函数为 __IOHIDEventSystemClientQueueCallback()。</p>
+<p>当一个硬件事件(触摸/锁屏/摇晃等)发生后，首先由 IOKit.framework 生成一个 IOHIDEvent 事件并由 SpringBoard 接收。这个过程的详细情况可以参考<a href="http://iphonedevwiki.net/index.php/IOHIDFamily" target="_blank" rel="external">这里</a>。SpringBoard 只接收按键(锁屏/静音等)，触摸，加速，接近传感器等几种 Event，随后用 mach port 转发给需要的App进程。随后苹果注册的那个 Source1 就会触发回调，并调用 _UIApplicationHandleEventQueue() 进行应用内部的分发。</p>
+<p>_UIApplicationHandleEventQueue() 会把 IOHIDEvent 处理并包装成 UIEvent 进行处理或分发，其中包括识别 UIGesture/处理屏幕旋转/发送给 UIWindow 等。通常事件比如 UIButton 点击、touchesBegin/Move/End/Cancel 事件都是在这个回调中完成的。</p>
+<p><a name="gesture"></a></p>
+<h3 id="手势识别"><a href="#手势识别" class="headerlink" title="手势识别"></a>手势识别</h3><p>当上面的 _UIApplicationHandleEventQueue() 识别了一个手势时，其首先会调用 Cancel 将当前的 touchesBegin/Move/End 系列回调打断。随后系统将对应的 UIGestureRecognizer 标记为待处理。</p>
+<p>苹果注册了一个 Observer 监测 BeforeWaiting (Loop即将进入休眠) 事件，这个Observer的回调函数是 _UIGestureRecognizerUpdateObserver()，其内部会获取所有刚被标记为待处理的 GestureRecognizer，并执行GestureRecognizer的回调。</p>
+<p>当有 UIGestureRecognizer 的变化(创建/销毁/状态改变)时，这个回调都会进行相应处理。</p>
+<p><a name="ui"></a></p>
+<h3 id="界面更新"><a href="#界面更新" class="headerlink" title="界面更新"></a>界面更新</h3><p>当在操作 UI 时，比如改变了 Frame、更新了 UIView/CALayer 的层次时，或者手动调用了 UIView/CALayer 的 setNeedsLayout/setNeedsDisplay方法后，这个 UIView/CALayer 就被标记为待处理，并被提交到一个全局的容器去。</p>
+<p>苹果注册了一个 Observer 监听 BeforeWaiting(即将进入休眠) 和 Exit (即将退出Loop) 事件，回调去执行一个很长的函数：</p>
+<p>_ZN2CA11Transaction17observer_callbackEP19__CFRunLoopObservermPv()。这个函数里会遍历所有待处理的 UIView/CAlayer 以执行实际的绘制和调整，并更新 UI 界面。</p>
+<p>这个函数内部的调用栈大概是这样的：</p>
+<pre class="crayon-plain-tag">_ZN2CA11Transaction17observer_callbackEP19__CFRunLoopObservermPv()
+    QuartzCore:CA::Transaction::observer_callback:
+        CA::Transaction::commit();
+            CA::Context::commit_transaction();
+                CA::Layer::layout_and_display_if_needed();
+                    CA::Layer::layout_if_needed();
+                        [CALayer layoutSublayers];
+                            [UIView layoutSubviews];
+                    CA::Layer::display_if_needed();
+                        [CALayer display];
+                            [UIView drawRect];</pre>
+
+<p><a name="timer"></a></p>
+<h3 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h3><p>NSTimer 其实就是 CFRunLoopTimerRef，他们之间是 toll-free bridged 的。一个 NSTimer 注册到 RunLoop 后，RunLoop 会为其重复的时间点注册好事件。例如 10:00, 10:10, 10:20 这几个时间点。RunLoop为了节省资源，并不会在非常准确的时间点回调这个Timer。Timer 有个属性叫做 Tolerance (宽容度)，标示了当时间点到后，容许有多少最大误差。</p>
+<p>如果某个时间点被错过了，例如执行了一个很长的任务，则那个时间点的回调也会跳过去，不会延后执行。就比如等公交，如果 10:10 时我忙着玩手机错过了那个点的公交，那我只能等 10:20 这一趟了。</p>
+<p>CADisplayLink 是一个和屏幕刷新率一致的定时器（但实际实现原理更复杂，和 NSTimer 并不一样，其内部实际是操作了一个 Source）。如果在两次屏幕刷新之间执行了一个长任务，那其中就会有一帧被跳过去（和 NSTimer 相似），造成界面卡顿的感觉。在快速滑动TableView时，即使一帧的卡顿也会让用户有所察觉。Facebook 开源的 AsyncDisplayLink 就是为了解决界面卡顿的问题，其内部也用到了 RunLoop，这个稍后我会再单独写一页博客来分析。</p>
+<p><a name="perform"></a></p>
+<h3 id="PerformSelecter"><a href="#PerformSelecter" class="headerlink" title="PerformSelecter"></a>PerformSelecter</h3><p>当调用 NSObject 的 performSelecter:afterDelay: 后，实际上其内部会创建一个 Timer 并添加到当前线程的 RunLoop 中。所以如果当前线程没有 RunLoop，则这个方法会失效。</p>
+<p>当调用 performSelector:onThread: 时，实际上其会创建一个 Timer 加到对应的线程去，同样的，如果对应线程没有 RunLoop 该方法也会失效。</p>
+<p><a name="gce"></a></p>
+<h3 id="关于GCD"><a href="#关于GCD" class="headerlink" title="关于GCD"></a>关于GCD</h3><p>实际上 RunLoop 底层也会用到 GCD 的东西，<del>比如 RunLoop 是用 dispatch_source_t 实现的 Timer</del>（评论中有人提醒，NSTimer 是用了 XNU 内核的 mk_timer，我也仔细调试了一下，发现 NSTimer 确实是由 mk_timer 驱动，而非 GCD 驱动的）。但同时 GCD 提供的某些接口也用到了 RunLoop， 例如 dispatch_async()。</p>
+<p>当调用 dispatch_async(dispatch_get_main_queue(), block) 时，libDispatch 会向主线程的 RunLoop 发送消息，RunLoop会被唤醒，并从消息中取得这个 block，并在回调 <strong>CFRUNLOOP_IS_SERVICING_THE_MAIN_DISPATCH_QUEUE</strong>() 里执行这个 block。但这个逻辑仅限于 dispatch 到主线程，dispatch 到其他线程仍然是由 libDispatch 处理的。</p>
+<p><a name="network"></a></p>
+<h3 id="关于网络请求"><a href="#关于网络请求" class="headerlink" title="关于网络请求"></a>关于网络请求</h3><p>iOS 中，关于网络请求的接口自下至上有如下几层:</p>
+<pre class="crayon-plain-tag">CFSocket
+CFNetwork       -&gt;ASIHttpRequest
+NSURLConnection -&gt;AFNetworking
+NSURLSession    -&gt;AFNetworking2, Alamofire</pre>
+
+<p>• CFSocket 是最底层的接口，只负责 socket 通信。</p>
+<p>• CFNetwork 是基于 CFSocket 等接口的上层封装，ASIHttpRequest 工作于这一层。</p>
+<p>• NSURLConnection 是基于 CFNetwork 的更高层的封装，提供面向对象的接口，AFNetworking 工作于这一层。</p>
+<p>• NSURLSession 是 iOS7 中新增的接口，表面上是和 NSURLConnection 并列的，但底层仍然用到了 NSURLConnection 的部分功能 (比如 com.apple.NSURLConnectionLoader 线程)，AFNetworking2 和 Alamofire 工作于这一层。</p>
+<p>下面主要介绍下 NSURLConnection 的工作过程。</p>
+<p>通常使用 NSURLConnection 时，你会传入一个 Delegate，当调用了 [connection start] 后，这个 Delegate 就会不停收到事件回调。实际上，start 这个函数的内部会会获取 CurrentRunLoop，然后在其中的 DefaultMode 添加了4个 Source0 (即需要手动触发的Source)。CFMultiplexerSource 是负责各种 Delegate 回调的，CFHTTPCookieStorage 是处理各种 Cookie 的。</p>
+<p>当开始网络传输时，我们可以看到 NSURLConnection 创建了两个新线程：com.apple.NSURLConnectionLoader 和 com.apple.CFSocket.private。其中 CFSocket 线程是处理底层 socket 连接的。NSURLConnectionLoader 这个线程内部会使用 RunLoop 来接收底层 socket 的事件，并通过之前添加的 Source0 通知到上层的 Delegate。</p>
+<p><a href="http://blog.ibireme.com/wp-content/uploads/2015/05/RunLoop_network.png" target="_blank" rel="external"><img src="http://blog.ibireme.com/wp-content/uploads/2015/05/RunLoop_network.png" alt="RunLoop_network"></a></p>
+<p>NSURLConnectionLoader 中的 RunLoop 通过一些基于 mach port 的 Source 接收来自底层 CFSocket 的通知。当收到通知后，其会在合适的时机向 CFMultiplexerSource 等 Source0 发送通知，同时唤醒 Delegate 线程的 RunLoop 来让其处理这些通知。CFMultiplexerSource 会在 Delegate 线程的 RunLoop 对 Delegate 执行实际的回调。</p>
+<p><a name="example"></a></p>
+<h2 id="RunLoop-的实际应用举例"><a href="#RunLoop-的实际应用举例" class="headerlink" title="RunLoop 的实际应用举例"></a>RunLoop 的实际应用举例</h2><p><a name="AFNetworking"></a></p>
+<h3 id="AFNetworking"><a href="#AFNetworking" class="headerlink" title="AFNetworking"></a>AFNetworking</h3><p><a href="https://github.com/AFNetworking/AFNetworking/blob/master/AFNetworking%2FAFURLConnectionOperation.m" target="_blank" rel="external">AFURLConnectionOperation</a> 这个类是基于 NSURLConnection 构建的，其希望能在后台线程接收 Delegate 回调。为此 AFNetworking 单独创建了一个线程，并在这个线程中启动了一个 RunLoop：</p>
+<pre class="crayon-plain-tag">+ (void)networkRequestThreadEntryPoint:(id)__unused object {
+    @autoreleasepool {
+        [[NSThread currentThread] setName:@"AFNetworking"];
+        NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+        [runLoop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
+        [runLoop run];
+    }
+}
+
++ (NSThread *)networkRequestThread {
+    static NSThread *_networkRequestThread = nil;
+    static dispatch_once_t oncePredicate;
+    dispatch_once(&amp;oncePredicate, ^{
+        _networkRequestThread = [[NSThread alloc] initWithTarget:self selector:@selector(networkRequestThreadEntryPoint:) object:nil];
+        [_networkRequestThread start];
+    });
+    return _networkRequestThread;
+}</pre>
+
+<p>RunLoop 启动前内部必须要有至少一个 Timer/Observer/Source，所以 AFNetworking 在 [runLoop run] 之前先创建了一个新的 NSMachPort 添加进去了。通常情况下，调用者需要持有这个 NSMachPort (mach_port) 并在外部线程通过这个 port 发送消息到 loop 内；但此处添加 port 只是为了让 RunLoop 不至于退出，并没有用于实际的发送消息。</p>
+<pre class="crayon-plain-tag">- (void)start {
+    [self.lock lock];
+    if ([self isCancelled]) {
+        [self performSelector:@selector(cancelConnection) onThread:[[self class] networkRequestThread] withObject:nil waitUntilDone:NO modes:[self.runLoopModes allObjects]];
+    } else if ([self isReady]) {
+        self.state = AFOperationExecutingState;
+        [self performSelector:@selector(operationDidStart) onThread:[[self class] networkRequestThread] withObject:nil waitUntilDone:NO modes:[self.runLoopModes allObjects]];
+    }
+    [self.lock unlock];
+}</pre>
+
+<p>当需要这个后台线程执行任务时，AFNetworking 通过调用 [NSObject performSelector:onThread:..] 将这个任务扔到了后台线程的 RunLoop 中。</p>
+<p><a name="AsyncDisplayKit"></a></p>
+<h3 id="AsyncDisplayKit"><a href="#AsyncDisplayKit" class="headerlink" title="AsyncDisplayKit"></a>AsyncDisplayKit</h3><p><a href="https://github.com/facebook/AsyncDisplayKit" target="_blank" rel="external">AsyncDisplayKit</a> 是 Facebook 推出的用于保持界面流畅性的框架，其原理大致如下：</p>
+<p>UI 线程中一旦出现繁重的任务就会导致界面卡顿，这类任务通常分为3类：排版，绘制，UI对象操作。</p>
+<p>排版通常包括计算视图大小、计算文本高度、重新计算子式图的排版等操作。</p>
+<p>绘制一般有文本绘制 (例如 CoreText)、图片绘制 (例如预先解压)、元素绘制 (Quartz)等操作。</p>
+<p>UI对象操作通常包括 UIView/CALayer 等 UI 对象的创建、设置属性和销毁。</p>
+<p>其中前两类操作可以通过各种方法扔到后台线程执行，而最后一类操作只能在主线程完成，并且有时后面的操作需要依赖前面操作的结果 （例如TextView创建时可能需要提前计算出文本的大小）。ASDK 所做的，就是尽量将能放入后台的任务放入后台，不能的则尽量推迟 (例如视图的创建、属性的调整)。</p>
+<p>为此，ASDK 创建了一个名为 ASDisplayNode 的对象，并在内部封装了 UIView/CALayer，它具有和 UIView/CALayer 相似的属性，例如 frame、backgroundColor等。所有这些属性都可以在后台线程更改，开发者可以只通过 Node 来操作其内部的 UIView/CALayer，这样就可以将排版和绘制放入了后台线程。但是无论怎么操作，这些属性总需要在某个时刻同步到主线程的 UIView/CALayer 去。</p>
+<p>ASDK 仿照 QuartzCore/UIKit 框架的模式，实现了一套类似的界面更新的机制：即在主线程的 RunLoop 中添加一个 Observer，监听了 kCFRunLoopBeforeWaiting 和 kCFRunLoopExit 事件，在收到回调时，遍历所有之前放入队列的待处理的任务，然后一一执行。</p>
+<p>具体的代码可以看这里：<a href="https://github.com/facebook/AsyncDisplayKit/blob/master/AsyncDisplayKit%2FDetails%2FTransactions%2F_ASAsyncTransactionGroup.m" target="_blank" rel="external">_ASAsyncTransactionGroup</a>。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>好长时间没写博客了喵～前几天给博客搬了个家，从越来越慢的 AWS 迁到了 Linode，然后很认真的换了一套新的博客主题，排版看着还说得过去吧～  <img src="http://blog.ibireme.com/wp-includes/images/smilies/icon_redface.gif" alt=":oops:"></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2015/05/深入理解RunLoop/" class="archive-article-date">
+  	<time datetime="2015-05-17T17:54:06.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-05-18</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2015年了呢" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/2015年了呢/">2015年了呢...</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>又是新的一年了呢。。偶尔也写写年终总结之类的东西，然后顺便稍微展望一下未来吧。</p>
+<p>算起来，来到帝都工作已经快三年了呢；相对于刚毕业前后那段紧张绝望迷茫的日子来说，刚过去的这一年已经算得上不错了。这一年里换了一个新工作，从 Java 转回了 iOS，上班从酒仙桥挪到了中关村，工资涨了点儿，活儿轻松了点儿。和小伙伴租的房子，一年一搬。新的房子有个面朝阳台的书房，午后的阳光很棒；书房有一个很大的书架，能放下我在这边买的所有的书。看上去，这一年过得还不错。</p>
+<p>但是到底是怎样的呢？我也不知道。能说上话的人越来越少，从前的朋友和同学也都各奔东西，不再联系。朋友们有的去留学了，有的留学又回来了，有的去创业了，有的仍留在出生的城市工作。大家都有自己的圈子，即使能有空聚一聚，或者在网上聊一聊，也都没什么话题了。我自己也不太擅长与人交流吧，所以总是习惯了一个人。用村上的话来说:”哪里会有人喜欢孤独，不过是不喜欢失望罢了”。</p>
+<p>2015年来了，我要做些什么呢？如果可以的话，腾出更多个人时间来做些有意思的事儿。再仔细学一下 dsp 相关的东西，希望能做出类似 GarageBand 那样的 App 吧，我想要在 iPad 上编辑和录制 midi。在屋里腾出块空间来放下我的电钢，试试看能不能捡起一些过去的技能。换一块儿好点的数位板，认真学一下数码绘，希望能创造点东西，而不是总在复制。然后，一定要多读书！想得太多读书少这肯定是不行的。我知道现在如果立下一堆计划怕是用处不大(笑)，但是不管怎么样，希望未来能更好一些吧。</p>
+<p>最后还是想说一下我的第一份工作。08年我第一次注册人人网，加上了很多大学好友，玩得不亦乐乎。11年底，我拿到人人的 Offer，到人人网实习，做一些移动方面的东西。12年毕业后，便正式加入了人人网，只是转做起了 Java 后台，先后负责开发开放平台、应用中心、支付等一些项目。虽然当时由移动开发转做 Java 有点不情愿，但现在看来这让我增长了很多技能，眼界也开阔了很多。在这期间，部门的头头(给我面试机会、招我进去，算是有知遇之恩吧)走了，一同去的几个同学也先后走了，部门同事也前前后后走了很多，最后我也走了。。我在人人网玩了六年多，工作了两年多，到现在每天新鲜事儿都刷不出来几条了，多少有点感伤，稍微祝福一下人人吧。。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2015/01/2015年了呢/" class="archive-article-date">
+  	<time datetime="2015-01-02T09:32:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2015-01-02</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/其他/">其他</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    </nav>
+  
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 nonato
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: true,
+		isPost: false,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/github-domain-cname/" style="font-size: 10px;">github,domain,cname</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/其他/" style="font-size: 10px;">其他</a> <a href="/tags/博客/" style="font-size: 13.33px;">博客</a> <a href="/tags/吐槽/" style="font-size: 10px;">吐槽</a> <a href="/tags/工具/" style="font-size: 13.33px;">工具</a> <a href="/tags/技术/" style="font-size: 16.67px;">技术</a> <a href="/tags/机器学习/" style="font-size: 13.33px;">机器学习</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.jianshu.com/users/cc52a4f9fcc5/latest_articles">简书</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://weibo.com/huangbo0913">微博</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/nonato">博客园</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://github.com/natoto">github</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">&lt;br&gt;长方体混凝土瞬间移动工程师&lt;br&gt;&lt;br&gt;专注移动开发，&lt;br&gt;略懂前端，&lt;br&gt;略懂脚本，&lt;br&gt;略懂机器学习&lt;br&gt;&lt;br&gt;感谢大家光临</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
