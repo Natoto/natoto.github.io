@@ -1,183 +1,175 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://natoto.github.io">
   <title>TensorFlow 在 iOS 平台上的使用(一) | 共田三皮君</title>
-  <meta name="author" content="nonato">
-  
-  <meta name="description" content="欢迎来到我的个人站~">
-  
-  
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  <meta property="og:title" content="TensorFlow 在 iOS 平台上的使用(一)"/>
-  <meta property="og:site_name" content="共田三皮君"/>
-
+  <meta name="description" content="距离上次使用 TensorFlow 在iOS平台上做的小 Demo，已经过了四个月了，今天忽然想再看看,发现 Demo 已经不见了，我只能从头在编一次，这次发现编译 iOS 库，简单多了。
+　　tensorflow 下载地址，tensorflow 最近提交的时间：2016-11-03，commit：7b7c02de56e013482b5fe5ab05e576dc98fe5742 。
+　　下载完">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TensorFlow 在 iOS 平台上的使用(一)">
+<meta property="og:url" content="http://natoto.github.io/2016/11/2016-11-03-TensorFlowOniOSUse1/index.html">
+<meta property="og:site_name" content="共田三皮君">
+<meta property="og:description" content="距离上次使用 TensorFlow 在iOS平台上做的小 Demo，已经过了四个月了，今天忽然想再看看,发现 Demo 已经不见了，我只能从头在编一次，这次发现编译 iOS 库，简单多了。
+　　tensorflow 下载地址，tensorflow 最近提交的时间：2016-11-03，commit：7b7c02de56e013482b5fe5ab05e576dc98fe5742 。
+　　下载完">
+<meta property="og:updated_time" content="2016-11-03T22:16:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TensorFlow 在 iOS 平台上的使用(一)">
+<meta name="twitter:description" content="距离上次使用 TensorFlow 在iOS平台上做的小 Demo，已经过了四个月了，今天忽然想再看看,发现 Demo 已经不见了，我只能从头在编一次，这次发现编译 iOS 库，简单多了。
+　　tensorflow 下载地址，tensorflow 最近提交的时间：2016-11-03，commit：7b7c02de56e013482b5fe5ab05e576dc98fe5742 。
+　　下载完">
   
-    <meta property="og:image" content="undefined"/>
-  
-
-  <link href="/favicon.png" rel="icon">
-
-  <link rel="alternate" href="/atom.xml" title="共田三皮君" type="application/atom+xml">
-
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/print.css" media="print" type="text/css">
-
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
-
-  <script src="/js/scripts.js"></script>
-
+    <link rel="alternative" href="/atom.xml" title="共田三皮君" type="application/atom+xml">
   
   
-    <script type="text/x-mathjax-config">
-  MathJax.Hub.Config(
-    {
-      tex2jax: {inlineMath: [['$','$'], ['\(','\)']]},
-      TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
-    }
-  );
-</script>
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+    <link rel="icon" href="/images/smallIcon.jpg">
   
+  <link rel="stylesheet" href="/main.css">
+  
+
 </head>
 
-
 <body>
-    <div class="container">
-      <div class="left-col">
-        <div class="intrude-less">
-          <header id="header" class="inner">
-            <div class="profilepic">
-  <script src="/js/md5.js"></script>
-  <script type="text/javascript">
-    $(function(){
-	$('.profilepic').append(
-          "<img src='http://www.gravatar.com/avatar/"
-          + MD5("")
-          + "?s=160' alt='Profile Picture' style='width: 160px;' />");
-    });
-  </script>
-</div><!-- profilepic -->
-<h1><a href="/">nonato</a></h1>
-<nav id="main-nav">
-  <ul class="main">
-    
-      <li>
-      <a href="/about">About</a>
-      </li>
-    
-  </ul>
-  
-  <section class="aboutme">
-    <p>
-      欢迎来到我的个人站~
-    </p>
-  </section>
-  
-</nav><!-- main-nav -->
-<nav id="sub-nav">
-  <div class="social">
-    
-      <a class="google" href="http://plus.google.com/"
-         title="Google+">Google+</a>
-    
-    
-      <a class="twitter" href="http://twitter.com/"
-         title="Twitter">Twitter</a>
-    
-    
-      <a class="github" href="http://github.com/"
-         title="Github">Github</a>
-    
-    
-        <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-    
-    
-      <a class="linkedin" href="http://www.linkedin.com/in/"
-        title="Linkedin">Linkedin</a>
-      
-    
-      <a class="facebook" href="http://facebook.com/"
-        title="Facebook">Facebook</a>
-    
-    
-      <a class="coderwall" href="http://github.com/"
-        title="Coderwall">Coderwall</a>
-    
-    
-      <a class="pinterest" href="http://pinterest.com/"
-        title="Pinterest">Pinterest</a>
-    
-  </div>
-</nav><!-- sub-nav -->
-<nav id="widget-nav">
-  <div class="widgets">
-    
-      
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/github-domain-cname/">github,domain,cname</a><small>1</small></li>
-  
-    <li><a href="/tags/iOS/">iOS</a><small>3</small></li>
-  
-    <li><a href="/tags/python/">python</a><small>1</small></li>
-  
-    <li><a href="/tags/博客/">博客</a><small>2</small></li>
-  
-    <li><a href="/tags/工具/">工具</a><small>2</small></li>
-  
-    <li><a href="/tags/技术/">技术</a><small>2</small></li>
-  
-    <li><a href="/tags/机器学习/">机器学习</a><small>2</small></li>
-  
-  </ul>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/images/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">nonato</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">YY.INC混泥土瞬间移动工程师</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Natoto" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/huangbo0913?is_hot=1" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+					<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
 </div>
 
-
-    
-  </div>
-</nav><!-- widget-nav -->
-
-          <header>
-        </div><!-- intrude-less -->
-      </div><!-- left-col -->
-      <div class="mid-col">
-        <div class="mid-col-container">
-	    <div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-  
-	<div class="meta">
-          
-<div class="date">
-
-<time datetime="2016-11-02T16:00:00.000Z"
-      
-      data-updated="true"
-       itemprop="datePublished">
-  2016-11-03
-</time>
-
-
-
-
-
-</div>
-
-          
-          
-<div class="print">Beitrag ausdrucken</div>
-
-          
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">nonato</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/images/avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">nonato</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">YY.INC混泥土瞬间移动工程师</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Natoto" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/huangbo0913?is_hot=1" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
 	</div>
-        <h1 class="title" itemprop="name">TensorFlow 在 iOS 平台上的使用(一)</h1>
-      	<div class="entry-content" itemprop="articleBody"><p>　　距离上次使用 TensorFlow 在iOS平台上做的小 Demo，已经过了四个月了，今天忽然想再看看,发现 Demo 已经不见了，我只能从头在编一次，这次发现编译 iOS 库，简单多了。</p>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-2016-11-03-TensorFlowOniOSUse1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      TensorFlow 在 iOS 平台上的使用(一)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　　距离上次使用 TensorFlow 在iOS平台上做的小 Demo，已经过了四个月了，今天忽然想再看看,发现 Demo 已经不见了，我只能从头在编一次，这次发现编译 iOS 库，简单多了。</p>
 <p>　　tensorflow <a href="https://github.com/tensorflow/tensorflow/archive/master.zip" target="_blank" rel="external">下载地址</a>，tensorflow 最近提交的时间：2016-11-03，commit：<code>7b7c02de56e013482b5fe5ab05e576dc98fe5742</code> 。</p>
 <p>　　下载完成后打开文件，找到目录 <code>tensorflow-master/tensorflow/contrib/ios_examples</code> 你会发现目录下有三个项目和一个 README.md 。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">benchmark 、 camera 、 simple 、README.md</div></pre></td></tr></table></figure>
@@ -195,62 +187,253 @@
 <p>解决方法是：先卸载 libtool 在重新安装，<code>brew uninstall libtool</code> &amp;&amp; <code>brew install libtool</code></p>
 <p>如果你还遇到了其它问题，可以看看我之前的一片文章 <a href="http://baixin.io/2016/07/iOSMachineLearning_TensorFlow/" target="_blank" rel="external">iOS开发迎来机器学习的春天—TensorFlow</a> ，或者是直接去 tensorflow 的 <a href="https://github.com/tensorflow/tensorflow/issues" target="_blank" rel="external">Issues</a> 里面找。 </p>
 <p>一个小时后。。。　如果编译没出问题，你可以在目录　<code>tensorflow-master/tensorflow/contrib/makefile／gen/lib</code> 下找到一个静态库：<code>libtensorflow-core.a</code> ，把这个静态库拷贝到 camera 项目中，然后编译运行。</p>
-</div>
 
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/2016-11-03-TensorFlowOniOSUse1/" class="archive-article-date">
+  	<time datetime="2016-11-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-03</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
+	</div>
 
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
 </article>
 
-  <div class="share">
-  <div class="addthis_toolbox addthis_default_style ">
   
+<nav id="article-nav">
   
-  <a class="addthis_button_tweet"></a>
-  
-  
-  <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-  
-  
-  </div>
-  <script type="text/javascript">
-    var addthis_config = {"data_track_addressbar":true};
-  </script>
-  <script type="text/javascript"
-          src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=null">
-  </script>
-</div>
-
-
-
-
-</div>
-	</div>
-        <footer id="footer" class="inner">
-          Copyright © 2013 - nonato - Powered by <a href="https://github.com/tommy351/hexo">Hexo</a><br>
-- Ported theme <a href="https://github.com/nuklly/hexo-theme-greyshade">GreyShade</a> -
-        </footer>
+    <a href="/2016/11/2016-06-12-HEXO_Advanced/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
         
-<script src="/js/slash.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
+          HEXO进阶
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/2016-10-14-jekyll_tutorials1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Jekyll搭建个人博客</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
 
 
 
 
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016-11-03-TensorFlowOniOSUse1" data-title="TensorFlow 在 iOS 平台上的使用(一)" data-url="http://natoto.github.io/2016/11/2016-11-03-TensorFlowOniOSUse1/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 nonato
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
 </script>
 
+<script src="/./main.js"></script>
 
 
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
 
-      </div><!-- mid-col -->
-    </div><!-- container -->
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/github-domain-cname/" style="font-size: 10px;">github,domain,cname</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/技术/" style="font-size: 15px;">技术</a> <a href="/tags/机器学习/" style="font-size: 15px;">机器学习</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.jianshu.com/users/cc52a4f9fcc5/latest_articles">简书</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://weibo.com/huangbo0913">微博</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/nonato">博客园</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://github.com/natoto">github</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">&lt;br&gt;长方体混凝土瞬间移动工程师&lt;br&gt;&lt;br&gt;专注移动开发，&lt;br&gt;略懂前端，&lt;br&gt;略懂脚本，&lt;br&gt;略懂机器学习&lt;br&gt;&lt;br&gt;感谢大家光临</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
 </body>
 </html>

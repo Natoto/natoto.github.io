@@ -1,183 +1,174 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://natoto.github.io">
   <title>iOS开发迎来机器学习的春天---TensorFlow | 共田三皮君</title>
-  <meta name="author" content="nonato">
-  
-  <meta name="description" content="欢迎来到我的个人站~">
-  
-  
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  <meta property="og:title" content="iOS开发迎来机器学习的春天---TensorFlow"/>
-  <meta property="og:site_name" content="共田三皮君"/>
-
+  <meta name="description" content="人工智能、机器学习都已走进了我们的日常，尤其是愈演愈热的大数据更是跟我们的生活息息相关，做 人工智能、数据挖掘的人在其他人眼中感觉是很高大上的，总有一种遥不可及的感觉，在我司也经常会听到数据科学部的同事们提到 机器学习、数据挖掘 之类的词。但这些名词真的跟我们移动开发就没直接关系了吗？　　作为移动开发者来说，无时无刻不被这些名词狠狠地敲打着脆弱的内心。💢 💢 💢  何时才能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS开发迎来机器学习的春天---TensorFlow">
+<meta property="og:url" content="http://natoto.github.io/2016/07/2016-07-07-iOSMachineLearning_TensorFlow/index.html">
+<meta property="og:site_name" content="共田三皮君">
+<meta property="og:description" content="人工智能、机器学习都已走进了我们的日常，尤其是愈演愈热的大数据更是跟我们的生活息息相关，做 人工智能、数据挖掘的人在其他人眼中感觉是很高大上的，总有一种遥不可及的感觉，在我司也经常会听到数据科学部的同事们提到 机器学习、数据挖掘 之类的词。但这些名词真的跟我们移动开发就没直接关系了吗？　　作为移动开发者来说，无时无刻不被这些名词狠狠地敲打着脆弱的内心。💢 💢 💢  何时才能">
+<meta property="og:image" content="http://natoto.github.io/images/posts/tfimg/logo.jpg">
+<meta property="og:image" content="http://natoto.github.io/images/posts/tfimg/image02.png">
+<meta property="og:image" content="http://natoto.github.io/images/posts/tfimg/image01.png">
+<meta property="og:image" content="http://natoto.github.io/images/posts/tfimg/wq.jpg">
+<meta property="og:updated_time" content="2016-11-03T22:16:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS开发迎来机器学习的春天---TensorFlow">
+<meta name="twitter:description" content="人工智能、机器学习都已走进了我们的日常，尤其是愈演愈热的大数据更是跟我们的生活息息相关，做 人工智能、数据挖掘的人在其他人眼中感觉是很高大上的，总有一种遥不可及的感觉，在我司也经常会听到数据科学部的同事们提到 机器学习、数据挖掘 之类的词。但这些名词真的跟我们移动开发就没直接关系了吗？　　作为移动开发者来说，无时无刻不被这些名词狠狠地敲打着脆弱的内心。💢 💢 💢  何时才能">
+<meta name="twitter:image" content="http://natoto.github.io/images/posts/tfimg/logo.jpg">
   
-    <meta property="og:image" content="undefined"/>
-  
-
-  <link href="/favicon.png" rel="icon">
-
-  <link rel="alternate" href="/atom.xml" title="共田三皮君" type="application/atom+xml">
-
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/print.css" media="print" type="text/css">
-
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
-
-  <script src="/js/scripts.js"></script>
-
+    <link rel="alternative" href="/atom.xml" title="共田三皮君" type="application/atom+xml">
   
   
-    <script type="text/x-mathjax-config">
-  MathJax.Hub.Config(
-    {
-      tex2jax: {inlineMath: [['$','$'], ['\(','\)']]},
-      TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
-    }
-  );
-</script>
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+    <link rel="icon" href="/images/smallIcon.jpg">
   
+  <link rel="stylesheet" href="/main.css">
+  
+
 </head>
 
-
 <body>
-    <div class="container">
-      <div class="left-col">
-        <div class="intrude-less">
-          <header id="header" class="inner">
-            <div class="profilepic">
-  <script src="/js/md5.js"></script>
-  <script type="text/javascript">
-    $(function(){
-	$('.profilepic').append(
-          "<img src='http://www.gravatar.com/avatar/"
-          + MD5("")
-          + "?s=160' alt='Profile Picture' style='width: 160px;' />");
-    });
-  </script>
-</div><!-- profilepic -->
-<h1><a href="/">nonato</a></h1>
-<nav id="main-nav">
-  <ul class="main">
-    
-      <li>
-      <a href="/about">About</a>
-      </li>
-    
-  </ul>
-  
-  <section class="aboutme">
-    <p>
-      欢迎来到我的个人站~
-    </p>
-  </section>
-  
-</nav><!-- main-nav -->
-<nav id="sub-nav">
-  <div class="social">
-    
-      <a class="google" href="http://plus.google.com/"
-         title="Google+">Google+</a>
-    
-    
-      <a class="twitter" href="http://twitter.com/"
-         title="Twitter">Twitter</a>
-    
-    
-      <a class="github" href="http://github.com/"
-         title="Github">Github</a>
-    
-    
-        <a class="rss" href="/atom.xml" title="RSS">RSS</a>
-    
-    
-      <a class="linkedin" href="http://www.linkedin.com/in/"
-        title="Linkedin">Linkedin</a>
-      
-    
-      <a class="facebook" href="http://facebook.com/"
-        title="Facebook">Facebook</a>
-    
-    
-      <a class="coderwall" href="http://github.com/"
-        title="Coderwall">Coderwall</a>
-    
-    
-      <a class="pinterest" href="http://pinterest.com/"
-        title="Pinterest">Pinterest</a>
-    
-  </div>
-</nav><!-- sub-nav -->
-<nav id="widget-nav">
-  <div class="widgets">
-    
-      
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/github-domain-cname/">github,domain,cname</a><small>1</small></li>
-  
-    <li><a href="/tags/iOS/">iOS</a><small>3</small></li>
-  
-    <li><a href="/tags/python/">python</a><small>1</small></li>
-  
-    <li><a href="/tags/博客/">博客</a><small>2</small></li>
-  
-    <li><a href="/tags/工具/">工具</a><small>2</small></li>
-  
-    <li><a href="/tags/技术/">技术</a><small>2</small></li>
-  
-    <li><a href="/tags/机器学习/">机器学习</a><small>2</small></li>
-  
-  </ul>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/images/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">nonato</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">YY.INC混泥土瞬间移动工程师</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/Natoto" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/huangbo0913?is_hot=1" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+					<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
 </div>
 
-
-    
-  </div>
-</nav><!-- widget-nav -->
-
-          <header>
-        </div><!-- intrude-less -->
-      </div><!-- left-col -->
-      <div class="mid-col">
-        <div class="mid-col-container">
-	    <div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-  
-	<div class="meta">
-          
-<div class="date">
-
-<time datetime="2016-07-06T16:00:00.000Z"
-      
-      data-updated="true"
-       itemprop="datePublished">
-  2016-07-07
-</time>
-
-
-
-
-
-</div>
-
-          
-          
-<div class="print">Beitrag ausdrucken</div>
-
-          
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">nonato</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/images/avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">nonato</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">YY.INC混泥土瞬间移动工程师</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Natoto" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/huangbo0913?is_hot=1" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
 	</div>
-        <h1 class="title" itemprop="name">iOS开发迎来机器学习的春天---TensorFlow</h1>
-      	<div class="entry-content" itemprop="articleBody"><div align="center"><br>    <img src="/images/posts/tfimg/logo.jpg" height="300" width="500"><br></div> 
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-2016-07-07-iOSMachineLearning_TensorFlow" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS开发迎来机器学习的春天---TensorFlow
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div align="center"><br>    <img src="/images/posts/tfimg/logo.jpg" height="300" width="500"><br></div> 
 
 <p>　　<code>人工智能</code>、<code>机器学习</code>都已走进了我们的日常，尤其是愈演愈热的大数据更是跟我们的生活息息相关，做 <code>人工智能</code>、<code>数据挖掘</code>的人在其他人眼中感觉是很高大上的，总有一种遥不可及的感觉，在我司也经常会听到数据科学部的同事们提到 <code>机器学习</code>、<code>数据挖掘</code> 之类的词。但这些名词真的跟我们移动开发就没直接关系了吗？<br>　　作为移动开发者来说，无时无刻不被这些名词狠狠地敲打着脆弱的内心。💢 💢 💢  何时才能够将<code>机器学习</code>、<code>深度学习</code>应用在移动端，敲响移动端<code>机器学习</code>工业化的大门呢？</p>
 <blockquote>
@@ -252,62 +243,253 @@
 <li><a href="http://weibo.com/p/1001603907610737775666" target="_blank" rel="external">如何评价Tensorflow和其它深度学习系统</a>    </li>
 <li><a href="http://www.algorithmdog.com/%E8%B0%81%E5%B0%86%E5%A4%BA%E5%8F%96%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%B7%A5%E4%B8%9A%E6%A0%87%E5%87%86%E7%9A%84%E8%8D%A3%E8%80%80" target="_blank" rel="external">深度学习框架大战正在进行，谁将夺取“深度学习工业标准”的荣耀？</a>  </li>
 </ul>
-</div>
 
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/07/2016-07-07-iOSMachineLearning_TensorFlow/" class="archive-article-date">
+  	<time datetime="2016-07-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-07-07</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
+	</div>
 
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
 </article>
 
-  <div class="share">
-  <div class="addthis_toolbox addthis_default_style ">
   
+<nav id="article-nav">
   
-  <a class="addthis_button_tweet"></a>
-  
-  
-  <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-  
-  
-  </div>
-  <script type="text/javascript">
-    var addthis_config = {"data_track_addressbar":true};
-  </script>
-  <script type="text/javascript"
-          src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=null">
-  </script>
-</div>
-
-
-
-
-</div>
-	</div>
-        <footer id="footer" class="inner">
-          Copyright © 2013 - nonato - Powered by <a href="https://github.com/tommy351/hexo">Hexo</a><br>
-- Ported theme <a href="https://github.com/nuklly/hexo-theme-greyshade">GreyShade</a> -
-        </footer>
+    <a href="/2016/07/2016-07-13-GitTutorial/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
         
-<script src="/js/slash.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
+          Git教程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/06/2016-06-02-Develop_Tool/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">开发常用工具</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
 
 
 
 
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2016-07-07-iOSMachineLearning_TensorFlow" data-title="iOS开发迎来机器学习的春天---TensorFlow" data-url="http://natoto.github.io/2016/07/2016-07-07-iOSMachineLearning_TensorFlow/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 nonato
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
 </script>
 
+<script src="/./main.js"></script>
 
 
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
 
-      </div><!-- mid-col -->
-    </div><!-- container -->
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/github-domain-cname/" style="font-size: 10px;">github,domain,cname</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/技术/" style="font-size: 15px;">技术</a> <a href="/tags/机器学习/" style="font-size: 15px;">机器学习</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.jianshu.com/users/cc52a4f9fcc5/latest_articles">简书</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://weibo.com/huangbo0913">微博</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/nonato">博客园</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://github.com/natoto">github</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">&lt;br&gt;长方体混凝土瞬间移动工程师&lt;br&gt;&lt;br&gt;专注移动开发，&lt;br&gt;略懂前端，&lt;br&gt;略懂脚本，&lt;br&gt;略懂机器学习&lt;br&gt;&lt;br&gt;感谢大家光临</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
 </body>
 </html>
