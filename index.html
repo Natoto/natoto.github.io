@@ -146,21 +146,11 @@
       <div class="body-wrap">
         
   
-    <article id="ios-AVAudioSession" class="article article-type-ios" itemscope itemprop="blogPost">
+    <article id="post-iOS 音频播放 —— AVAudioSession" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
     
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/AVAudioSession/">AVAudioSession</a>
-    </h1>
-  
-
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
@@ -177,8 +167,10 @@
 <p>下面就开始 <code>AVAudioSession</code>相关功能的使用，大家可以用我们上一篇写好的 ——离线歌曲播放的例子来进行演练。</p>
 <hr>
 <h2 id="激活音频会话"><a href="#激活音频会话" class="headerlink" title="激活音频会话"></a>激活音频会话</h2><p>细心的朋友可能已经发现我们上一篇写好的音频播放有很大的局限性，比如：不支持后台播放、当手机处于禁音状态时也无法正常输出声音。这个时候就需要我们去激活音频会话，也就是 <code>AVAudioSession</code> 。激活的方法非常简单大家可以在初始化播放器的时候加上下面一段代码</p>
-<p>//激活音频会话<br>[[AVAudioSession sharedInstance]setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionAllowBluetooth error:nil];<br>[[AVAudioSession sharedInstance]setActive:YES error:nil];</p>
-<p>这段代码的意思呢就是设置我们app音频会话的<code>category</code>（模式）和<code>option</code>（选项），下面这张表就是几种可选的<code>category</code>及其效果，大家在实际开发中可以根据自己的实际情况去选择对应的参数：</p>
+<pre><code>//激活音频会话
+[[AVAudioSession sharedInstance]setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionAllowBluetooth error:nil];
+[[AVAudioSession sharedInstance]setActive:YES error:nil];
+</code></pre><p>这段代码的意思呢就是设置我们app音频会话的<code>category</code>（模式）和<code>option</code>（选项），下面这张表就是几种可选的<code>category</code>及其效果，大家在实际开发中可以根据自己的实际情况去选择对应的参数：</p>
 <table><br><br><thead><br><br><tr><br><br><th>会话类型</th><br><br><th style="text-align:center">说明</th><br><br><th style="text-align:center">是否要求输入</th><br><br><th style="text-align:center">是否要求输出</th><br><br><th style="text-align:right">是否遵从静音键</th><br><br></tr><br><br></thead><br><br><tbody><br><br><tr><br><br><td>AVAudioSessionCategoryAmbient</td><br><br><td style="text-align:center">混音播放，可以与其他音频应用同时播放</td><br><br><td style="text-align:center">否</td><br><br><td style="text-align:center">是</td><br><br><td style="text-align:right">是</td><br><br></tr><br><br><tr><br><br><td>AVAudioSessionCategorySoloAmbient</td><br><br><td style="text-align:center">独占播放</td><br><br><td style="text-align:center">否</td><br><br><td style="text-align:center">是</td><br><br><td style="text-align:right">是</td><br><br></tr><br><br><tr><br><br><td>AVAudioSessionCategoryPlayback</td><br><br><td style="text-align:center">后台播放，独占</td><br><br><td style="text-align:center">否</td><br><br><td style="text-align:center">是</td><br><br><td style="text-align:right">否</td><br><br></tr><br><br><tr><br><br><td>AVAudioSessionCategoryRecord</td><br><br><td style="text-align:center">录音模式</td><br><br><td style="text-align:center">是</td><br><br><td style="text-align:center">否</td><br><br><td style="text-align:right">否</td><br><br></tr><br><br><tr><br><br><td>AVAudioSessionCategoryPlayAndRecord</td><br><br><td style="text-align:center">播放和录音，此时可以录音也可以播放</td><br><br><td style="text-align:center">是</td><br><br><td style="text-align:center">是</td><br><br><td style="text-align:right">否</td><br><br></tr><br><br><tr><br><br><td>AVAudioSessionCategoryAudioProcessing</td><br><br><td style="text-align:center">硬件解码音频，此时不能播放和录制</td><br><br><td style="text-align:center">否</td><br><br><td style="text-align:center">否</td><br><br><td style="text-align:right">否</td><br><br></tr><br><br><tr><br><br><td>AVAudioSessionCategoryMultiRoute</td><br><br><td style="text-align:center">多种输入输出，例如可以耳机、USB设备同时播放</td><br><br><td style="text-align:center">是</td><br><br><td style="text-align:center">是</td><br><br><td style="text-align:right">否</td><br><br></tr><br><br></tbody><br><br></table>
 
 <p>激活音频会话后，我们就可以开始执行一系列跟 <code>AVAudioSession</code> 的服务了。</p>
@@ -193,340 +185,77 @@
 <p></p></div><p></p>
 <p>好了，这个时候重新运行我们的程序home到后台后，我们的播放器就不会暂停播放了。不过这个时候我们呼出系统的控制台发现我们播放的歌曲并没有在这显示，这是因为我们呢没有告诉系统我们的app接受远程控制，下面让我们的播放器响应远程。</p>
 <p>首先要在初始化播放器的时候或者是<em>appDelegate</em>的<code>- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;</code>这个方法中加入这段代码</p>
-<p>//告诉系统，我们要接受远程控制事件<br>[[UIApplication sharedApplication] beginReceivingRemoteControlEvents];<br>[self becomeFirstResponder];</p>
-<p>如果你的app是以音频播放为主，我建议你的代码是写在<em>appDelegate</em>中。重写<em>appDelegate</em>的<code>canBecomeFirstResponder</code>方法让我们的<em>appDelegate</em>可以成为第一响应者，已响应控制台的操作。</p>
-<ul>
-<li>(BOOL)canBecomeFirstResponder{<br>return YES;<br>}</li>
-</ul>
-<p>最后只要再实现一下<code>- (void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent;</code>这个方法，我们app的远程控制功能就完成了。</p>
-<p>//响应远程音乐播放控制消息</p>
-<ul>
-<li>(void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent {<br>if (receivedEvent.type == UIEventTypeRemoteControl) {<br>switch (receivedEvent.subtype) {<br>case UIEventSubtypeRemoteControlPlay:<br>[self.playCenter midBtnClicked:nil];<br>NSLog(@”暂停播放”);<br>break;<br>case UIEventSubtypeRemoteControlPause:<br>[self.playCenter midBtnClicked:nil];<br>NSLog(@”继续播放”);<br>break;<br>case UIEventSubtypeRemoteControlNextTrack:<br>NSLog(@”下一曲”);<br>break;<br>case UIEventSubtypeRemoteControlPreviousTrack:<br>NSLog(@”上一曲”);<br>break;<br>default:<br>break;<br>}<br>}<br>}</li>
-</ul>
-<p>这里我只是简单的举例了其中几个常用的枚举值，更详细远程控制会在后续完善。</p>
+<pre><code>//告诉系统，我们要接受远程控制事件
+[[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+[self becomeFirstResponder];
+</code></pre><p>如果你的app是以音频播放为主，我建议你的代码是写在<em>appDelegate</em>中。重写<em>appDelegate</em>的<code>canBecomeFirstResponder</code>方法让我们的<em>appDelegate</em>可以成为第一响应者，已响应控制台的操作。</p>
+<pre><code>- (BOOL)canBecomeFirstResponder{
+    return YES;
+}
+</code></pre><p>最后只要再实现一下<code>- (void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent;</code>这个方法，我们app的远程控制功能就完成了。</p>
+<pre><code>//响应远程音乐播放控制消息
+- (void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent {
+    if (receivedEvent.type == UIEventTypeRemoteControl) {
+        switch (receivedEvent.subtype) {
+            case UIEventSubtypeRemoteControlPlay:
+                [self.playCenter midBtnClicked:nil];
+                NSLog(@&quot;暂停播放&quot;);
+                break;
+            case UIEventSubtypeRemoteControlPause:
+                [self.playCenter midBtnClicked:nil];
+                NSLog(@&quot;继续播放&quot;);
+                break;
+            case UIEventSubtypeRemoteControlNextTrack:
+                NSLog(@&quot;下一曲&quot;);
+                break;
+            case UIEventSubtypeRemoteControlPreviousTrack:
+                NSLog(@&quot;上一曲&quot;);
+                break;
+            default:
+                break;
+        }
+    }
+}
+</code></pre><p>这里我只是简单的举例了其中几个常用的枚举值，更详细远程控制会在后续完善。</p>
 <p>差点忘记，在控制台中也是可以看到正在播放的歌曲的哦，不过如果你没有配置的话，那就只会显示你app的名字了，代码如下</p>
-<p>[[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:@{MPMediaItemPropertyTitle:self.detailModel.sampleAudioTitle,MPMediaItemPropertyAlbumTitle:self.detailModel.sampleAuther}];</p>
-<hr>
+<pre><code>[[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:@{MPMediaItemPropertyTitle:self.detailModel.sampleAudioTitle,MPMediaItemPropertyAlbumTitle:self.detailModel.sampleAuther}];
+</code></pre><hr>
 <h3 id="监听RouteChange事件"><a href="#监听RouteChange事件" class="headerlink" title="监听RouteChange事件"></a>监听RouteChange事件</h3><p>监听<em>RouteChange</em>事件，我们一般是为了实现 <em>拔出耳机后暂停播放</em> 这个功能。</p>
-<p>//首先向NSNotificationCenter添加通知<br>[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(routeChange:) name:AVAudioSessionRouteChangeNotification object:nil];</p>
-<p><code>-(void)routeChange:(NSNotification *)notification</code>实现如下：</p>
-<p>/**</p>
-<ul>
-<li>一旦输出改变则执行此方法<br>*</li>
-<li>@param notification 输出改变通知对象<br><em>/<br>-(void)routeChange:(NSNotification </em>)notification{<br>NSDictionary <em>dic=notification.userInfo;<br>int changeReason= [dic[AVAudioSessionRouteChangeReasonKey] intValue];<br>//等于AVAudioSessionRouteChangeReasonOldDeviceUnavailable表示旧输出不可用<br>if (changeReason==AVAudioSessionRouteChangeReasonOldDeviceUnavailable) {<br>AVAudioSessionRouteDescription </em>routeDescription=dic[AVAudioSessionRouteChangePreviousRouteKey];<br>AVAudioSessionPortDescription *portDescription= [routeDescription.outputs firstObject];<br>//原设备为耳机则暂停<br>if ([portDescription.portType isEqualToString:@”Headphones”]) {<br>if (self.playButton.selected) {<br>[self playButtonAction:_playButton];<br>}<br>}<br>}<br>}</li>
-</ul>
-<p>一般来说如果没有实现 <em>拔出耳机后暂停播放</em> ，系统会自动的把默认输出设备设置为扬声器。但是有一个例外，就是当<code>AVAudioSession</code> 的 <code>Category</code> 设置为 <code>AVAudioSessionCategoryPlayAndRecord</code> 的时候，音频输出的默认设备是听筒而不是扬声器。这个时候如果你既不希望播放器自动暂停播放，又希望切换到扬声器播放的时候，你可能需要做如下处理，一样是在方法 <code>-(void)routeChange:(NSNotification *)notification;</code> 中实现</p>
-<p>NSError <em>error = nil;<br>AVAudioSession </em>session = [AVAudioSession sharedInstance];<br>//强制设置为扬声器播放<br>[session overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:&amp;error];</p>
-
+<pre><code>//首先向NSNotificationCenter添加通知
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(routeChange:) name:AVAudioSessionRouteChangeNotification object:nil];
+</code></pre><p><code>-(void)routeChange:(NSNotification *)notification</code>实现如下：</p>
+<pre><code>/**
+ *  一旦输出改变则执行此方法
+ *
+ *  @param notification 输出改变通知对象
+ */
+-(void)routeChange:(NSNotification *)notification{
+    NSDictionary *dic=notification.userInfo;
+    int changeReason= [dic[AVAudioSessionRouteChangeReasonKey] intValue];
+    //等于AVAudioSessionRouteChangeReasonOldDeviceUnavailable表示旧输出不可用
+    if (changeReason==AVAudioSessionRouteChangeReasonOldDeviceUnavailable) {
+        AVAudioSessionRouteDescription *routeDescription=dic[AVAudioSessionRouteChangePreviousRouteKey];
+        AVAudioSessionPortDescription *portDescription= [routeDescription.outputs firstObject];
+        //原设备为耳机则暂停
+        if ([portDescription.portType isEqualToString:@&quot;Headphones&quot;]) {
+           if (self.playButton.selected) {
+              [self playButtonAction:_playButton];
+           }
+        }
+    }
+}
+</code></pre><p>一般来说如果没有实现 <em>拔出耳机后暂停播放</em> ，系统会自动的把默认输出设备设置为扬声器。但是有一个例外，就是当<code>AVAudioSession</code> 的 <code>Category</code> 设置为 <code>AVAudioSessionCategoryPlayAndRecord</code> 的时候，音频输出的默认设备是听筒而不是扬声器。这个时候如果你既不希望播放器自动暂停播放，又希望切换到扬声器播放的时候，你可能需要做如下处理，一样是在方法 <code>-(void)routeChange:(NSNotification *)notification;</code> 中实现</p>
+<pre><code>NSError *error = nil;
+AVAudioSession *session = [AVAudioSession sharedInstance];   
+//强制设置为扬声器播放
+[session overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:&amp;error];
+</code></pre>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/11/AVAudioSession/" class="archive-article-date">
-  	<time datetime="2016-11-22T03:12:02.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-22</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Hello-World-0" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/Hello-World-0/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/Hello-World-0/" class="archive-article-date">
-  	<time datetime="2016-11-22T02:38:36.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-22</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-firstdocument" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/firstdocument/">firstdocument</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="iOS-音频播放-——-AVAudioSession"><a href="#iOS-音频播放-——-AVAudioSession" class="headerlink" title="iOS 音频播放 —— AVAudioSession"></a>iOS 音频播放 —— AVAudioSession</h1><blockquote>
-<p>An audio session is a singleton object that you employ to set the audio context for your app and to express to the system your intentions for your app’s audio behavior.</p>
-</blockquote>
-<p>上面是摘自<a href="https://developer.apple.com/library/prerelease/ios/documentation/AVFoundation/Reference/AVAudioSession_ClassReference/" target="_blank" rel="external">官方文档</a>的介绍。大体就是说明一下 <code>AVAudioSession</code> 是一个单例对象，并用来为音频类app向系统传递一些配置信息。 其实在iOS7以前甚至是现在为止还有相当一部人使用的是<code>AudioToolBox</code>框架下的<code>AudioSession</code>，不过<code>AudioSession</code>在SDK7中已经被苹果标明 <em>depracated</em>。所以我们主要就以<code>AVAudioSession</code>为主，与时俱进嘛！</p>
-<p><code>AVAudioSession</code> 的主要功能包括以下几点功能：</p>
-<ul>
-<li>向系统说明你的app使用音频的模式（比如是播放还是录音，是否支持蓝牙播放，是否支持后台播放）</li>
-<li>为你的app选择音频的输入输出设备（比如输入用的麦克风，输出是耳机、手机功放或者airplay）</li>
-<li>协助管理多个音源需要播放时的行为（例如同时使用多个音乐播放app，或者突然有电话接入）</li>
-</ul>
-<p>下面就开始 <code>AVAudioSession</code>相关功能的使用，大家可以用我们上一篇写好的 ——离线歌曲播放的例子来进行演练。</p>
-<hr>
-<h2 id="激活音频会话"><a href="#激活音频会话" class="headerlink" title="激活音频会话"></a>激活音频会话</h2><p>细心的朋友可能已经发现我们上一篇写好的音频播放有很大的局限性，比如：不支持后台播放、当手机处于禁音状态时也无法正常输出声音。这个时候就需要我们去激活音频会话，也就是 <code>AVAudioSession</code> 。激活的方法非常简单大家可以在初始化播放器的时候加上下面一段代码</p>
-<p>//激活音频会话<br>[[AVAudioSession sharedInstance]setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionAllowBluetooth error:nil];<br>[[AVAudioSession sharedInstance]setActive:YES error:nil];</p>
-<p>这段代码的意思呢就是设置我们app音频会话的<code>category</code>（模式）和<code>option</code>（选项），下面这张表就是几种可选的<code>category</code>及其效果，大家在实际开发中可以根据自己的实际情况去选择对应的参数：</p>
-<table><br><br><thead><br><br><tr><br><br><th>会话类型</th><br><br><th style="text-align:center">说明</th><br><br><th style="text-align:center">是否要求输入</th><br><br><th style="text-align:center">是否要求输出</th><br><br><th style="text-align:right">是否遵从静音键</th><br><br></tr><br><br></thead><br><br><tbody><br><br><tr><br><br><td>AVAudioSessionCategoryAmbient</td><br><br><td style="text-align:center">混音播放，可以与其他音频应用同时播放</td><br><br><td style="text-align:center">否</td><br><br><td style="text-align:center">是</td><br><br><td style="text-align:right">是</td><br><br></tr><br><br><tr><br><br><td>AVAudioSessionCategorySoloAmbient</td><br><br><td style="text-align:center">独占播放</td><br><br><td style="text-align:center">否</td><br><br><td style="text-align:center">是</td><br><br><td style="text-align:right">是</td><br><br></tr><br><br><tr><br><br><td>AVAudioSessionCategoryPlayback</td><br><br><td style="text-align:center">后台播放，独占</td><br><br><td style="text-align:center">否</td><br><br><td style="text-align:center">是</td><br><br><td style="text-align:right">否</td><br><br></tr><br><br><tr><br><br><td>AVAudioSessionCategoryRecord</td><br><br><td style="text-align:center">录音模式</td><br><br><td style="text-align:center">是</td><br><br><td style="text-align:center">否</td><br><br><td style="text-align:right">否</td><br><br></tr><br><br><tr><br><br><td>AVAudioSessionCategoryPlayAndRecord</td><br><br><td style="text-align:center">播放和录音，此时可以录音也可以播放</td><br><br><td style="text-align:center">是</td><br><br><td style="text-align:center">是</td><br><br><td style="text-align:right">否</td><br><br></tr><br><br><tr><br><br><td>AVAudioSessionCategoryAudioProcessing</td><br><br><td style="text-align:center">硬件解码音频，此时不能播放和录制</td><br><br><td style="text-align:center">否</td><br><br><td style="text-align:center">否</td><br><br><td style="text-align:right">否</td><br><br></tr><br><br><tr><br><br><td>AVAudioSessionCategoryMultiRoute</td><br><br><td style="text-align:center">多种输入输出，例如可以耳机、USB设备同时播放</td><br><br><td style="text-align:center">是</td><br><br><td style="text-align:center">是</td><br><br><td style="text-align:right">否</td><br><br></tr><br><br></tbody><br><br></table>
-
-<p>激活音频会话后，我们就可以开始执行一系列跟 <code>AVAudioSession</code> 的服务了。</p>
-<hr>
-<h2 id="后台播放及远程控制"><a href="#后台播放及远程控制" class="headerlink" title="后台播放及远程控制"></a>后台播放及远程控制</h2><p>可以这么说，不支持后台播放的音频类app是不完整的，但是要我们的app支持后台播放外，还需要给我们的项目设置一些参数。<br>网上很多教程都是教的直接修改plist文件，我这里也放出来这种方法：在info.plist 文件中加入如下参数<em>Required background modes</em>并在<em>item 0</em>中写入App plays audio or streams audio/video using AirPlay。如下图</p>
-<div class="image-package"><img src="http://upload-images.jianshu.io/upload_images/1182541-ec11b72f651cf960.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><br><div class="image-caption">在plist中注册后台播放</div>
-
-<p></p></div><p></p>
-<p>但是Xcode其实在很早的版本就已经提供了图形化的操作界面，更为的直观，不知大家是没有发现还是什么原因，相关的一些配置都是直接修改的plist，下面就是图形化的设置方法。如图</p>
-<div class="image-package"><img src="http://upload-images.jianshu.io/upload_images/1182541-9fa38bc4562fc328.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><br><div class="image-caption">图形化操作界面注册后台播放</div>
-
-<p></p></div><p></p>
-<p>好了，这个时候重新运行我们的程序home到后台后，我们的播放器就不会暂停播放了。不过这个时候我们呼出系统的控制台发现我们播放的歌曲并没有在这显示，这是因为我们呢没有告诉系统我们的app接受远程控制，下面让我们的播放器响应远程。</p>
-<p>首先要在初始化播放器的时候或者是<em>appDelegate</em>的<code>- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;</code>这个方法中加入这段代码</p>
-<p>//告诉系统，我们要接受远程控制事件<br>[[UIApplication sharedApplication] beginReceivingRemoteControlEvents];<br>[self becomeFirstResponder];</p>
-<p>如果你的app是以音频播放为主，我建议你的代码是写在<em>appDelegate</em>中。重写<em>appDelegate</em>的<code>canBecomeFirstResponder</code>方法让我们的<em>appDelegate</em>可以成为第一响应者，已响应控制台的操作。</p>
-<ul>
-<li>(BOOL)canBecomeFirstResponder{<br>return YES;<br>}</li>
-</ul>
-<p>最后只要再实现一下<code>- (void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent;</code>这个方法，我们app的远程控制功能就完成了。</p>
-<p>//响应远程音乐播放控制消息</p>
-<ul>
-<li>(void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent {<br>if (receivedEvent.type == UIEventTypeRemoteControl) {<br>switch (receivedEvent.subtype) {<br>case UIEventSubtypeRemoteControlPlay:<br>[self.playCenter midBtnClicked:nil];<br>NSLog(@”暂停播放”);<br>break;<br>case UIEventSubtypeRemoteControlPause:<br>[self.playCenter midBtnClicked:nil];<br>NSLog(@”继续播放”);<br>break;<br>case UIEventSubtypeRemoteControlNextTrack:<br>NSLog(@”下一曲”);<br>break;<br>case UIEventSubtypeRemoteControlPreviousTrack:<br>NSLog(@”上一曲”);<br>break;<br>default:<br>break;<br>}<br>}<br>}</li>
-</ul>
-<p>这里我只是简单的举例了其中几个常用的枚举值，更详细远程控制会在后续完善。</p>
-<p>差点忘记，在控制台中也是可以看到正在播放的歌曲的哦，不过如果你没有配置的话，那就只会显示你app的名字了，代码如下</p>
-<p>[[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:@{MPMediaItemPropertyTitle:self.detailModel.sampleAudioTitle,MPMediaItemPropertyAlbumTitle:self.detailModel.sampleAuther}];</p>
-<hr>
-<h3 id="监听RouteChange事件"><a href="#监听RouteChange事件" class="headerlink" title="监听RouteChange事件"></a>监听RouteChange事件</h3><p>监听<em>RouteChange</em>事件，我们一般是为了实现 <em>拔出耳机后暂停播放</em> 这个功能。</p>
-<p>//首先向NSNotificationCenter添加通知<br>[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(routeChange:) name:AVAudioSessionRouteChangeNotification object:nil];</p>
-<p><code>-(void)routeChange:(NSNotification *)notification</code>实现如下：</p>
-<p>/**</p>
-<ul>
-<li>一旦输出改变则执行此方法<br>*</li>
-<li>@param notification 输出改变通知对象<br><em>/<br>-(void)routeChange:(NSNotification </em>)notification{<br>NSDictionary <em>dic=notification.userInfo;<br>int changeReason= [dic[AVAudioSessionRouteChangeReasonKey] intValue];<br>//等于AVAudioSessionRouteChangeReasonOldDeviceUnavailable表示旧输出不可用<br>if (changeReason==AVAudioSessionRouteChangeReasonOldDeviceUnavailable) {<br>AVAudioSessionRouteDescription </em>routeDescription=dic[AVAudioSessionRouteChangePreviousRouteKey];<br>AVAudioSessionPortDescription *portDescription= [routeDescription.outputs firstObject];<br>//原设备为耳机则暂停<br>if ([portDescription.portType isEqualToString:@”Headphones”]) {<br>if (self.playButton.selected) {<br>[self playButtonAction:_playButton];<br>}<br>}<br>}<br>}</li>
-</ul>
-<p>一般来说如果没有实现 <em>拔出耳机后暂停播放</em> ，系统会自动的把默认输出设备设置为扬声器。但是有一个例外，就是当<code>AVAudioSession</code> 的 <code>Category</code> 设置为 <code>AVAudioSessionCategoryPlayAndRecord</code> 的时候，音频输出的默认设备是听筒而不是扬声器。这个时候如果你既不希望播放器自动暂停播放，又希望切换到扬声器播放的时候，你可能需要做如下处理，一样是在方法 <code>-(void)routeChange:(NSNotification *)notification;</code> 中实现</p>
-<p>NSError <em>error = nil;<br>AVAudioSession </em>session = [AVAudioSession sharedInstance];<br>//强制设置为扬声器播放<br>[session overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:&amp;error];</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/firstdocument/" class="archive-article-date">
-  	<time datetime="2016-11-22T02:31:11.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-22</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/hello-world/" class="archive-article-date">
-  	<time datetime="2016-11-22T02:26:46.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-22</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2015-08-25-HEXO搭建个人博客" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>layout: post<br>title: “HEXO搭建个人博客”<br>date: 2015-08-25<br>description: “HEXO配置，HEXO+Github，搭建自己的博客”</p>
-<h2 id="tag-博客"><a href="#tag-博客" class="headerlink" title="tag: 博客 "></a>tag: 博客 </h2><p>　　经过各种找资料，踩过各种坑，终于使用 hexo 搭建个人博客初步完成了，域名目前用得时 github 的，我的 hexo 是 3.1.1 版本，hexo 不同的版本，很多配置都不一样。好吧，废话不多说了，开始吧。     </p>
-<p>　　本篇文章累计了大量评论，和我的一些解答，读者有什么问题可以先看看评论，或者搜下关键字，如果还是有问题可以给我在评论里给我留言，问题很着急的可以加我 ＱＱ：1499065178　，或者给我发邮件：<a href="mailto:leopardpan@icloud.com" target="_blank" rel="external">leopardpan@icloud.com</a>  ，都可以，如果你已经搭建完成了，可以看看我的另一篇博客<a href="http://baixin.io/2016/06/HEXO_Advanced/" target="_blank" rel="external">HEXO进阶</a>，有讲如何能百度搜索你的博客、多台电脑使用HEXO发布博客等。我现在的博客是使用 Jekyll 搭建的，如果你想使用我现在的模板请看<a href="http://baixin.io/2016/10/jekyll_tutorials1/" target="_blank" rel="external">Jekyll搭建个人博客</a> </p>
-<h2 id="正文："><a href="#正文：" class="headerlink" title="正文："></a>正文：</h2><p>　这边教程是针对与Mac的，<a href="http://ibruce.info/2013/11/22/hexo-your-blog/?utm_source=tuicool" target="_blank" rel="external">参考链接</a>，由于原文讲到的hexo是以前的老版本，所以现在的版本配置的时候会有些改动。</p>
-<p>　之前是想着写博客，一方面是给自己做笔记，可以提升自己的写作、总结能力，一个技术点我们会使用，并不难，但是要做到让让别人也能听懂我们讲得，还是需要一定的技巧和经验的。很多类似于CSDN、博客园也都可以写文章，但是页面的样式我，不是太喜欢，简书还算好点得。最近看到一些大神们的博客（在我的友情链接里有），貌似都是用hexo写得，我也依葫芦画瓢的搭建了一个。不罗嗦了，直接上搭建步骤。</p>
-<h2 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h2><h3 id="安装Node（必须）"><a href="#安装Node（必须）" class="headerlink" title="安装Node（必须）"></a>安装Node（必须）</h3><p>作用：用来生成静态页面的<br>到Node.js<a href="https://nodejs.org/" target="_blank" rel="external">官网</a>下载相应平台的最新版本，一路安装即可。</p>
-<h3 id="安装Git（必须）"><a href="#安装Git（必须）" class="headerlink" title="安装Git（必须）"></a>安装Git（必须）</h3><p>作用：把本地的hexo内容提交到github上去.<br>安装Xcode就自带有Git，我就不多说了。</p>
-<h3 id="申请GitHub（必须）"><a href="#申请GitHub（必须）" class="headerlink" title="申请GitHub（必须）"></a>申请GitHub（必须）</h3><p>作用：是用来做博客的远程创库、域名、服务器之类的，怎么与本地hexo建立连接等下讲。<br><a href="https://github.com/" target="_blank" rel="external">github</a>账号我也不再啰嗦了,没有的话直接申请就行了，跟一般的注册账号差不多，SSH Keys，看你自己了，可以不配制，不配置的话以后每次对自己的博客有改动提交的时候就要手动输入账号密码，配置了就不需要了，怎么配置我就不多说了，网上有很多教程。</p>
-<h3 id="正式安装HEXO"><a href="#正式安装HEXO" class="headerlink" title="正式安装HEXO　"></a>正式安装HEXO　</h3><p>Node和Git都安装好后，可执行如下命令安装hexo：</p>
-<pre><code>$ sudo npm install -g hexo
-</code></pre><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>创建一个文件夹，如：Blog，cd到Blog里执行hexo init的。命令：</p>
-<pre><code>hexo init
-</code></pre><p>好啦，至此，全部安装工作已经完成！</p>
-<h3 id="生成静态页面"><a href="#生成静态页面" class="headerlink" title="生成静态页面"></a>生成静态页面</h3><p>继续再Blog目录下执行如下命令，生成静态页面</p>
-<pre><code>hexo generate （hexo g  也可以）   
-</code></pre><h3 id="本地启动"><a href="#本地启动" class="headerlink" title="本地启动"></a>本地启动</h3><p>启动本地服务，进行文章预览调试，命令：</p>
-<pre><code>hexo server   
-</code></pre><p>浏览器输入<a href="就可以看到最原始的效果了">http://localhost:4000</a><br>我不知道你们能不能，反正我不能，因为我还有环境没配置好</p>
-<h3 id="常见的HEXO配置错误："><a href="#常见的HEXO配置错误：" class="headerlink" title="常见的HEXO配置错误："></a>常见的HEXO配置错误：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ERROR Plugin load failed: hexo-server</div><div class="line"></div><div class="line">原因： Besides, utilities are separated into a standalone module. hexo.util is not reachable anymore.</div><div class="line"></div><div class="line">解决方法，执行命令：$ sudo npm install hexo-server</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">执行命令hexo server，提示：Usage: hexo&lt;Command&gt; ....</div><div class="line"></div><div class="line">原因：我认为是没有生成本地服务</div><div class="line"></div><div class="line">解决方法，执行命令：$ npm install hexo-server --save</div><div class="line"></div><div class="line">提示：hexo-server@0.1.2 node_modules/hexo-server</div><div class="line">.... </div><div class="line"></div><div class="line">表示成功了[参考](https://hexo.io/zh-cn/docs/server.html)</div></pre></td></tr></table></figure>
-<p>这个时候再执行：$ hexo-server</p>
-<p>得到: INFO  Hexo is running at <a href="http://0.0.0.0:4000/" target="_blank" rel="external">http://0.0.0.0:4000/</a>. Press Ctrl+C to stop.</p>
-<p>这个时候再点击<a href="http://0.0.0.0:4000" target="_blank" rel="external">http://0.0.0.0:4000</a>，正常情况下应该是最原始的画面，但是我看到的是：<br>白板和Cannot GET /   几个字<br>原因： 由于2.6以后就更新了，我们需要手动配置些东西，我们需要输入下面三行命令：</p>
-<pre><code>npm install hexo-renderer-ejs --save
-npm install hexo-renderer-stylus --save
-npm install hexo-renderer-marked --save
-</code></pre><p>这个时候再重新生成静态文件，命令：</p>
-<pre><code>hexo generate （或hexo g）
-</code></pre><p>启动本地服务器：</p>
-<pre><code>hexo server （或hexo s）
-</code></pre><p>再点击网址<a href="http://0.0.0.0:4000" target="_blank" rel="external">http://0.0.0.0:4000</a> OK终于可以看到属于你自己的blog啦，?，虽然很简陋，但好歹有了一个属于自己的小窝了。<a href="https://disqus.com/home/discussion/bsspirit/hexogithubweb/" target="_blank" rel="external">参考链接</a>，本地已经简单的设置好了，但是现在域名和服务器都是基于自己的电脑，接下来需要跟github进行关联。</p>
-<h2 id="配置Github"><a href="#配置Github" class="headerlink" title="配置Github"></a>配置Github</h2><h3 id="建立Repository"><a href="#建立Repository" class="headerlink" title="建立Repository"></a>建立Repository</h3><p>建立与你用户名对应的仓库，仓库名必须为【your_user_name.github.io】，固定写法<br>然后建立关联，我的Blog在本地/Users/leopard/Blog，Blog是我之前建的东西也全在这里面，有：</p>
-<blockquote>
-<p>Blog<br>　｜<br>　｜－－ _config.yml<br>　｜－－ node_modules<br>　｜－－ public<br>　｜－－ source<br>　｜－－ db.json<br>　｜－－ package.json<br>　｜－－ scaffolds<br>　｜－－ themes          　　　　　
-　　　</p>
-</blockquote>
-<p>现在我们需要_config.yml文件，来建立关联，命令：</p>
-<pre><code>vim _config.yml
-</code></pre><p>翻到最下面，改成我这样子的，注意： <code>: 后面要有空格</code></p>
-<pre><code>deploy:
-  type: git
-  repository: https://github.com/leopardpan/leopardpan.github.io.git
-  branch: master
-</code></pre><p>执行如下命令才能使用git部署</p>
-<pre><code>npm install hexo-deployer-git --save
-</code></pre><p>网上会有很多说法，有的type是github, 还有repository 最后面的后缀也不一样，是github.com.git，我也踩了很多坑，我现在的版本是hexo: 3.1.1，执行命令hexo -vsersion就出来了,貌似3.0后全部改成我上面这种格式了。<br>忘了说了，我没用SSH Keys如果你用了SSH Keys的话直接在github里复制SSH的就行了，总共就两种协议，相信你懂的。<br>然后，执行配置命令：</p>
-<pre><code>hexo deploy
-</code></pre><p>　然后再浏览器中输入<a href="http://leopardpan.github.io/" target="_blank" rel="external">http://leopardpan.github.io/</a>就行了，我的 github 的账户叫 leopardpan ,把这个改成你 github 的账户名就行了</p>
-<h3 id="部署步骤"><a href="#部署步骤" class="headerlink" title="部署步骤"></a>部署步骤</h3><p>每次部署的步骤，可按以下三步来进行。</p>
-<pre><code>hexo clean
-hexo generate
-hexo deploy
-</code></pre><p>一些常用命令：</p>
-<pre><code>hexo new &quot;postName&quot; #新建文章
-hexo new page &quot;pageName&quot; #新建页面
-hexo generate #生成静态页面至public目录
-hexo server #开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）
-hexo deploy #将.deploy目录部署到GitHub
-hexo help  #查看帮助
-hexo version  #查看Hexo的版本
-</code></pre><p>这里有大量的<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">主题列表</a>使用方法里面<br>都有详细的介绍，我就不多说了。<br>我这里有几款个人认为不错的主题，免去你们，一个一个的选了，欢迎吐槽我的审美，?<br>　<a href="https://github.com/daisygao/hexo-themes-cover" target="_blank" rel="external">Cover</a> - A chic theme with facebook-like cover photo<br>　<a href="https://github.com/henryhuang/oishi" target="_blank" rel="external">Oishi</a> - A white theme based on Landscape plus and Writing.<br>　<a href="https://github.com/hardywu/hexo-theme-sidebar" target="_blank" rel="external">Sidebar</a> - Another theme based on Light with a simple sidebar<br>　<a href="https://github.com/SuperKieran/TKL" target="_blank" rel="external">TKL</a> - A responsive design theme for Hexo. 一个设计优雅的响应式主题<br>　<a href="https://github.com/levonlin/Tinnypp" target="_blank" rel="external">Tinnypp</a> - A clean, simple theme based on Tinny<br>　<a href="https://github.com/yunlzheng/hexo-themes-writing" target="_blank" rel="external">Writing</a> - A small and simple hexo theme based on Light<br>　<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="external">Yilia</a> - Responsive and simple style 优雅简洁响应式主题，我用得就是这个。<br>　<a href="https://github.com/Voidly/pacman" target="_blank" rel="external">Pacman voidy</a> - A theme with dynamic tagcloud and dynamic snow      </p>
-<h3 id="一些基本路径"><a href="#一些基本路径" class="headerlink" title="一些基本路径"></a>一些基本路径</h3><p>　文章在 source/_posts，编辑器可以用 Sublime，支持 markdown 语法。如果想修改头像可以直接在主题的 _config.yml 文件里面修改，友情链接，之类的都在这里，修改名字在 public/index.html 里修改，开始打理你的博客吧，有什么问题或者建议，都可以提出来，我会继续完善的。</p>
-<p>Markdown语法参考链接: <a href="https://www.zybuluo.com/mdeditor" target="_blank" rel="external">作业部落</a></p>
-<h3 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><blockquote>
-<p>问：如何让文章想只显示一部分和一个 <code>阅读全文</code> 的按钮？<br>答：在文章中加一个 <code>&lt;!--more--&gt;</code> ， <code>&lt;!--more--&gt;</code> 后面的内容就不会显示出来了。</p>
-</blockquote>
-<p> </p>
-
-<blockquote>
-<p>问：本地部署成功了，也能预览效果，但使用 username.github.io 访问，<code>出现 404</code> .<br>答：首先确认 hexo d 命令执行是否报错，如果没有报错，再查看一下你的 github 的 username.github.io 仓库，你的博客是否已经成功提交了，你的 github 邮箱也要通过验证才行。</p>
-</blockquote>
-<p> </p>
-
-<p>转载请注明原地址，潘柏信的博客：<a href="http://leopardpan.github.io" target="_blank" rel="external">http://leopardpan.github.io</a> 谢谢！</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/2015-08-25-HEXO搭建个人博客/" class="archive-article-date">
-  	<time datetime="2016-11-03T22:16:26.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-04</time>
+      <a href="/2016/11/iOS 音频播放 —— AVAudioSession/" class="archive-article-date">
+  	<time datetime="2016-11-22T02:08:20.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-22</time>
 </a>
       
       
@@ -598,6 +327,49 @@ hexo version  #查看Hexo的版本
     <div class="article-info article-info-index">
       
       <a href="/2016/11/2016-04-02-CocoaPod_Use/" class="archive-article-date">
+  	<time datetime="2016-11-03T22:16:26.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-04</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2016-07-05-MachineLearning_introduce" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>layout: post<br>title: “机器学习入门（名词科普）”<br>date: 2016-07-05<br>description: “机器学习入门篇”<br>tag: 机器学习  </p>
+<hr>
+<h3 id="通用名词"><a href="#通用名词" class="headerlink" title="通用名词"></a>通用名词</h3><h4 id="ML"><a href="#ML" class="headerlink" title="ML"></a>ML</h4><p>　　<strong>名词解释：</strong> 机器学习(Machine Learning)是一门多领域交叉学科，涉及概率论、统计学、逼近论、凸分析、算法复杂度理论等多门学科。专门研究计算机怎样模拟或实现人类的学习行为，以获取新的知识或技能，重新组织已有的知识结构使之不断改善自身的性能。<br>　　它是人工智能的核心，是使计算机具有智能的根本途径，其应用遍及人工智能的各个领域，它主要使用归纳、综合而不是演绎。</p>
+<h4 id="DL"><a href="#DL" class="headerlink" title="DL"></a>DL</h4><p>　　<strong>名词解释：</strong> 深度学习（Deep Learning）是机器学习拉出的分支，它试图使用包含复杂结构或由多重非线性变换构成的多个处理层对数据进行高层抽象的算法。<br>　　深度学习是机器学习中表征学习方法。观测值（例如一幅图像）可以使用多种方式来表示，如每个像素强度值的矢量，或者更抽象地表示成一系列边、特定形状的区域等。而使用某些特定的表示方法更容易从实例中学习任务（例如，人脸识别或面部表情识别）。深度学习的好处是将用非监督式或半监督式的特征学习和分层特征提取的高效算法来替代手工获取特征。</p>
+<h4 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h4><p>　　<strong>名词解释：</strong> 卷积神经网络（Convolutional neural networks，简称CNNs）是一种深度的监督学习下的机器学习模型</p>
+<h3 id="算法名词"><a href="#算法名词" class="headerlink" title="算法名词"></a>算法名词</h3><h4 id="KNN"><a href="#KNN" class="headerlink" title="KNN:"></a>KNN:</h4><p>　　<strong>名词解释：</strong> 邻近算法，或者说K最近邻(kNN，k-NearestNeighbor)分类算法。<br>　　邻近算法是数据挖掘分类技术中最简单的方法之一。所谓K最近邻，就是k个最近的邻居的意思，说的是每个样本都可以用它最接近的k个邻居来代表。<br>　　kNN算法的核心思想是如果一个样本在特征空间中的k个最相邻的样本中的大多数属于某一个类别，则该样本也属于这个类别，并具有这个类别上样本的特性。该方法在确定分类决策上只依据最邻近的一个或者几个样本的类别来决定待分样本所属的类别。 kNN方法在类别决策时，只与极少量的相邻样本有关。由于kNN方法主要靠周围有限的邻近的样本，而不是靠判别类域的方法来确定所属类别的，因此对于类域的交叉或重叠较多的待分样本集来说，kNN方法较其他方法更为适合。</p>
+<h4 id="SVM"><a href="#SVM" class="headerlink" title="SVM:"></a>SVM:</h4><p>　　<strong>名词解释：</strong> 支持向量机（Support Vector Machine）。<br>　　在机器学习领域，支持向量机SVM(Support Vector Machine)是一个有监督的学习模型，通常用来进行模式识别、分类、以及回归分析。</p>
+<p><a href="http://baixin.io/2016/07/MachineLearning_introduce/" target="_blank" rel="external">点击阅读原文</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/2016-07-05-MachineLearning_introduce/" class="archive-article-date">
   	<time datetime="2016-11-03T22:16:26.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-04</time>
 </a>
       
@@ -694,49 +466,6 @@ hexo version  #查看Hexo的版本
 
 
   
-    <article id="post-2016-07-05-MachineLearning_introduce" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>layout: post<br>title: “机器学习入门（名词科普）”<br>date: 2016-07-05<br>description: “机器学习入门篇”<br>tag: 机器学习  </p>
-<hr>
-<h3 id="通用名词"><a href="#通用名词" class="headerlink" title="通用名词"></a>通用名词</h3><h4 id="ML"><a href="#ML" class="headerlink" title="ML"></a>ML</h4><p>　　<strong>名词解释：</strong> 机器学习(Machine Learning)是一门多领域交叉学科，涉及概率论、统计学、逼近论、凸分析、算法复杂度理论等多门学科。专门研究计算机怎样模拟或实现人类的学习行为，以获取新的知识或技能，重新组织已有的知识结构使之不断改善自身的性能。<br>　　它是人工智能的核心，是使计算机具有智能的根本途径，其应用遍及人工智能的各个领域，它主要使用归纳、综合而不是演绎。</p>
-<h4 id="DL"><a href="#DL" class="headerlink" title="DL"></a>DL</h4><p>　　<strong>名词解释：</strong> 深度学习（Deep Learning）是机器学习拉出的分支，它试图使用包含复杂结构或由多重非线性变换构成的多个处理层对数据进行高层抽象的算法。<br>　　深度学习是机器学习中表征学习方法。观测值（例如一幅图像）可以使用多种方式来表示，如每个像素强度值的矢量，或者更抽象地表示成一系列边、特定形状的区域等。而使用某些特定的表示方法更容易从实例中学习任务（例如，人脸识别或面部表情识别）。深度学习的好处是将用非监督式或半监督式的特征学习和分层特征提取的高效算法来替代手工获取特征。</p>
-<h4 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h4><p>　　<strong>名词解释：</strong> 卷积神经网络（Convolutional neural networks，简称CNNs）是一种深度的监督学习下的机器学习模型</p>
-<h3 id="算法名词"><a href="#算法名词" class="headerlink" title="算法名词"></a>算法名词</h3><h4 id="KNN"><a href="#KNN" class="headerlink" title="KNN:"></a>KNN:</h4><p>　　<strong>名词解释：</strong> 邻近算法，或者说K最近邻(kNN，k-NearestNeighbor)分类算法。<br>　　邻近算法是数据挖掘分类技术中最简单的方法之一。所谓K最近邻，就是k个最近的邻居的意思，说的是每个样本都可以用它最接近的k个邻居来代表。<br>　　kNN算法的核心思想是如果一个样本在特征空间中的k个最相邻的样本中的大多数属于某一个类别，则该样本也属于这个类别，并具有这个类别上样本的特性。该方法在确定分类决策上只依据最邻近的一个或者几个样本的类别来决定待分样本所属的类别。 kNN方法在类别决策时，只与极少量的相邻样本有关。由于kNN方法主要靠周围有限的邻近的样本，而不是靠判别类域的方法来确定所属类别的，因此对于类域的交叉或重叠较多的待分样本集来说，kNN方法较其他方法更为适合。</p>
-<h4 id="SVM"><a href="#SVM" class="headerlink" title="SVM:"></a>SVM:</h4><p>　　<strong>名词解释：</strong> 支持向量机（Support Vector Machine）。<br>　　在机器学习领域，支持向量机SVM(Support Vector Machine)是一个有监督的学习模型，通常用来进行模式识别、分类、以及回归分析。</p>
-<p><a href="http://baixin.io/2016/07/MachineLearning_introduce/" target="_blank" rel="external">点击阅读原文</a></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/2016-07-05-MachineLearning_introduce/" class="archive-article-date">
-  	<time datetime="2016-11-03T22:16:26.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-04</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
     <article id="post-2016-11-03-TensorFlowOniOSUse1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -804,7 +533,7 @@ hexo version  #查看Hexo的版本
 
 
   
-    <article id="post-2016-10-25-Xcode8" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2016-10-14-jekyll_tutorials1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -814,7 +543,7 @@ hexo version  #查看Hexo的版本
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/2016-10-25-Xcode8/">Xcode 8 使用笔记</a>
+      <a class="article-title" href="/2016/10/2016-10-14-jekyll_tutorials1/">Jekyll搭建个人博客</a>
     </h1>
   
 
@@ -822,74 +551,488 @@ hexo version  #查看Hexo的版本
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最近使用 Xcode8遇到了一些问题，想记下来，发现简书上有位同学写了一篇很详细的教程 <a href="http://www.jianshu.com/p/c1904fd8db06" target="_blank" rel="external">原文链接</a>，比较懒惰的我就在他的基础上加了些我自己的一些笔记。</p>
-<h3 id="Interface-Builder"><a href="#Interface-Builder" class="headerlink" title="Interface Builder"></a>Interface Builder</h3><p>随着 14 年的 iPhone6 和 6P 出来之后，iPhone 的屏幕尺寸也越来越多，屏幕适配是一个需要解决的问题，以后不一定苹果又出什么尺寸的 iPhone 呢。</p>
-<p>在 iPhone6 和 6P 发布的同一年，苹果推出的 Xcode6 中在原有的 Auto layout的基础上，添加了Size Classes新特性，通过这个新特性可以使用一个XIB或者SB文件，适配不同的屏幕以及iPhone和iPad两种设备。</p>
-<p>在 Xcode8 中，苹果推出了更加强大的可视化编辑工具预览功能，可以在不运行App的情况下，预览当前XIB或SB在不同屏幕尺寸下的显示。(这个功能我记得之前Xcode就有，只是隐藏的比较深，苹果现在给拿到外面了)</p>
-<p>选择一个XIB文件进去，点击下面红框的位置，会出现从3.5寸-5.5寸一系列屏幕尺寸的选项。直接点击不同屏幕尺寸，以及横竖屏选项，切换不同的屏幕显示。在iPad上还可以选择是否分屏，功能非常强大。</p>
-<p><img src="/images/posts/Xcode8/image1.png" height="200" width="600"> </p>
-<p>在右边有一个 Vary for Traits 选项，点击这个选项就可以同时显示所有可选的屏幕样式，功能和上面图片都一样，只是显示上看起来比较多。</p>
-<p><img src="/images/posts/Xcode8/image2.png" height="160" width="600">  </p>
-<p>还有一点，新创建的 XIB 控件尺寸，不再是之前 600*600 的方块了，而是默认是6s的长方形 XIB 文件，看起来舒服多了。</p>
-<h3 id="Target中General-的变化"><a href="#Target中General-的变化" class="headerlink" title="Target中General 的变化"></a>Target中General 的变化</h3><p>在 Xcode8 之前，都需要自己设置证书和描述文件。如果设置出现错误的情况下，还可以通过点击 Fix issue 来修复这个错误。但这有个问题就在于，Fix issue 选项并不是那么好用，有的时候设置是正确的这里也提示需要 Fix issue。</p>
-<p>可能苹果也意识到这个问题的存在，在Xcode8中可以通过Automatically manage signing选项，让苹果为我们管理证书和配置文件，设置也都是由苹果来完成的。在Xcode8中新建项目，这个选项默认是被勾选的。</p>
-<p><img src="/images/posts/Xcode8/image3.png" height="350" width="500">  </p>
-<p>从上面图中可以看到，苹果帮我们自动管理了证书和配置文件。而且在之前的项目中，如果想要设置安装后显示在手机上的App名字，还需要自己到Info.plist文件中，修改Display Name字段，而现在直接在General中就可以做修改，这个修改和Info.plist是同步的。</p>
-<p>但是，如果我想自己管理证书和描述文件呢？只需要去掉Automatically manage signing选项。</p>
-<p><img src="/images/posts/Xcode8/image4.png" height="350" width="500"> </p>
-<p>如果自己到Build Settings中手动设置证书和描述文件，可以发现Provisioning Profile选项已经被标明为Deprecated，也就是苹果并不推荐手动设置。</p>
-<h3 id="Xcode-插件"><a href="#Xcode-插件" class="headerlink" title="Xcode 插件"></a>Xcode 插件</h3><p>升级 Xcode8 之后会发现，在 Xcode8 中所有第三方插件都失效了，并且连之前菜单栏的插件选项也不存在了。在之前很多 iOS 开发者，都是通过 <a href="http://alcatraz.io/" target="_blank" rel="external">Alcatraz</a> 来管理插件的，现在 Alcatraz 也是不可用的。但是X code8 自身也对编译器进行了升级，将一些比较好的插件功能加入到 Xcode 中，例如单行高亮显示等。</p>
-<p>在 Xcode8 中支持了开发插件工程，并且为我们提供了一个插件模板，开发的插件可以上传到App Store 下载。苹果这么做有一个原因在于，之前 Xcode和插件是运行在同一个进程的，所以插件的崩溃也会导致Xcode崩溃。苹果现在将插件作为一个单独的应用程序，分开进程运行，不会对Xcode带来其他影响。</p>
-<p><img src="/images/posts/Xcode8/image5.png" height="350" width="500">  </p>
-<h3 id="Runtime-Issues"><a href="#Runtime-Issues" class="headerlink" title="Runtime Issues"></a>Runtime Issues</h3><p>在开发过程中，因为语法或明显的代码错误(例如Retain Cycle)，编译器可以发现并报黄色或红色警告。但是一些因为代码逻辑导致的错误，编译器并没有办法找到。例如下面的这句代码，因为代码逻辑的问题导致两个数组相互引用，都不能释放。</p>
-<p><img src="/images/posts/Xcode8/image6.png" height="180" width="600">  </p>
-<p>这时候可以通过 Xcode8 提供的 Runtime Issues 新特性，查找到运行过程中出现的问题，并通过 Graph 的方式将问题可视化的展现给开发者。</p>
-<p><img src="/images/posts/Xcode8/image7.png" height="300" width="600"> </p>
-<h3 id="Debug-Memory-Graph"><a href="#Debug-Memory-Graph" class="headerlink" title="Debug Memory Graph"></a>Debug Memory Graph</h3><p>在Xcode6中出现了Debug View Hierarchy新特性，可以通过其调试当前App的视图层级，查找UI相关的bug非常方便。在Xcode8中苹果为开发者提供了Debug Memory Graph特性，通过这个新特性，可以直接选择一个对象，查看与其相关的内存关系。</p>
-<p><img src="/images/posts/Xcode8/image8.png" height="300" width="600"> </p>
-<p>Debug Memory Graph 和 Runtime Issues 可以配合使用，通过 Debug Memory Graph 分析内存关系完成后，点击 Runtime Issues 可以看到已经发现的内存问题。</p>
-<h3 id="Swift-3"><a href="#Swift-3" class="headerlink" title="Swift 3"></a>Swift 3</h3><p>Xcode8 带来了新版本的 Swift3，新版本的Swift变化较大，如果旧版的Swift项目在Xcode8上编译可能会失败。对此，苹果为开发者提供了Swift迁移工具，听说不太好用(我没用过这个工具)。</p>
-<p>如果不想立刻就迁移到Swift3，可以在Builder Settings中进行设置，选择Use Legacy Swift Language Version设置为YES，就可以继续使用旧版本的Swift2.3。</p>
-<p><img src="/images/posts/Xcode8/image9.png" height="300" width="600">   </p>
-<h3 id="其他更新"><a href="#其他更新" class="headerlink" title="其他更新"></a>其他更新</h3><p>Xcode 新版字体，SF Mono Regular 字体。更新 Xcode 之后我比较喜欢这种字体，看起来代码非常工整。<br>被编辑的行高亮显示。之前Xcode有个插件就是这个功能，Xcode8把高亮功能集成进来了，使用起来很方便。<br>最新版的API文档，展示样式发生了很大的改变。<br>更方便的生成文档(就是喵神写的VVDocumenter)，在Xcode8中可以将光标放在方法上面，通过option + command + /快捷键生成文档注释。</p>
-<h3 id="Xcode8适配-XIB和Storeboard适配"><a href="#Xcode8适配-XIB和Storeboard适配" class="headerlink" title="Xcode8适配,XIB和Storeboard适配"></a>Xcode8适配,XIB和Storeboard适配</h3><p>在 Xcode8 之前，创建一个 XIB 或 SB 文件，都是一个 600*600 的方块 XIB 文件。在 Xcode8 之后，创建的 XIB 文件默认是6s尺寸的大小。</p>
-<p>但是 Xcode8 打开之前旧项目的 XIB或SB 文件时，会弹出下面的弹框， 这时候一般直接选择Choose Device即可。</p>
-<p><img src="/images/posts/Xcode8/image10.png" height="300" width="500">  </p>
-<p>但是这样有个问题，如果Xcode8打开过这个XIB文件，并选择Choose Device之后。其他的Xcode8以下版本的编译器，将无法再打开这个文件，会报以下错误：</p>
-<p>The document “ViewController.xib” requires Xcode 8.0 or later. This version does not support documents saved in the Xcode 8 format. Open this document with Xcode 8.0 or later.<br>有两种方法解决这个问题：</p>
-<p>你同事也升级Xcode8，比较推荐这种方式，应该迎接改变。<br>右击XIB或SB文件 -&gt; Open as -&gt; Source Code，删除xml文件中下面一行字段。</p>
-<capability name="documents saved in the Xcode 8 format" mintoolsversion="8.0">
+        <p>　之前写了一篇<a href="http://baixin.io/2015/08/HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" target="_blank" rel="external">HEXO搭建个人博客</a>的教程获得了很好评，尤其是在<a href="http://www.jianshu.com/p/465830080ea9" target="_blank" rel="external">简书</a>上目前已经累积了10W+的阅读量了，也有好心的读者主动给我打赏，在此感谢。</p>
+<p>　如果你看过我的文章会发现我现在的博客样式跟之前是有很大的区别的，之前我也是使用 HEXO 搭建的博客，后来发现使用 HEXO 在多台电脑上发布博客，操作起来并不是那么方便，果断就转到了 Jekyll 上，接下来我会讲如何使用 Jekyll 搭建博客，<a href="http://baixin.io/#blog" target="_blank" rel="external">博客模板效果</a>。</p>
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p> 　Jekyll 是一个简单的博客形态的静态站点生产机器。它有一个模版目录，其中包含原始文本格式的文档，通过 Markdown （或者 Textile） 以及 Liquid 转化成一个完整的可发布的静态网站，你可以发布在任何你喜爱的服务器上。Jekyll 也可以运行在 GitHub Page 上，也就是说，你可以使用 GitHub 的服务来搭建你的项目页面、博客或者网站，而且是完全免费的</p>
+<p>　使用 Jekyll 搭建博客之前要确认下本机环境，Git 环境（用于部署到远端）、<a href="http://www.ruby-lang.org/en/downloads/" target="_blank" rel="external">Ruby</a> 环境（Jekyll 是基于 Ruby 开发的）、包管理器 <a href="http://rubygems.org/pages/download" target="_blank" rel="external">RubyGems</a><br>　　如果你是 Mac 用户，你就需要安装 Xcode 和 Command-Line Tools了。下载方式 Preferences → Downloads → Components。</p>
+<p>　　Jekyll 是一个免费的简单静态网页生成工具，可以配合第三方服务例如： Disqus（评论）、多说(评论) 以及分享 等等扩展功能，Jekyll 可以直接部署在 Github（国外） 或 Coding（国内） 上，可以绑定自己的域名。<a href="http://jekyll.bootcss.com/" target="_blank" rel="external">Jekyll中文文档</a>、<a href="https://jekyllrb.com/" target="_blank" rel="external">Jekyll英文文档</a>、<a href="http://jekyllthemes.org/" target="_blank" rel="external">Jekyll主题列表</a>。</p>
+<h3 id="Jekyll-环境配置"><a href="#Jekyll-环境配置" class="headerlink" title="Jekyll 环境配置"></a>Jekyll 环境配置</h3><p>安装 jekyll</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ gem install jekyll     </div><div class="line">```    </div><div class="line"></div><div class="line">创建博客</div><div class="line"></div><div class="line">```    </div><div class="line">$ jekyll new myBlog    </div><div class="line">```   </div><div class="line"></div><div class="line">进入博客目录</div></pre></td></tr></table></figure>
+<p>$ cd myBlog<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">启动本地服务</div></pre></td></tr></table></figure></p>
+<p>$ jekyll serve<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">在浏览器里输入： [http://localhost:4000](http://localhost:4000)，就可以看到你的博客效果了。</div><div class="line"></div><div class="line">![](/images/posts/jekyll/image1.png)</div><div class="line"></div><div class="line">so easy !</div><div class="line"></div><div class="line">### 目录结构</div><div class="line">　</div><div class="line">　Jekyll 的核心其实是一个文本转换引擎。它的概念其实就是： 你用你最喜欢的标记语言来写文章，可以是 Markdown，也可以是 Textile,或者就是简单的 HTML, 然后 Jekyll 就会帮你套入一个或一系列的布局中。在整个过程中你可以设置URL路径, 你的文本在布局中的显示样式等等。这些都可以通过纯文本编辑来实现，最终生成的静态页面就是你的成品了。</div><div class="line"></div><div class="line"> 一个基本的 Jekyll 网站的目录结构一般是像这样的：</div></pre></td></tr></table></figure></p>
+<p>.<br>├── _config.yml<br>├── _includes<br>|   ├── footer.html<br>|   └── header.html<br>├── _layouts<br>|   ├── default.html<br>|   ├── post.html<br>|   └── page.html<br>├── _posts<br>|   └── 2016-10-08-welcome-to-jekyll.markdown<br>├── _sass<br>|   ├── _base.scss<br>|   ├── _layout.scss<br>|   └── _syntax-highlighting.scss<br>├── about.md<br>├── css<br>|   └── main.scss<br>├── feed.xml<br>└── index.html</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">这些目录结构以及具体的作用可以参考 [官网文档](http://jekyll.com.cn/docs/structure/) </div><div class="line"></div><div class="line">进入 _config.yml 里面，修改成你想看到的信息，重新 jekyll server ，刷新浏览器就可以看到你刚刚修改的信息了。</div><div class="line"></div><div class="line">到此，博客初步搭建算是完成了，</div><div class="line"></div><div class="line">### 博客部署到远端 </div><div class="line"></div><div class="line">　我这里讲的是部署到 Github Page 创建一个 github 账号，然后创建一个跟你账户名一样的仓库，如我的 github 账户名叫 [leopardpan](https://github.com/leopardpan)，我的 github 仓库名就叫 [leopardpan.github.io](https://github.com/leopardpan/leopardpan.github.io)，创建好了之后，把刚才建立的 myBlog 项目 push 到 username.github.io仓库里去（username指的是你的github用户名），检查你远端仓库已经跟你本地 myBlog 同步了，然后你在浏览器里输入 username.github.io ，就可以访问你的博客了。</div><div class="line"></div><div class="line"></div><div class="line">### 编写文章</div><div class="line"></div><div class="line">　　所有的文章都是 _posts 目录下面，文章格式为 mardown 格式，文章文件名可以是 .mardown 或者 .md。</div><div class="line"></div><div class="line">　　编写一篇新文章很简单，你可以直接从 _posts/ 目录下复制一份出来 `2016-10-16-welcome-to-jekyll副本.markdown` ，修改名字为 2016-10-16-article1.markdown ，注意：文章名的格式前面必须为 2016-10-16- ，日期可以修改，但必须为 年-月-日- 格式，后面的 article1 是整个文章的连接 URL，如果文章名为中文，那么文章的连接URL就会变成这样的：http://baixin.io/2015/08/%E6%90%AD%E5/ ， 所以建议文章名最好是英文的或者阿拉伯数字。 双击 2016-10-16-article1.markdown 打开</div></pre></td></tr></table></figure>
+<hr>
+<p>layout: post<br>title:  “Welcome to Jekyll!”<br>date:   2016-10-16 11:29:08 +0800</p>
+<h2 id="categories-jekyll-update"><a href="#categories-jekyll-update" class="headerlink" title="categories: jekyll update"></a>categories: jekyll update</h2><p>正文…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">title: 显示的文章名， 如：title: 我的第一篇文章                    </div><div class="line">date:  显示的文章发布日期，如：date: 2016-10-16                          </div><div class="line">categories: tag标签的分类，如：categories: 随笔            </div><div class="line"></div><div class="line">注意：文章头部格式必须为上面的，.... 就是文章的正文内容。</div><div class="line"></div><div class="line">我写文章使用的是 Sublime Text2 编辑器，如果你对 markdown 语法不熟悉的话，可以看看[作业部落的教程](https://www.zybuluo.com/) </div><div class="line"></div><div class="line"></div><div class="line">### 使用我的博客模板</div><div class="line"></div><div class="line">虽然博客部署完成了，你会发现博客太简单不是你想要的，如果你喜欢我的模板的话，可以使用我的模板。</div><div class="line"></div><div class="line">首先你要获取的我博客，[Github项目地址](https://github.com/leopardpan/leopardpan.github.io.git)，你可以直接[点击下载博客](https://github.com/leopardpan/leopardpan.github.io/archive/master.zip)，进去leopardpan.github.io/ 目录下， 使用命令部署本地服务</div></pre></td></tr></table></figure>
+<p>$ jekyll server<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 如果你本机没配置过任何jekyll的环境，可能会报错</div></pre></td></tr></table></figure></p>
+<p>/Users/xxxxxxxx/.rvm/rubies/ruby-2.2.2/lib/ruby/site_ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in <code>require&#39;: cannot load such file -- bundler (LoadError)
+    from /Users/xxxxxxxx/.rvm/rubies/ruby-2.2.2/lib/ruby/site_ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in</code>require’<br>    from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/gems/jekyll-3.3.0/lib/jekyll/plugin_manager.rb:34:in <code>require_from_bundler&#39;
+    from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/gems/jekyll-3.3.0/exe/jekyll:9:in</code><top (required)="">‘<br>    from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/jekyll:23:in <code>load&#39;
+    from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/jekyll:23:in</code><main>‘<br>    from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/ruby_executable_hooks:15:in <code>eval&#39;
+    from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/ruby_executable_hooks:15:in</code><main>‘</main></main></top></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">原因： 没有安装 bundler ，执行安装 bundler 命令</div></pre></td></tr></table></figure>
+<p>$ gem install bundler</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">提示：</div></pre></td></tr></table></figure>
+<p>Fetching: bundler-1.13.5.gem (100%)<br>Successfully installed bundler-1.13.5<br>Parsing documentation for bundler-1.13.5<br>Installing ri documentation for bundler-1.13.5<br>Done installing documentation for bundler after 5 seconds<br>1 gem installed</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">再次执行 $ jekyll server  ，提示</div></pre></td></tr></table></figure>
+<p>Could not find proper version of jekyll (3.1.1) in any of the sources<br>Run <code>bundle install</code> to install missing gems.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">跟着提示运行命令</div></pre></td></tr></table></figure>
+<p>$ bundle install<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">这个时候你可能会发现 bundle install 运行卡主不动了。</div><div class="line"></div><div class="line">如果很长时间都没任何提示的话，你可以尝试修改 gem 的 source</div></pre></td></tr></table></figure></p>
+<p>$ gem sources –remove <a href="https://rubygems.org/" target="_blank" rel="external">https://rubygems.org/</a><br>$ gem sources -a <a href="http://ruby.taobao.org/" target="_blank" rel="external">http://ruby.taobao.org/</a><br>$ gem sources -l<br><strong><em> CURRENT SOURCES </em></strong></p>
+<p><a href="http://ruby.taobao.org" target="_blank" rel="external">http://ruby.taobao.org</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">再次执行命令 $ bundle install，发现开始有动静了</div></pre></td></tr></table></figure>
+<p>Fetching gem metadata from <a href="https://rubygems.org/" target="_blank" rel="external">https://rubygems.org/</a>………..<br>Fetching version metadata from <a href="https://rubygems.org/" target="_blank" rel="external">https://rubygems.org/</a>..<br>Fetching dependency metadata from <a href="https://rubygems.org/" target="_blank" rel="external">https://rubygems.org/</a>.<br>。。。<br>Installing jekyll-watch 1.3.1<br>Installing jekyll 3.1.1<br>Bundle complete! 3 Gemfile dependencies, 17 gems now installed.<br>Use <code>bundle show [gemname]</code> to see where a bundled gem is installed.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">bundler安装完成，后再次启动本地服务</div></pre></td></tr></table></figure>
+<p>$ jekyll server</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">继续报错</div></pre></td></tr></table></figure>
+<p>Configuration file: /Users/tendcloud-Caroline/Desktop/leopardpan.github.io/_config.yml<br>  Dependency Error: Yikes! It looks like you don’t have jekyll-sitemap or one of its dependencies installed. In order to use Jekyll as currently configured, you’ll need to install this gem. The full error message from Ruby is: ‘cannot load such file – jekyll-sitemap’ If you run into trouble, you can find helpful resources at <a href="http://jekyllrb.com/help/!" target="_blank" rel="external">http://jekyllrb.com/help/!</a><br>jekyll 3.1.1 | Error:  jekyll-sitemap</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">表示 当前的 jekyll 版本是 3.1.1 ，无法使用 jekyll-sitemap </div><div class="line"></div><div class="line">解决方法有两个</div><div class="line"></div><div class="line">&gt; 1、打开当前目录下的 _config.yml 文件，把 gems: [jekyll-paginate,jekyll-sitemap] 换成 gems: [jekyll-paginate] ，也就是去掉jekyll-sitemap。</div><div class="line"></div><div class="line">&gt; 2、升级 jekyll 版本，我当前的是 jekyll 3.1.2 。</div><div class="line"></div><div class="line">修改完成后保存配置，再次执行</div></pre></td></tr></table></figure>
+<p>$ jekyll server</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">提示</div></pre></td></tr></table></figure>
+<p>Configuration file: /Users/baixinpan/Desktop/OpenSource/Mine/Page-Blog/leopardpan.github.io-github/_config.yml<br>            Source: /Users/baixinpan/Desktop/OpenSource/Mine/Page-Blog/leopardpan.github.io-github<br>       Destination: /Users/baixinpan/Desktop/OpenSource/Mine/Page-Blog/leopardpan.github.io-github/_site<br> Incremental build: disabled. Enable with –incremental<br>      Generating…<br>                    done in 0.901 seconds.<br> Auto-regeneration: enabled for ‘/Users/baixinpan/Desktop/OpenSource/Mine/Page-Blog/leopardpan.github.io-github’<br>Configuration file: /Users/baixinpan/Desktop/OpenSource/Mine/Page-Blog/leopardpan.github.io-github/_config.yml<br>    Server address: <a href="http://127.0.0.1:4000/" target="_blank" rel="external">http://127.0.0.1:4000/</a><br>  Server running… press ctrl-c to stop.</p>
+<p>```</p>
+<p>表示本地服务部署成功。</p>
+<p>在浏览器输入 <a href="127.0.0.1:4000" target="_blank" rel="external">127.0.0.1:4000</a> ， 就可以看到<a href="http://baixin.io" target="_blank" rel="external">baixin.io</a>博客效果了。</p>
+<h3 id="修改成你自己的博客"><a href="#修改成你自己的博客" class="headerlink" title="修改成你自己的博客"></a>修改成你自己的博客</h3><blockquote>
+<ul>
+<li>如果你想使用我的模板请把 _posts/ 目录下的文章都去掉。</li>
+<li>修改 _config.yml 文件里面的内容为你自己的。</li>
+</ul>
+</blockquote>
+<p>然后使用 git push 到你自己的仓库里面去，检查你远端仓库，在浏览器输入 username.github.io 就会发现，你有一个漂亮的主题模板了。      </p>
+<h4 id="【-如果想修改博客样式却不知道怎么修改，可以直接在评论里给我提问-】"><a href="#【-如果想修改博客样式却不知道怎么修改，可以直接在评论里给我提问-】" class="headerlink" title="【 如果想修改博客样式却不知道怎么修改，可以直接在评论里给我提问 】"></a>【 如果想修改博客样式却不知道怎么修改，可以直接在评论里给我提问 】</h4><h3 id="为什么要是用-Jekyll"><a href="#为什么要是用-Jekyll" class="headerlink" title="为什么要是用 Jekyll"></a>为什么要是用 Jekyll</h3><p>使用了 Jekyll 你会发现如果你想使用多台电脑发博客都很方便，只要把远端 github 仓库里的博客 clone 下来，写文章后再提交就可以了，Hexo 由于远端提交的是静态网页，所有无法直接写 Markdown 的文章。如果你想看 Hexo 搭建博客，可以看看我的另一篇<a href="http://baixin.io/2015/08/HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" target="_blank" rel="external">HEXO搭建个人博客</a>的教程。</p>
+<p>如果你在搭建博客遇到问题，可以在<a href="http://baixin.io/2016/06/jekyll_tutorials1/" target="_blank" rel="external">原文博客</a>的评论里给我提问。</p>
+<p>后面会继续介绍，在我的博客基础上，如何修改成你自己喜欢的 Style，欢迎继续关注我博客的更新。</p>
 
-<h3 id="编译错误"><a href="#编译错误" class="headerlink" title="编译错误"></a>编译错误</h3><p>升级Xcode之后，Xcode8对之前的一些修饰符和语句不兼容，会导致一些编译错误。这种错误导致的原因很多，这里大致列几条，各位还是根据自身遇到的情况做修改吧。</p>
-<p>之前一些泛型相关的修饰符，nullable之类的有的会报错。<br>CAAnimation及其子类，设置代理属性后，必须在@interface()遵守代理，否则报错，等等。</p>
-<h3 id="权限适配"><a href="#权限适配" class="headerlink" title="权限适配"></a>权限适配</h3><p>这应该算iOS10系统适配的范畴，最近这两个都在弄，所以就直接和Xcode8适配一起写出来了。</p>
-<p>在iOS10之后需要在Info.plist中，添加新的字段获取权限，否则在iOS10上运行会导致崩溃。下面是一些常用的字段，如果有缺少的麻烦各位评论区补充一下。</p>
-<p>Key    权限<br>Privacy - Camera Usage Description    相机<br>Privacy - Microphone Usage Description    麦克风<br>Privacy - Photo Library Usage Description    相册<br>Privacy - Contacts Usage Description    通讯录<br>Privacy - Bluetooth Peripheral Usage Description    蓝牙<br>Privacy - Location When In Use Usage Description    定位<br>Privacy - Location Always Usage Description    后台定位<br>Privacy - Calendars Usage Description    日历</p>
-<p>参考资料：<a href="https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html" target="_blank" rel="external">developer.apple</a></p>
-<h3 id="推送通知"><a href="#推送通知" class="headerlink" title="推送通知"></a>推送通知</h3><p>苹果的推送在之前iOS8和iOS9的时候就发生过大的更新，推送功能越来越强大。在iOS10之后苹果推出了UserNotifications框架，可以通过这个框架更好的控制推送通知，可以更新、修改锁屏页面的推送消息，可以添加图片等功能。</p>
-<p>但是在用Xcode8打包后，并且不对代码进行修改的情况下，会发现打包后苹果发来了一封邮件。这封邮件大概意思是如果需要使用推送通知，需要对代码做修改，否则将不能使用推送通知。</p>
-<p><img src="/images/posts/Xcode8/image11.png" height="300" width="600">  </p>
-<p>这是因为在Xcode8之后，如果需要使用Push Notifications的功能，需要勾选Capabilities -&gt; Push Notifications为YES，否则进行远程推送就会有问题，并且会收到苹果发来的这封邮件。</p>
-<h3 id="删除系统log"><a href="#删除系统log" class="headerlink" title="删除系统log"></a>删除系统log</h3><p>升级Xcode8之后，在调试和运行过程中，发现控制台打印了很多不认识的log，这些log是系统打印的，和开发者没关系。但是这么多log看着比较乱，怎么屏蔽掉呢？</p>
-<p>subsystem: com.apple.UIKit, category: HIDEventFiltered, enable_level: 0, persist_level: 0, default_ttl: 0, info_ttl: 0, debug_ttl: 0, generate_symptoms: 0, enable_oversize: 1, privacy_setting: 2, enable_private_data: 0<br>在Target -&gt; Edit Scheme -&gt; Run -&gt; Arguments中，添加OS_ACTIVITY_MODE字段，并设置为Disable即可。</p>
-<p><img src="/images/posts/Xcode8/image12.png" height="300" width="500">   </p>
-<p>顺便提一下，这两天在设置log选项的时候，发现可以通过在Arguments中设置参数，打印出App加载的时长，包括整体加载时长，动态库加载时长等。</p>
-<p>在Environment Variables中添加DYLD_PRINT_STATISTICS字段，并设置为YES，在控制台就会打印加载时长。</p>
-<p><img src="/images/posts/Xcode8/image13.png" height="300" width="600">  </p>
-<h3 id="awakeFromNib报警告"><a href="#awakeFromNib报警告" class="headerlink" title="awakeFromNib报警告"></a>awakeFromNib报警告</h3><p>老项目在Xcode8中，有些重写awakeFromNib方法的地方，会报下面的错误。这是因为没有调用super的方法导致的，还好我平时都是调用super的，我代码目前还没出问题。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Method possibly missing a [super awakeFromNib] call</div></pre></td></tr></table></figure>
-</capability>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/10/2016-10-25-Xcode8/" class="archive-article-date">
-  	<time datetime="2016-10-24T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-25</time>
+      <a href="/2016/10/2016-10-14-jekyll_tutorials1/" class="archive-article-date">
+  	<time datetime="2016-10-13T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-14</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2016-09-23-iOSLowerLeftAppicon" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/2016-09-23-iOSLowerLeftAppicon/">iOS设备左下角出现Appicon</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近发现我设备锁屏后，按Home屏幕变亮的时候，左下角出现一个灰色的Appicon （应用图标），关于这个应用图标的出现做了一些调研，下面是应用图标出现的几种情况。</p>
+<p>图一 iOS 系统自带的 App icon , 图二 第三方 App icon , 图三 通过 iBeacon 信号激活的 demo icon</p>
+<p><img src="/images/posts/icon/image01.png" alt=""></p>
+<h2 id="结论：有三种情况导致设备的左下角出现灰色的-App-icon"><a href="#结论：有三种情况导致设备的左下角出现灰色的-App-icon" class="headerlink" title="结论：有三种情况导致设备的左下角出现灰色的 App icon"></a>结论：有三种情况导致设备的左下角出现灰色的 App icon</h2><h3 id="1、AppStore根据地点对App-推荐"><a href="#1、AppStore根据地点对App-推荐" class="headerlink" title="1、AppStore根据地点对App 推荐"></a>1、AppStore根据地点对App 推荐</h3><ul>
+<li><strong>简介</strong> <ul>
+<li>iOS 8会基于你的位置在锁屏界面上展示一个app快捷打开方式。比如你正在星巴克附近，那iOS 8会在锁屏界面上展示星巴克应用的icon，方便你快速打开。一些用户也表示会在锁屏界面收到app推荐，比如你在Costco和Apple Store附近，即便你之前没有安装过这些应用。   </li>
+</ul>
+</li>
+</ul>
+<h3 id="2、App实现了handoff功能"><a href="#2、App实现了handoff功能" class="headerlink" title="2、App实现了handoff功能"></a>2、App实现了handoff功能</h3><ul>
+<li><strong><a href="https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/Handoff/HandoffFundamentals/HandoffFundamentals.html" target="_blank" rel="external">handoff简介</a>：</strong><ul>
+<li><code>OS X 10.10 Yosemite</code> 新增了一个酷炫的功能 “Hand Off”，打开这个功能之后，用户可以在 Mac 上对 iPad 和 iPhone 进行操作，比如能够编写 iPhone 上未完成的邮件，并且可以在Mac上打开 iPhone 的热点等等， Mac 的 Hand Off 功能只能识别 Mac 周围的 iPhone 手机。      </li>
+</ul>
+</li>
+<li><strong>handoff有几个要求：</strong><ul>
+<li>1 两台设备都要登录同一个 iCloud 账号。</li>
+<li>2 两台设备上的app有相同的 TeamID 。</li>
+<li>3 锁屏（或dock）设备上的app支持的 <code>NSUserActivityTypes</code> 包含活动设备上的app当前的UserActivityType。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3、App内有iBeacon信号接收功能，App被iBeacon信号唤醒"><a href="#3、App内有iBeacon信号接收功能，App被iBeacon信号唤醒" class="headerlink" title="3、App内有iBeacon信号接收功能，App被iBeacon信号唤醒"></a>3、App内有iBeacon信号接收功能，App被iBeacon信号唤醒</h3><ul>
+<li><strong><a href="https://developer.apple.com/ibeacon/" target="_blank" rel="external">iBeacon简介</a></strong>：<ul>
+<li>是苹果公司2013年9月发布的移动设备用OS（iOS7）上配备的新功能。工作原理类似之前的蓝牙技术，由 <code>iBeacon</code> 发射信号，iOS设备定位接受，反馈信号。根据这项简单的定位技术可以做出许多的相应技术应用,如：<code>室内定位</code> 、<code>商品推荐</code> 、<code>微信摇一摇</code> 等。</li>
+</ul>
+</li>
+<li><strong>App icon出现的原因</strong>：<ul>
+<li><code>iBeacon</code> 具备后台定位的能力，只要用户把蓝牙(4.0或以后)开启 和 允许 App 访问位置信息。在有被 App 检测的 <code>iBeacon</code> 出现时，如果设备是锁屏状态，设备的左下角就会出现该 App 的 icon 。</li>
+</ul>
+</li>
+</ul>
+<p><a href="http://baixin.io/2016/09/iOSLowerLeftAppicon/" target="_blank" rel="external">点击阅读原文</a>     </p>
+<p>参考链接:<br><a href="http://stackoverflow.com/questions/26082414/make-app-appear-as-ios-8-suggested-app-at-lockscreen/26676020#26676020" target="_blank" rel="external">Make app appear as iOS 8 Suggested App at lockscreen</a><br><a href="http://stackoverflow.com/questions/25897219/can-i-get-my-ios-app-to-appear-on-the-lower-left-corner-of-the-lock-screen/25898890#25898890" target="_blank" rel="external">Can I get my iOS app to appear on the lower left corner of the lock screen?</a><br><a href="https://www.zhihu.com/question/26653964" target="_blank" rel="external">为什么 iOS 8 锁屏界面的左下角经常会出现某个应用的小图标？</a><br><a href="https://www.v2ex.com/t/142320" target="_blank" rel="external">关于 IOS8 锁屏左下方出现的 APP ICON</a> </p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/09/2016-09-23-iOSLowerLeftAppicon/" class="archive-article-date">
+  	<time datetime="2016-09-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-09-23</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2016-08-04-PythonTestAutomationiOS" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/2016-08-04-PythonTestAutomationiOS/">Python自动化测试iOS项目</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>作为一个开发人员，为了保证自己的代码的健壮，写单元测试是必不可少的环节，然而最痛快的是每天去手动跑一遍所有的case。那么什么能帮我们解决这些繁琐的操作呢，大家应该会想到自动化测试脚本了，是的，我们可以借助脚本来完成全自动化测试，下面是我列的每天脚本自动执行流程：       </p>
+<blockquote>
+<ul>
+<li>1、<code>pull</code> git仓库里面的最新代码到本地。    </li>
+<li>2、然后打包成<code>App</code>。   </li>
+<li>3、安装到模拟器上。    </li>
+<li>4、运行App，执行单元测试，生成测试数据并保存到本地。    </li>
+<li>5、脚本读取测试数据，邮件发送给相关人员。    </li>
+</ul>
+</blockquote>
+<p>当这些全自动化后，可以大大减少开发人员的维护成本，即使每次项目里面有新增模块后，增加测试case就行了，下面会介绍自动测试这5步具体怎么去执行，整个脚本是使用Python写的，代码很少功能也很简单，但这已经可以帮我们完成基本的自动化测试了，这就是脚本的强大之处，选择Pyhton纯属个人喜好，最近也在学习Python，当然了最终使用什么语言看你自己。   </p>
+<h3 id="python执行shell命令完成测试"><a href="#python执行shell命令完成测试" class="headerlink" title="python执行shell命令完成测试"></a>python执行shell命令完成测试</h3><p>首先确认本机上安装了<code>git</code> 和 <code>python</code> 。<br>脚本判断本地是否存在项目，不存在则使用命令 <code>git clone ...</code> ，存在则使用命令 <code>git pull ...</code> 。<br>这些在Linux的命令都可以使用脚本来完成的，python的 <code>os.popen()</code> 方法 就是可以在Linux上执行shell命令。<br><strong>例如：</strong>  把下面这段代码添加到一个 test.py 的文件里，然后在终端上执行 <code>python test.py</code> 命令你就会看到，你的当前目录下正在下载我的博客了。</p>
+<pre><code>import os
+
+os.popen(&apos;git clone https://github.com/leopardpan/leopardpan.github.io.git&apos;)
+</code></pre><p>git pull 。。。 更新代码也是一样的。</p>
+<p>接下来的打包、安装、运行都是使用python执行shell命令      </p>
+<p><strong>把iOS项目打包成App，下面的 <code>Demo</code> 是项目的名字</strong>              </p>
+<blockquote>
+<ul>
+<li>os.popen(‘xcodebuild -project Demo.xcodeproj -target Demo -configuration Debug -sdk iphonesimulator’)     </li>
+</ul>
+</blockquote>
+<p>这行脚本运行完成后，你就会发现同会生成一个 <code>build</code> 的文件夹。<br>Debug参数表示现在是Debug模式，如果Xcode里面改成Release了，这里需要改成Release。<br>xcodebuild 命令是 Xcode Command Line Tools 的一部分。通过调用这个命令，可以完成 iOS 工程的编译，打包和签名过程。可以使用 xcodebuild –help 来看看具体有哪些功能。 </p>
+<p><strong>打开iOS模拟器，这里运行的是<code>iPhone 6 Plus</code> 你也可以换成其它型号的模拟器</strong>      </p>
+<blockquote>
+<ul>
+<li>os.popen(‘xcrun instruments -w “iPhone 6 Plus”‘)    </li>
+</ul>
+</blockquote>
+<p><strong>把刚才打包生成的App安装到模拟器上</strong><br>在安装之前要先卸载App,不然你运行的永远是最初安装的那个，后来安装的不会覆盖之前的，卸载App</p>
+<blockquote>
+<ul>
+<li>os.popen(‘xcrun simctl uninstall booted com.test.Demo’)</li>
+</ul>
+</blockquote>
+<p>booted 后面接的是 <code>Bundle Identifier</code>，我的是 com.test.Demo，然后再安装App     </p>
+<blockquote>
+<ul>
+<li>os.popen(‘xcrun simctl install booted build/Debug-iphonesimulator/Demo.app ‘)    </li>
+</ul>
+</blockquote>
+<p>booted 后面接的是.app的路径，我打包的时候的是Debug，所以这个的文件夹名称是Debug-iphonesimulator。</p>
+<p><strong>在模拟器里运行App</strong>      </p>
+<blockquote>
+<ul>
+<li>os.popen(‘xcrun simctl launch booted com.test.Demo’)</li>
+</ul>
+</blockquote>
+<p>booted 后面接的是 <code>Bundle Identifier</code>，我的是 com.test.Demo。</p>
+<p>到目前为止，你就会发现你的项目已经运行起来了，你可以在项目是Debug模式下一启动就执行单元测试，然后把对应的测试数据保存到本地为data.json。然后在使用python脚本读取测试文件的数据，最终使用邮件发送给相关人员，pyhton读取数据很简单，一行代码就行</p>
+<blockquote>
+<ul>
+<li>data = open(‘data.json’).read() </li>
+</ul>
+</blockquote>
+<p>data里面就是json字符串，为了脚本操作简单，我在存储的时候直接把json格式的转成了字符串类型。</p>
+<h3 id="python发送邮件"><a href="#python发送邮件" class="headerlink" title="python发送邮件"></a>python发送邮件</h3><p>我使用的是SMTP进行邮件发送的，SMTP是发送邮件的协议，Python内置对SMTP的支持，可以发送纯文本邮件、HTML邮件以及带附件的邮件。     </p>
+<p>Python对SMTP支持有smtplib和email两个模块，email负责构造邮件，smtplib负责发送邮件，具体代码如下： </p>
+<pre><code>from email import encoders
+from email.header import Header
+from email.mime.text import MIMEText
+from email.utils import parseaddr, formataddr
+import smtplib
+
+def format_addr(self,s):
+    name, addr = parseaddr(s)
+    return formataddr(( \
+        Header(name, &apos;utf-8&apos;).encode(), \
+        addr.encode(&apos;utf-8&apos;) if isinstance(addr, unicode) else addr))
+
+def send_mail(self, mail, message, title):
+    from_addr = &apos;leopardpan@163.com&apos;
+    password = &apos;&apos;
+    to_addr = mail
+    smtp_server = &apos;smtp.163.com&apos;
+
+    msg = MIMEText(message, &apos;plain&apos;, &apos;utf-8&apos;)
+    msg[&apos;From&apos;] = self.format_addr(u&apos;自动化测试邮件 &lt;%s&gt;&apos; % from_addr)
+    msg[&apos;To&apos;] = self.format_addr(u&apos;管理员 &lt;%s&gt;&apos; % to_addr)
+    msg[&apos;Subject&apos;] = Header(title, &apos;utf-8&apos;).encode()
+
+    server = smtplib.SMTP(smtp_server, 25)
+    server.set_debuglevel(1)
+    server.login(from_addr, password)
+    server.sendmail(from_addr, [to_addr], msg.as_string())
+    server.quit()
+
+send_mail(&apos;leopardpan@icloud.com&apos;,&apos;正文&apos;,&apos;标题&apos;)
+</code></pre><p>from_addr是发送方的邮箱地址，password是开通SMTP时输入的密码<br>smtp_server是smtp的服务，如果你的from_addr是gamil.com，那么就要写成smtp_server = ‘smtp.gmail.com’ 了。</p>
+<p>方法 send_mail(self, mail, message, title): 有四个参数，第一个不用传，第二个参数是收信人的邮箱，第三个是邮件的正文，第四个是邮件的标题，方法调用格式： <code>send_mail(&#39;leopardpan@icloud.com&#39;,&#39;正文&#39;,&#39;标题&#39;)</code></p>
+<p>注意：发送方的邮箱必须要开通SMTP功能才行，否则会报错</p>
+<blockquote>
+<ul>
+<li>SMTPSenderRefused: (550, ‘User has no permission’, ‘leopardpan@163.com’)</li>
+</ul>
+</blockquote>
+<p>163的SMTP开通，需要你登录网易邮箱，然后点击顶部的设置就会出现<code>POP3/SMTP/IMAP</code>，点击之后，勾选选择开启，这个时候需要你输入密码，记住这个密码就是上面代码中的<code>password</code>，如果你都完成的话，你把上面的代码拷贝出现，把邮箱修改成你自己的，使用 pyhton 运行一下吧。</p>
+<p>上面的几个流程结合起来就可以实现一个简单的自动化测试了，如果你有什么建议和意见欢迎讨论。</p>
+<p><a href="http://baixin.io/2016/08/PythonTestAutomationiOS/" target="_blank" rel="external">点击阅读原文</a>     </p>
+<p>参考链接：<br><a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386832745198026a685614e7462fb57dbf733cc9f3ad000" target="_blank" rel="external">SMTP发送邮件</a>     </p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/08/2016-08-04-PythonTestAutomationiOS/" class="archive-article-date">
+  	<time datetime="2016-08-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-04</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2016-07-15-Codeless" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/2016-07-15-Codeless/">老司机带你剖析无码统计</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　　无需开发介入，也可以统计移动App上按钮的点击次数，简称 <code>无码统计</code> ，只要是跟App开发相关的同学，相信都对埋点统计有些了解，特别是针对开发人员来说，做代码埋点统计基本上是看不到直接收益也是开发人员最不愿做的一件事，这篇文章讲的就是如何让开发人员摆脱代码埋点的痛苦。</p>
+<p>　　文章主要分为：使用场景、实现原理、适用范围、使用详情四个模块，不管你是产品，还是开发人员又或者是运营人员都适合读这篇文章。  </p>
+<p>　　在App开发过程中我们应该都有过类似的需求：想统计某些按钮的点击次数。例如，我们开发了一个注册模块，注册流程有些复杂，整个注册功能开发完成后，我们想知道到底有没有用户使用注册功能，而又有多少用户使用？         </p>
+<p>有什么方式能知道呢？</p>
+<blockquote>
+<ul>
+<li><p>后台看注册系统?<br>　有些麻烦，需要后台去数据库里查看，还要做成数据可视化的才方便看。      </p>
+</li>
+<li><p>查看注册按钮的点击情况?<br>　这是最直观的。 主看看两块就行，注册按钮的点击次数 和 提交注册按钮的点击次数，如果发现注册按钮被点击多次（如1W次），而提交注册的点击次数却只有几次，这就可以反映出，很多用户看到的我们的注册流程太复杂，然后选择放弃注册了。同样的道理，我们通过同样的方式可以验证我们其它的功能模块是否有用户经常使用，从而来重新规划我们的设计需求。         </p>
+</li>
+</ul>
+</blockquote>
+<p>　　一整个功能模块的完成涉及到 产品、UI设计、开发、测试 等几个部分，资源和人力的消耗还是挺大的，所以我们在开发过程是否继续维护这些功能模块，还是开发新功能是要经过慎重衡量，而衡量这些最有说服力的依据就是用户的使用数据，这些数据来源是刚才说的 按钮的点击次数，页面的停留时长 等等。</p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>　　分析用户App的使用情况当然是直接用数据说话，那么想知道某些按钮的点击次数，就一定需要App的开发人员去具体的按钮点击方法里面埋点才行，有的公司有自己的一套完整的统计埋点系统，有的公司是使用第三方统计，最终都是可以看到按钮的点击次数的，不管怎么样想知道按钮的点击必须要App的开发人员亲自去写代码埋点才行，而这篇文章主要讲的是 <code>无码统计</code> 按钮点击次数。也就是不需要开发介入，我们就能知道按钮的点击了，开发人员只要负责他的业务开发就行，下面是一张 <code>传统埋点</code> 统计和 <code>灵动分析</code> 统计，灵动是TalkingData的SDK无码统计的一个功能。</p>
+<p><img src="/images/posts/codeless/image01.png" height="300" width="600">  </p>
+<p>先大致讲下左边 <code>传统</code> 埋点统计流程</p>
+<blockquote>
+<ul>
+<li><p>首先需要制定埋点需求、设计埋点方案，需求有了后就去找开发沟通，埋点需求的讨论，双方确认需求通过后，然后准备需求文档，开发再根据文档来写具体的埋点代码。 </p>
+</li>
+<li><p>代码写完后，App打包给测试人员，测试人员进行测试，同时还要对埋点参数的数据安全审核，参数是否有包含公司敏感信息。</p>
+</li>
+<li><p>测试通过后就需要上线了，这个过程一般是开发人员去完成的。iOS需要提交到AppStore上，以前大家都知道，一个审核周期就是一两周，还有随时被拒的可能，现在虽然周期变短了，但审核也还是挺严格的（走快捷通道的除外）。Android需要在各个渠道上重新发布，也是很麻烦的。</p>
+</li>
+<li><p>如果前面几部都顺利完成了的话，接下来就等待用户更新了，如果埋点统计功能跟其它新功能一起上线的话，我们更新就有理由了，如果仅仅这一版仅仅只是埋点统计功能，那么让用户更新App的理由又是一件头疼的事情了，不管怎么样经常让用户更新App多少会对用户用些影响的。</p>
+</li>
+<li><p>最终的结果应该是部分用户更新了App，那么我们能统计到按钮点击的用户了就只是更新了App的这一部分用户了，而且他们更新的时间是不一样的，最终我们终于可以看需求上的埋点统计了。</p>
+</li>
+</ul>
+</blockquote>
+<p>再看看右边 <code>灵动</code> 统计流程</p>
+<p>同样需要制定需求，但是需求方可以直接根据自己的需求去使用 <code>灵动</code> 了，使用了灵动就可以直接看按钮的点击率了，这个过程不需要开发介入，也不需要用户去更新App。</p>
+<p>　　从这张图可以看出，不需要开发人员介入，可以开发成功，提高开发效率，而且埋点也很灵活，需求人员（可以是产品，也可以是运营）可以直接使用灵动，也不需要用户更新，那么数据反馈会比传统埋点快很多，使用了就可以立即生效，需求方的观察周期也缩短了，能更灵活的做出决策。</p>
+<h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><p>　　上面大致介绍了下 <code>灵动</code> 能给我们解决什么问题，这里讲的是 <code>灵动</code> 是通过什么样的技术手段实现，这里可能对于开发人员来说更喜欢，大家先看一张灵动使用时的一个交互</p>
+<p><img src="/images/posts/codeless/image02.png" height="300" width="500">  </p>
+<p>　　这张图分成两部分看，先看上面，一个用户在操作Client和PC，Client和PC通讯是通过一个Wss的服务器建立的长连接，这是灵动调试时的一个交互。<br>　　也就是说，用户使用灵动分析时，需要一个安装自己App的移动设备，这个App必须要集成TalkingData的统计分析SDK才行，SDK初始化时的AppID是在TalkingData创建应用时分配的。另一端用户要打开TalkingData的灵动网页，在App启动的时候摇一摇手机，然后就可以建立一个wss的长连接了。用户就可以直接在网页上给按钮添加监听事件了，添加完成后，在手机上点击该按钮，网页上就会提示被点击，调试完成后点击全部生效，配置数据就会保存到下面https的服务器。<br>　　我们的所有用户在启动App的时候，都可以从https服务器里获取到这套配置，客户端根据这套配置找到具体的按钮，监听点击事件，当按钮被点击后，就可以统计到了。</p>
+<p>接下来再看看灵动调试过程中数据是具体怎么进行数据交互的。</p>
+<p><img src="/images/posts/codeless/image03.png" height="300" width="500"> </p>
+<p>　　可以看到App客户端和Web端交互主要分为四部分：<code>设备信息</code> 、 <code>App基本结构</code> 、<code>控件绑定配置</code> 、<code>按钮点击信息</code> ，<code>设备信息</code> 主要是用来确认设备是调试者的设备，因为其它的终端用户也可能会误触发调试，<code>App基本结构</code>是用来在Web上展示移动App的，然后在Web上绑定了控件，就会把<code>控件绑定配置</code>发送给客户端，客户端根据配置监听绑定，当终端用户点击控件后，客户端就会把<code>按钮点击信息</code>传给Web端，Web显示控件被点击。</p>
+<p>　　再回头看看实现原理的第一张图片，调试完成数据就会从WSS的长连接服务器存储到HTTPS的服务器，此后其它终端用户只要在再次启动App就能获取到埋点配置了，SDK根据埋点配置去找到具体的控件(按钮)，监听点击，当用户点击控件时就可以调用自定义埋点的方法，之后的数据处理就跟自定义埋点是一样的原理了。<br>　　可能有同学会有疑问，所有的App每次启动的时候都会去获取埋点配置，是不是会很耗流量？ 答案是不会的，服务器在没有埋点配置的时候每次将获取不到信息，那么将不会有什么流量消耗。如果服务器有配置了，App才会有些流量消耗的，而且这些配置信息是经过压缩的，所以流量消耗也不大，App获取到了配置之后就会做本地缓存，服务器配置不变的情况下再次获取配置也不会有流量的消耗，只有在下一次运营人员修改了新的控件绑定时才会消耗一些流量。 所以整个无码统计对终端用户的流量的影响是很小的。<br>　　你也可以参考这套逻辑试试自己也部署这么一套无码统计，之后就不用再担心运营给的埋点统计需求了，让他们自己去用无码统计吧。 </p>
+<p><a href="http://baixin.io/2016/07/Codeless/" target="_blank" rel="external">点击阅读原文</a>     </p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/07/2016-07-15-Codeless/" class="archive-article-date">
+  	<time datetime="2016-07-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-07-15</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-2016-07-13-GitTutorial" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/2016-07-13-GitTutorial/">Git教程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>　　Git是做项目的版本管理，你也可以称它们为版本管理工具。假如现在你有一个文件夹，里面可以是项目，也可以是你的个人笔记(如我这个博客)，或者是你的简历、毕业设计等等，都可以使用git来管理。</p>
+<p>　　目前常用的版本控制器有Git和SVN，即使这两个你没有全用过，至少也会听过，我这里以Git为例，个人比较喜欢Git，你也可以看看这篇文章：<a href="http://www.worldhello.net/2012/04/12/why-git-is-better-than-svn.html" target="_blank" rel="external">为什么Git比SVN好</a>。我使用的是Mac，Mac上没自带Git环境，但是作为iOS开发者，我安装Xcode的时候，Xcode里是有自带Git的，所以我不需要考虑怎么去安装Git了。          </p>
+<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p><strong>在Mac OS X上安装Git</strong>      </p>
+<p>提供两种方法参考：      </p>
+<blockquote>
+<p>1、通过homebrew安装Git，具体方法请参考<a href="http://brew.sh/" target="_blank" rel="external">homebrew的文档</a><br>2、直接从AppStore安装Xcode，Xcode集成了Git，不过默认没有安装，你需要运行Xcode。     </p>
+</blockquote>
+<p><strong>在Windows上安装Git</strong>      </p>
+<blockquote>
+<p>从<a href="https://git-for-windows.github.io" target="_blank" rel="external">https://git-for-windows.github.io</a> 下载，然后按默认选项安装即可，安装完成后，在开始菜单里找到“Git”-&gt;“Git Bash”，蹦出一个类似命令行窗口的东西，就说明Git安装成功！</p>
+</blockquote>
+<h3 id="配置Git"><a href="#配置Git" class="headerlink" title="配置Git"></a>配置Git</h3><p>安装完成后，还需要最后一步设置，在命令行输入：</p>
+<blockquote>
+<ul>
+<li>$ git config –global user.name “Your Name”</li>
+<li>$ git config –global user.email “email@example.com”</li>
+</ul>
+</blockquote>
+<p>“Your Name”： 是每次提交时所显示的用户名，因为Git是分布式版本控制系统，当我们push到远端时，就需要区分每个提交记录具体是谁提交的，这个”Your Name”就是最好的区分。          </p>
+<p>“email@example.com”： 是你远端仓库的email       </p>
+<p>–global：用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然我们也可以对某个仓库指定不同的用户名和Email地址。         </p>
+<h3 id="开始使用-建立仓库："><a href="#开始使用-建立仓库：" class="headerlink" title="开始使用-建立仓库："></a>开始使用-建立仓库：</h3><p>你在目标文件夹下使命令：    </p>
+<blockquote>
+<ul>
+<li>git init  （创建.git文件）      </li>
+</ul>
+</blockquote>
+<p>就会创建一个 <code>.git</code> 隐藏文件，相当于已经建立了一个本地仓库。</p>
+<p><strong>添加到暂存区：</strong>      </p>
+<blockquote>
+<ul>
+<li>git add .   （全部添加到暂存区）    </li>
+<li>git commit -m ‘ first commit’  （提交暂存区的记录到本地仓库）     </li>
+</ul>
+</blockquote>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p>git branc 查看时如出现</p>
+<blockquote>
+<ul>
+<li>(HEAD detached at analytics_v2)   </li>
+<li>dev</li>
+<li>master</li>
+</ul>
+</blockquote>
+<p>代表现在已经进入一个临时的HEAD，可以使用 <code>git checkout -b temp</code> 创建一个 temp branch，这样临时HEAD上修改的东西就不会被丢掉了。<br>然后切换到 dev 分支上，在使用 git branch merge temp，就可以把 temp 分支上的代码合并到 dev 上了。</p>
+<p><a href="http://baixin.io/2016/07/GitTutorial/" target="_blank" rel="external">点击阅读原文</a>     </p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/07/2016-07-13-GitTutorial/" class="archive-article-date">
+  	<time datetime="2016-07-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-07-13</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具/">工具</a></li></ul>
 	</div>
 
       
@@ -984,17 +1127,13 @@ hexo version  #查看Hexo的版本
   		
   			<div class="friends-wrap" id="js-friends">
   			
-  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接1</a>
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.jianshu.com/users/cc52a4f9fcc5/latest_articles">简书</a>
   	        
-  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接2</a>
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://weibo.com/huangbo0913">微博</a>
   	        
-  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/nonato">博客园</a>
   	        
-  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
-  	        
-  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
-  	        
-  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://github.com/natoto">github</a>
   	        
   	        </div>
   		
@@ -1004,7 +1143,7 @@ hexo version  #查看Hexo的版本
     
     	<section class="tools-section tools-section-me">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">长方体混凝土瞬间移动工程师&lt;br&gt;&lt;br&gt;专注移动开发，略懂前端，略懂脚本，略懂机器学习&lt;br&gt;感谢大家光临</div>
   	  	
     	</section>
     
