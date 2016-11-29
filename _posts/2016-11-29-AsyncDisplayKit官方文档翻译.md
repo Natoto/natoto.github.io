@@ -1,5 +1,11 @@
   
-
+---
+layout: post
+title: "AsyncDisplayKit官方文档翻译"
+date: 2016-11-29 
+description: "AsyncDisplayKit官方文档翻译"
+tag: asdk 
+---  
 #  AsyncDisplayKit官方文档翻译
  
 
