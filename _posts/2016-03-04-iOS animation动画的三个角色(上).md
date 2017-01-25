@@ -1,8 +1,8 @@
 --
 layout: post
 title: iOS animation动画的三个角色(上)
-tags: Animation 
 date: 2016-03-04
+tags: Animation 
 --
 
 #iOS animation动画的三个角色(上) 
