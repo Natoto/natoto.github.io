@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 【React Native】React Native 移植原生iOS平台
-tags: React Native
+tag: React Native
 date: 2015-11-15 
 ---
 

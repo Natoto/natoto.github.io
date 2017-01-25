@@ -2,7 +2,7 @@
 layout: post
 title: iOS开发--四种多线程技术方案
 date: 2017-01-01  
-tags:多线程
+tag:多线程
 ---
    
 #iOS 多线程的四种技术方案

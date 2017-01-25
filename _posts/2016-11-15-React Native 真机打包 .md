@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 【React Native 真机打包
-tags: React Native
+tag: React Native
 date: 2016-11-15
 ---
 

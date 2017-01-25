@@ -1,7 +1,7 @@
 ---
 layout: post
 title: RN排列方式  flexbox
-tags: React Native 
+tag: React Native 
 date: 2016-11-12 
 ---
 
