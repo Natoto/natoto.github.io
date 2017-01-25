@@ -2,8 +2,8 @@
 ---
 layout: post
 title: AsyncDisplayKit官方文档翻译
-date: 2016-11-29  
-tags: asdk 
+date: 2016-11-30 
+tags: asdk  
 ---  
 
 
