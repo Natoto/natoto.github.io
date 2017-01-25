@@ -95,8 +95,5 @@ friends: [
     },{
         title: "博客园",
         href: "http://www.cnblogs.com/nonato"
-    },{
-    	title:"awhisper",
-    	href:"http://awhisper.github.io/"
     }
 ]
