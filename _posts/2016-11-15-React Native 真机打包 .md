@@ -5,7 +5,7 @@ tag: React Native
 date: 2016-11-15
 ---
 
-##React Native 真机打包
+## React Native 真机打包
 > 离线包不适合真机调试
 > android 打包
 > ios 打包

@@ -1,8 +1,8 @@
 ---
 layout: post
-title:iOS animation动画三个角色(下)
+title: iOS animation动画三个角色(下)
 date: 2016-03-04
-tag: Animation
+tag:  Animation
 ---
  
 
