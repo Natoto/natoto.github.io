@@ -2,17 +2,22 @@
 layout: post
 title:  你会用convertRect吗
 tag: 技巧
-date: 2017-04-02
+date: 2017-4-2
 --- 
 
 ### 一句话介绍convertRect方法
 * 从父视图转换操作视图坐标到目标视图
 
 ```
-- (CGPoint)convertPoint:(CGPoint)point toView:(nullable UIView *)view;
-- (CGPoint)convertPoint:(CGPoint)point fromView:(nullable UIView *)view;
-- (CGRect)convertRect:(CGRect)rect toView:(nullable UIView *)view;
-- (CGRect)convertRect:(CGRect)rect fromView:(nullable UIView *)view;
+// 把该window中的一个坐标转换成在目标window中时的坐标值
+- (CGPoint)convertPoint:(CGPoint)point toWindow:(nullable UIWindow *)window;   
+// 把目标window中的一个坐标转换成在该window中时的坐标值
+- (CGPoint)convertPoint:(CGPoint)point fromWindow:(nullable UIWindow *)window;  
+// 把该window中的一个矩阵转换成在目标window中时的矩阵值
+- (CGRect)convertRect:(CGRect)rect toWindow:(nullable UIWindow *)window;
+// 把目标window中的一个矩阵转换成在该window中时的矩阵值
+- (CGRect)convertRect:(CGRect)rect fromWindow:(nullable UIWindow *)window;
+
 
 ```
 很多次用到此方法的时候总是很迷惑，并不知道第一个参数是什么。虽然后面两个参数很容易理解，于是乎有了几种不同的猜测，但是每次都猜错。终于又一次遇到了，正好接着日更的方式重新攻克这个疑惑以便下次再遇到不会再迷惑了，其实这些方法用更好理解的设计应该是：
