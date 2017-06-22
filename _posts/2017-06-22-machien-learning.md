@@ -7,12 +7,13 @@ tag: 机器学习概念
 
 ---
 
-### 机器学习概念
+## 机器学习&监督学习&非监督学习概念
 
+### 机器学习
 > 
 Tom Mitchell provides a more modern definition: "A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E."
 
-#### 概念：一个程序被认为能从经验`E`中学习，解决任务 `T`，达到 性能度量值`P`，当且仅当, 有了经验E后，经过`P`评判， 程序在处理 `T` 时的性能有所提升
+#### 概念：一个程序被认为能从经验`E`中学习，解决任务 `T`，达到 性能度量值`P`，当且仅当, 有了经验`E`后，经过`P`评判， 程序在处理 `T` 时的性能有所提升
 
 
 示例：玩跳棋。
@@ -25,8 +26,21 @@ Tom Mitchell provides a more modern definition: "A computer program is said to l
  
 #### 概念：在监督学习中，我们获得了一个数据集，并且已经知道我们正确的输出应该是什么样子的，这意味着输入和输出之间有一个关系。
 
+```
+注解：有一个函数可以对应输入和输出的关系，我们自己知道结果
+```
+
 受监督的学习问题分为“回归”和“分类”问题。在回归问题中，我们试图在连续输出中预测结果，这意味着我们正在尝试将输入变量映射到某些连续函数。在分类问题中，我们试图用离散输出来预测结果。换句话说，我们正在尝试将输入变量映射到离散类别。
 
+```
+定量输出称为回归，或者说是连续变量预测；
+定性输出称为分类，或者说是离散变量预测。
+
+举个例子：
+
+预测明天的气温是多少度，这是一个回归任务；
+预测明天是阴、晴还是雨，就是一个分类任务。
+```
 示例1：
 
 给出关于房地产市场规模的数据，尝试预测房价。价格作为大小的函数是连续的输出，所以这是一个回归问题。
@@ -39,9 +53,8 @@ Tom Mitchell provides a more modern definition: "A computer program is said to l
 
 （b）分类 - 鉴于肿瘤患者，我们必须预测肿瘤是恶性还是良性。
 
-### 什么是无监督学习
-无监督学习
-
+### 无监督学习
+ 
 #### 概念：无监督的学习使我们能够很少或不知道我们的结果应该如何处理问题。 我们可以从数据中导出结构，我们不一定知道变量的影响。
 
 我们可以通过基于数据中的变量之间的关系对数据进行聚类来导出该结构。
@@ -54,11 +67,42 @@ Tom Mitchell provides a more modern definition: "A computer program is said to l
 >
 非聚类：“鸡尾酒会算法”，让您在混乱的环境中找到结构。 （即，从鸡尾酒会的声音网格中识别个体声音和音乐）。
 
-### 参考资料：
 
+### 知乎终极回答
+#### 是否有监督（supervised），就看输入数据是否有标签（label）。输入数据有标签，则为有监督学习，没标签则为无监督学习。
+
+>
+首先看什么是学习（learning）？一个成语就可概括：举一反三。
+此处以高考为例，高考的题目在上考场前我们未必做过，但在高中三年我们做过很多很多题目，懂解题方法，因此考场上面对陌生问题也可以算出答案。机器学习的思路也类似：我们能不能利用一些训练数据（已经做过的题），使机器能够利用它们（解题方法）分析未知数据（高考的题目）？
+>
+最简单也最普遍的一类机器学习算法就是分类（classification）。对于分类，输入的训练数据有特征（feature），有标签（label）。所谓的学习，其本质就是找到特征和标签间的关系（mapping）。这样当有特征而无标签的未知数据输入时，我们就可以通过已有的关系得到未知数据标签。
+>
+在上述的分类过程中，如果所有训练数据都有标签，则为有监督学习（supervised learning）。如果数据没有标签，显然就是无监督学习（unsupervised learning）了，也即聚类（clustering）。
+>
+目前分类算法的效果还是不错的，但相对来讲，聚类算法就有些惨不忍睹了。确实，无监督学习本身的特点使其难以得到如分类一样近乎完美的结果。这也正如我们在高中做题，答案（标签）是非常重要的，假设两个完全相同的人进入高中，一个正常学习，另一人做的所有题目都没有答案，那么想必第一个人高考会发挥更好，第二个人会发疯。
+>
+这时各位可能要问，既然分类如此之好，聚类如此之不靠谱，那为何我们还可以容忍聚类的存在？因为在实际应用中，标签的获取常常需要极大的人工工作量，有时甚至非常困难。例如在自然语言处理（NLP）中，Penn Chinese Treebank在2年里只完成了4000句话的标签……
+>
+这时有人可能会想，难道有监督学习和无监督学习就是非黑即白的关系吗？有没有灰呢？Good idea。灰是存在的。二者的中间带就是半监督学习（semi-supervised learning）。对于半监督学习，其训练数据的一部分是有标签的，另一部分没有标签，而没标签数据的数量常常极大于有标签数据数量（这也是符合现实情况的）。隐藏在半监督学习下的基本规律在于：数据的分布必然不是完全随机的，通过一些有标签数据的局部特征，以及更多没标签数据的整体分布，就可以得到可以接受甚至是非常好的分类结果。（此处大量忽略细节）
+>
+- 因此，learning家族的整体构造是这样的：
+- 有监督学习（分类，回归）
+- ↕
+- 半监督学习（分类，回归），transductive learning（分类，回归）
+- ↕
+- 半监督聚类（有标签数据的标签不是确定的，类似于：肯定不是xxx，很可能是yyy）
+- ↕
+- 无监督学习（聚类）
+ 
+   
+ 
+### 参考资料：
+- 本文地址 http://whenbar.com
+- 知乎回答无监督学习 https://www.zhihu.com/question/23194489
 - https://www.coursera.org/learn/machine-learning/supplement/aAgxl/what-is-machine-learning 
 
 - https://www.coursera.org/learn/machine-learning/supplement/1O0Bk/unsupervised-learning
 
-- [pdf课件下载](https://d3c33hcgiwev3.cloudfront.net/_974fa7509d583eabb592839f9716fe25_Lecture1.pdf?Expires=1498262400&Signature=QxSmAALlfrh-TI-QuTASj8sQ676ylvL35926XM3tpOcv01BUU~7xNWFnceuZIev7jwP84g6hJw91MYaw1X7WLP-Zs4yzgpSQ~Hd2EW8XJBYpzdvOsAdCLeNOGcV21d4yNrKeA5oDbycGixH8XmWoiZG~G6ykbUIAIVZXk4TQiQg_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A)
+- [吴恩达PDF课件下载](https://d3c33hcgiwev3.cloudfront.net/_974fa7509d583eabb592839f9716fe25_Lecture1.pdf?Expires=1498262400&Signature=QxSmAALlfrh-TI-QuTASj8sQ676ylvL35926XM3tpOcv01BUU~7xNWFnceuZIev7jwP84g6hJw91MYaw1X7WLP-Zs4yzgpSQ~Hd2EW8XJBYpzdvOsAdCLeNOGcV21d4yNrKeA5oDbycGixH8XmWoiZG~G6ykbUIAIVZXk4TQiQg_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A)
 
+- [监督学习导论PDF](http://pages.cs.wisc.edu/~jerryzhu/pub/sslicml07.pdf) 
