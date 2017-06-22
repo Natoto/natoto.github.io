@@ -59,3 +59,6 @@ Tom Mitchell provides a more modern definition: "A computer program is said to l
 - https://www.coursera.org/learn/machine-learning/supplement/aAgxl/what-is-machine-learning 
 
 - https://www.coursera.org/learn/machine-learning/supplement/1O0Bk/unsupervised-learning
+
+- [pdf课件下载](https://d3c33hcgiwev3.cloudfront.net/_974fa7509d583eabb592839f9716fe25_Lecture1.pdf?Expires=1498262400&Signature=QxSmAALlfrh-TI-QuTASj8sQ676ylvL35926XM3tpOcv01BUU~7xNWFnceuZIev7jwP84g6hJw91MYaw1X7WLP-Zs4yzgpSQ~Hd2EW8XJBYpzdvOsAdCLeNOGcV21d4yNrKeA5oDbycGixH8XmWoiZG~G6ykbUIAIVZXk4TQiQg_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A)
+
