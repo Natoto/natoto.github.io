@@ -1,9 +1,9 @@
 # Site settings
-title: Natoto Blog
+title: 共田君的博客
 SEOTitle: 共田君的博客 | WHENBAR.COM
 header-img: img/home-bg.jpg
 email: nonato@foxmail.com
-description: "长方体混凝土瞬间移动工程师 专注移动开发，略懂前端，略懂脚本，略懂机器学习"
+description: "长方体混凝土瞬间移动工程师 专职移动开发，略懂前端，略懂脚本，略懂机器学习"
 keyword: "ios"
 url: "http://whenbar.com"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
@@ -70,7 +70,7 @@ ga_domain: whenbar.com
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "长方体混凝土瞬间移动工程师 专注移动开发，略懂前端，略懂脚本，略懂机器学习"
+sidebar-about-description: "长方体混凝土瞬间移动工程师 专职移动开发，略懂前端，略懂脚本，略懂机器学习"
 sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
