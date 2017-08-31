@@ -97,3 +97,5 @@ friends: [
         href: "http://www.cnblogs.com/nonato"
     }
 ]
+
+theme: jekyll-theme-cayman
