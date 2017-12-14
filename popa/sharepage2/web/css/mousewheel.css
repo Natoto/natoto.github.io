@@ -1,0 +1,61 @@
+@charset "UTF-8";
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td{margin:0;padding:0;}
+*{box-sizing:border-box;}
+html,body{font-family:微软雅黑;height:100%;overflow:hidden}
+fieldset,img{border:0;display:block;}
+.clearfix:after{content:"";height:0;display:block;visibility:hidden;clear:both;}
+.clearfix{zoom:1;}
+ol,ul,li{list-style:none;}
+h1,h2,h3,h4,h5,h6{font-size:100%;}
+i,em{font-style:normal;}
+input,button,select,textarea{outline:none;border:0;} 
+textarea{resize:none; }
+a{text-decoration:none; }
+a:hover{text-decoration:none; }
+.none{display:none;}
+.b_body{z-index:9;width:100%;height:100%;overflow:hidden;}
+.c_body{z-index:9;width:1200px;height:100%;overflow:hidden;margin:0 auto;}
+.c_con{position:absolute;width:100%;height:2000px;top:0;}
+.c_b{padding-top:50px;-webkit-box-sizing:border-box;position:relative;background-image:url(../images/bg.png);float:left;}
+.color_a{background-color:#2dcdcd}
+.color_b{background-color:#b262da}
+.color_c{background-color:#2cb539}
+.color_d{background-color:#ffc800}
+/*  */
+.bg{background:url(../images/bg.png) no-repeat center center;}
+.nav{height:50px;background:#fff;position:fixed;left:0;top:0;width:100%;z-index:9}
+.nav a{height:32px;line-height:32px;margin-top:9px;display:block;float:left;margin-right:50px;color:#666;font-size:14px;}
+.nav a:hover,.nav a.clk{border-bottom:2px solid #666}
+.nav_logo{height:100%;width:70px;background:url(../images/logo.png) no-repeat center center;float:right;display:block;}
+/*  */
+.c_b img{width:auto;height:60%;display:block;position:absolute;bottom:0;left:50%}
+.c_b p{text-align:center;font-size:30px;color:#fff;line-height:44px;position:absolute;width:100%;top:20%}
+.c_b p.mtt{top:27%}
+/* 左右两侧 */
+.lra{position:fixed;top:50%;margin-top:-32px;width:27px;height:47px;display:block}
+
+.lt{left:40px;background:url(../images/lt.png)}
+.rt{right:40px;background:url(../images/rt.png)}
+/**/
+.ind_footer{width:100%;position:fixed;bottom:0;left:0;background:#fff;height:50px;line-height:50px;color:#5a5a5a;font-size:12px}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 圆点 */
+.right_list{width:auto;position:fixed;top:80px;left:50%;z-index:9;display:table;margin-left:-74px;}
+.right_list div{display:table-cell;vertical-align:middle;width:auto;right:15px;}
+.right_list .rl ul li{float:right;display:block;overflow:hidden;width:17px;height:18px;margin-left:15px;float:left;cursor:pointer;background:url(../images/yd_a.png)}
+.right_list .rl ul li.clk{border-radius:20px;background:url(../images/yd_b.png)}
+.right_list .rl ul li:hover{/* background:url(../images/yd_b.png) */}

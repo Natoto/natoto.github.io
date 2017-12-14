@@ -1,0 +1,15 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "Q2MLJP44KF.com.bobaiapp.popa",
+                "paths": [ "/popai"]
+            },
+            {
+                "appID": "Q2MLJP44KF.com.bobaiapp.popa",
+                "paths": [ "*" ]
+            }
+        ]
+    }
+}
