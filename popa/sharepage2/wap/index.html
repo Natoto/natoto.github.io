@@ -28,6 +28,10 @@
 </script>
 <script type="text/javascript">
 
+  window.onload = function(){
+
+     
+  };
 	var openuserId=0;
 	var iphoneSchema = "POPA://openuser?uid="+openuserId;
 	function getParameter()
@@ -111,7 +115,7 @@
     .swiper-slide {
       text-align: center;
       font-size: 18px;
-      background: #fff;
+      /*background: #fff;*/
 
       /* Center slide text vertically */
       display: -webkit-box;
@@ -149,35 +153,65 @@
   <!-- Swiper -->
   <div class="swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">Slide 1</div>
-      <div class="swiper-slide">Slide 2</div>
-      <div class="swiper-slide">Slide 3</div>
-      <div class="swiper-slide">Slide 4</div>
-      <div class="swiper-slide">Slide 5</div>
-      <div class="swiper-slide">Slide 6</div>
-      <div class="swiper-slide">Slide 7</div>
-      <div class="swiper-slide">Slide 8</div>
-      <div class="swiper-slide">Slide 9</div>
-      <div class="swiper-slide">Slide 10</div>
-    </div>
-    <!-- Add Pagination -->
-    <div class="swiper-pagination"></div>
+      <div class="swiper-slide">
+      <img style="width: 100%;height: 100%;" src="切图/tupian.png"></img>
+      </div>
+      <div class="swiper-slide">
+      <img class="slider-img"  src="切图/testvedio.png"></img></div>
+      <div class="swiper-slide">
+      <img class="slider-img" src="切图/tupian.png"></img></div>
+      <div class="swiper-slide">
+      <video class="slider-img" src="切图/SCVideo-Merged.mov" height="100%" controls="controls"> 
+      <div class="swiper-slide">
+      <img class="slider-img"  src="切图/tupian.png"></img></div>
+      <div class="swiper-slide">
+      <img class="slider-img"  src="切图/tupian.png"></img></div> 
+ 
+    </div> 
   </div>
 
-  <!-- Swiper JS -->
+  <div id="leftArrow" style="position: absolute; left: 10px; margin-top: -50%; z-index: 1;">
+  <img src="切图/leftarrow.png"> </div> 
+
+  <div id="rightarrow" style="position: absolute; right: 10px; margin-top: -50%; z-index: 1;">
+  <img src="切图/rightarrow.png"> </div> 
+
   <script src="../dist/js/swiper.min.js"></script>
 
   <!-- Initialize Swiper -->
   <script>
     var swiper = new Swiper('.swiper-container', {
       slidesPerView: 1.4,
-      spaceBetween: 20,
+      spaceBetween: 0,
       centeredSlides: true,
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
       },
+      navigation: {
+        nextEl: '#leftArrow',
+        prevEl: '#rightarrow',
+      },
     });
+
+    let that = swiper;
+    swiper.on('slideChange', function (e) {
+      console.log('slide changed',that.clickedIndex,that.realIndex);
+      if (that.realIndex == 0) { $('#rightarrow').hide() }
+      else{
+         $('#rightarrow').show() 
+      }
+      if (that.realIndex == 5) { $('#leftArrow').hide() }
+      else{
+        $('#leftArrow').show()
+      }
+    });
+    //swiper文档 http://idangero.us/swiper/api/
+    //zeptojs文档 http://www.css88.com/doc/zeptojs_api/#index
+
+    // $("#leftArrow").click(function(e){
+    //       alert("click");
+    //   });
   </script>
 
 

@@ -1,6 +1,6 @@
 /* CSS Document */
 html{ height:100%; }
-body{ font:16px 'Microsoft YaHei',Helvetica; height:100%; min-height:100%; word-break:break-word; }
+body{ font:16px 'Microsoft YaHei',Helvetica; height:auto; min-height:100%; word-break:break-word; }
 ul,li{ list-style:none; }
 .left{ float:left; }
 .right{ float:right; }
@@ -135,4 +135,5 @@ nav ul li a{color:#FFFFFF;display:block;height:100%}
 .none{display:none}
 
 
-.menuboxul{ display: block;padding-left: 20px;padding-right: 20‒;padding-right: 20px; margin-top: 11px;}
+.menuboxul{display: none; padding-left: 20px;padding-right: 20‒;padding-right: 20px; margin-top: 11px;}
+.slider-img{width: 100%;height: 100%;}
