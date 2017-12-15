@@ -136,4 +136,4 @@ nav ul li a{color:#FFFFFF;display:block;height:100%}
 
 
 .menuboxul{display: none; padding-left: 20px;padding-right: 20‒;padding-right: 20px; margin-top: 11px;}
-.slider-img{width: 100%;height: 100%;}
+.slider-img{width: 100%;height: 100%; border-radius: 20px; overflow: hidden;}
