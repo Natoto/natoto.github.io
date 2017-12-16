@@ -21,15 +21,12 @@
 <script src="../indexwap/encrypt/components/mode-ecb.js"></script>
 <script type="text/javascript" src="../indexwap/openpopa/openpopa.js"></script> 
 <script type="text/javascript" src="js/vue.js"></script>
-
 <script>
 	var glb={
 		isMove:true
 	}
-</script>
-<script type="text/javascript">
-  
-</script>
+</script> 
+
 <script type="text/javascript"> 
 	var openuserId=0;
 	var iphoneSchema = "POPA://openuser?uid="+openuserId;
@@ -89,20 +86,21 @@
 	}
 </script>
 
-<script src="../dist/js/swiper.min.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+<script src="../dist/js/swiper.min.js"></script> 
+<script type="text/javascript" src="popatest.js"></script>
 <script type="text/javascript">
     
   window.onload=function(){ 
 
+    
     var c=new Vue({
         el:'#container',
         data:{
           boxshow:false,
-          name:'大骏的南无',
-          bopaiId:'daydren',
+          name:POPAOPUSINFO.data.opusList[0].userName,
+          bopaiId:POPAOPUSINFO.data.opusList[0].userId,
           msg:'welcome vue!',
-          arr:['apple','orange','banana'],
+          arr: POPAOPUSINFO.data.opusList,
           json:{a:'apple',b:'orange',c:'banana'}
         },
         methods: {
@@ -145,19 +143,21 @@
           $('#leftArrow').show()
         }
       });
-     
 
-      axios.get('/json/cdn/opus/get_opus_list', {
-      params: {
-          ID: 12345
-        }
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    // var opus = new POPAOPUSINFO();
+    console.log(POPAOPUSINFO)     
+
+      // axios.get('http://106.14.83.31:9010/json/cdn/opus/get_opus_list', {
+      // params: {
+      //     userId: 100031
+      //   }
+      // })
+      // .then(function (response) {
+      //   console.log(response);
+      // })
+      // .catch(function (error) {
+      //   console.log(error);
+      // });
  
   };
 
@@ -234,27 +234,13 @@
       <div class="swiper-container">
         <div class="swiper-wrapper" id="swiperitems">
 
-          <div v-for="v in arr" class="swiper-slide">
-            <img style="width: 100%;height: 90%;" src="切图/tupian.png"></img>
-            <label style="font-size: 10px;color: #000;margin-left: 10px;">13:00</label>
-          </div> 
+          <div v-for="v in arr" class="swiper-slide" :key="v.id">
+            <img style="z-index: -1;width: 90%;height: 90%; box-shadow: 0px 10px 10px #aaaaaa;border-radius: 20px;" :src="v.opusImg"></img>
+             
+            <video v-if="v.videoPath.length>0" style="position: absolute; bottom:35px; z-index: 1;width: 90%;height: 90%;border-radius: 20px;background: #000;" :src="v.videoPath" height="90%" controls="controls"> </video> 
+            <label style="margin-top: 10px; font-size: 10px;color: #000;margin-left: 10px;">{{v.createDate}}</label>
+          </div>  
 
- <!--          <div class="swiper-slide">
-            <img class="slider-img"  src="切图/testvedio.png"></img></div>
-          
-          <div class="swiper-slide"> 
-            <img class="slider-img" style="left:0px;top:0px;position: absolute;z-index: -1;" src="切图/tupian.png"></img>
-          <video class="slider-img" src="http://7xicym.com1.z0.glb.clouddn.com/20171029124946_eqjGm43qWsri-SCVideo-Merged.mov" height="100%" controls="controls"> </video></div>
-
-          <div class="swiper-slide">
-          <img class="slider-img" src="切图/tupian.png"></img></div>
-          
-          <div class="swiper-slide">
-          <img class="slider-img"  src="切图/tupian.png"></img></div>
-          
-          <div class="swiper-slide">
-          <img class="slider-img"  src="切图/tupian.png"></img></div>  -->
-     
         </div> 
       </div>
       <div id="leftArrow" style="position: absolute; left: 10px; margin-top: -80%; z-index: 1;">
@@ -264,78 +250,16 @@
       <img src="切图/rightarrow.png"> </div> 
      
       <div style="width: 100%;height: 80px;margin-top: 0px;display: flex;justify-content: flex-start;flex-direction: column;align-items: center;">
-          <button style="background-color: #DC5CE4;border-radius: 15px;height: 30px; width: 100px; color: #fff;" >下载博拍</button>
+          <a href="http://ios.bopaiapp.com" style="text-align: center;line-height:30px; background-color: #DC5CE4;border-radius: 15px;height: 30px; width: 100px; color: #fff;" >下载博拍</a>
+          
           <label style="color: #949494;font-size: 10px;">了解博拍</label>
           <img style="width: 16px;height: 10px;" src="切图/uparrow.png"></img>
       </div>
   
 
   </div>
-
-
-  <script> 
-    // for (var i = 0; i < 5; i++) {
-    //   console.log('idx:',i);
-    //   // $('#swiperitems').add('label').css('background','red');      
-    //   $("<div class=\"swiper-slide\"><img style=\"width: 100%;height: 100%;\" src=\"切图/tupian.png\"></img></div>").appendTo("#swiperitems");
-    // }
-
-    //swiper文档 http://idangero.us/swiper/api/
-    //zeptojs文档 http://www.css88.com/doc/zeptojs_api/#index
-
-    // $("#leftArrow").click(function(e){
-    //       alert("click");
-    //   });
-</script>
-
-<!-- <div style="float:right;margin-left:10px;margin-top:7px;color: #DC5CE4;margin-right:16px;border-radius: 7.8px;
-    border: 2px solid #DC5CE4;text-align: center;padding: 3px 12px;font-family: PingFangSC-Medium;font-size: 13px;color: #DC5CE4;border: 1.5px solid #DC5CE4;border-radius: 8px;">到APP查看</div>
-	</div>
-	<div class="ind_box">
-	<div style="
-    margin-top: 51px;
-    text-align: center;
-    color: #000000;
-    font-family: PingFangSC-Medium;
-    font-size: 18px;
-    color: #000000;
-">大骏的南无</div>
-<div style="
-    text-align: center;
-    font-size: 15px;
-    color: #7A7A7A;
-">daydren</div>
-
-<div><img src="切图/左侧按钮.png" class="wt_img" style="
-    width: 9.45px;
-    height: 9.45px;
-    display: inline-block;
-    margin-top: 100px;
-    float: left;
-    margin-left: 31.05px;
-">
-		<img src="切图/tupian.png" class="wt_img" style="
-    margin-top: 10.5px;
-    margin-left: 75px;
-"></div> -->
-
-
-		<!-- <p class="wt_t" id="nickName"></p>
-		<p class="wt_b" id="userCode"></p>
-				<div class="foot">
-			 <div class="d_table">
-				 <div class="d_td">
-					<p class="d_td2">了解博拍</p>
-				 </div>
-			 </div>
-			 <a href="http://ios.bopaiapp.com" target="_blank" style="
-    background: #DC5CE4;
-    border: 4px solid #DC5CE4;
-    border-radius: 100px;
-">下载APP</a>
-		</div>
-		
-	</div> -->
+ 
+ 
 </body>
 
 	<script type="text/javascript">
