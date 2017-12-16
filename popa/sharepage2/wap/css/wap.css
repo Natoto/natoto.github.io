@@ -1,6 +1,6 @@
 /* CSS Document */
 html{ height:100%; }
-body{ font:16px 'Microsoft YaHei',Helvetica; height:auto; min-height:100%; word-break:break-word; }
+body{ font:16px 'Microsoft YaHei',Helvetica; height:auto; min-height:100%; word-break:break-word; background: #fff;}
 ul,li{ list-style:none; }
 .left{ float:left; }
 .right{ float:right; }
@@ -42,7 +42,7 @@ input,button,textarea{-webkit-appearance: none; padding:0;margin:0; border:none;
 .tit_b,.tit_c{color:#9b999a;font-size:0.4rem;text-align:center;font-weight:bold;margin-top:0.5rem;}
 .tit_c{margin-top:3rem;}
 /* all */
-.nav{width:100%;height:1.76rem;background:#fff;position:fixed;top:0;left:0;z-index:9999;background: #FFFFFF;}
+.nav{width:100%;height:1.76rem;background:#fff;position:fixed;top:0;left:0;z-index:9999;background: #FFFFFF;border-bottom:solid 0.5px  #979797;}
 
 .one{background-color:#2dcdcd}
 .two{background-color:#b262da}

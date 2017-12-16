@@ -20,6 +20,7 @@
 <script src="../indexwap/encrypt/rollups/tripledes.js"></script>
 <script src="../indexwap/encrypt/components/mode-ecb.js"></script>
 <script type="text/javascript" src="../indexwap/openpopa/openpopa.js"></script> 
+<script type="text/javascript" src="js/vue.js"></script>
 
 <script>
 	var glb={
@@ -27,11 +28,9 @@
 	}
 </script>
 <script type="text/javascript">
-
-  window.onload = function(){
-
-     
-  };
+  
+</script>
+<script type="text/javascript"> 
 	var openuserId=0;
 	var iphoneSchema = "POPA://openuser?uid="+openuserId;
 	function getParameter()
@@ -90,6 +89,80 @@
 	}
 </script>
 
+<script src="../dist/js/swiper.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+<script type="text/javascript">
+    
+  window.onload=function(){ 
+
+    var c=new Vue({
+        el:'#container',
+        data:{
+          boxshow:false,
+          name:'大骏的南无',
+          bopaiId:'daydren',
+          msg:'welcome vue!',
+          arr:['apple','orange','banana'],
+          json:{a:'apple',b:'orange',c:'banana'}
+        },
+        methods: {
+            reverseMessage: function () {
+              this.msg = this.msg.split('').reverse().join('')
+            },
+            show:function(){
+               this.boxshow = (this.boxshow==true)?false:true;
+            },
+            add:function(){
+              this.arr.push('tomato');
+            },
+        }
+      })
+
+     var swiper = new Swiper('.swiper-container', {
+
+        slidesPerView: 1.4,
+        spaceBetween: 0,
+        centeredSlides: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '#leftArrow',
+          prevEl: '#rightarrow',
+        },
+      });
+
+      let that = swiper;
+      swiper.on('slideChange', function (e) {
+        console.log('slide changed',that.clickedIndex,that.realIndex);
+        if (that.realIndex == 0) { $('#rightarrow').hide() }
+        else{
+           $('#rightarrow').show() 
+        }
+        if (that.realIndex == 5) { $('#leftArrow').hide() }
+        else{
+          $('#leftArrow').show()
+        }
+      });
+     
+
+      axios.get('/json/cdn/opus/get_opus_list', {
+      params: {
+          ID: 12345
+        }
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+ 
+  };
+
+  </script>
+ 
   <!-- Link Swiper's CSS -->
   <link rel="stylesheet" href="../dist/css/swiper.min.css">
 
@@ -100,7 +173,7 @@
       height: 100%;
     }
     body {
-      background: #eee;
+      background: #fff;
       font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
       font-size: 14px;
       color:#000;
@@ -110,13 +183,12 @@
     .swiper-container {
       width: 100%;
       height: 75%; 
-      top: 15%;
+      margin-top:0%;
     }
     .swiper-slide {
       text-align: center;
       font-size: 18px;
       /*background: #fff;*/
-
       /* Center slide text vertically */
       display: -webkit-box;
       display: -ms-flexbox;
@@ -129,7 +201,10 @@
       -webkit-box-align: center;
       -ms-flex-align: center;
       -webkit-align-items: center;
-      align-items: center;
+      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+
     }
   </style>
 
@@ -139,9 +214,9 @@
 	<div class="nav">
 		<div class="logo"></div>
 
-		<div style="float:left;margin-left:10px;margin-top: 10px;font-size: 12px;color: #DC5CE4;;">博拍</div>
+		<div style="float:left;margin-left:10px;margin-top: 10px;font-size: 12px;color: #DC5CE4; ">博拍</div>
 		<nav id="show" style="margin-right: 20px;width: 18px;height: 17px">
-	<ul class="menuboxul" >
+	  <ul class="menuboxul" >
 				<li><a href="index.html" id="toIndex";>首页</a></li>
 				<li><a href="guanyuwomen.html">关于博拍</a></li>
 				<li><a href="xianzaiyingyong.html">下载应用</a></li>
@@ -150,78 +225,68 @@
 		</nav>
 		</div> 
 
-  <!-- Swiper -->
-  <div class="swiper-container">
-    <div class="swiper-wrapper">
-
-      <div class="swiper-slide">
-      <img style="width: 100%;height: 100%;" src="切图/tupian.png"></img>
+    <div id="container" style="width: 100%;height: 100%;">      
+      <div style="width: 100%;height: 50px;margin-top: 50px;display: flex;justify-content: center;flex-direction: column;">
+        <label style="font-size: 18px;color: #000;text-align: center;">{{name}}</label>
+        <label style="font-size: 15px;color: #7A7A7A;text-align: center;" >{{bopaiId}}</label>
       </div>
+      <!-- Swiper -->
+      <div class="swiper-container">
+        <div class="swiper-wrapper" id="swiperitems">
 
-      <div class="swiper-slide">
-      <img class="slider-img"  src="切图/testvedio.png"></img></div>
-      
-      <div class="swiper-slide">
+          <div v-for="v in arr" class="swiper-slide">
+            <img style="width: 100%;height: 90%;" src="切图/tupian.png"></img>
+            <label style="font-size: 10px;color: #000;margin-left: 10px;">13:00</label>
+          </div> 
 
-      <img class="slider-img" style="left:0px;top:0px;position: absolute;z-index: -1;" src="切图/tupian.png"></img>
-      <video class="slider-img" src="http://7xicym.com1.z0.glb.clouddn.com/20171029124946_eqjGm43qWsri-SCVideo-Merged.mov" height="100%" controls="controls"> </video></div>
+ <!--          <div class="swiper-slide">
+            <img class="slider-img"  src="切图/testvedio.png"></img></div>
+          
+          <div class="swiper-slide"> 
+            <img class="slider-img" style="left:0px;top:0px;position: absolute;z-index: -1;" src="切图/tupian.png"></img>
+          <video class="slider-img" src="http://7xicym.com1.z0.glb.clouddn.com/20171029124946_eqjGm43qWsri-SCVideo-Merged.mov" height="100%" controls="controls"> </video></div>
 
-      <div class="swiper-slide">
-      <img class="slider-img" src="切图/tupian.png"></img></div>
-      
-      <div class="swiper-slide">
-      <img class="slider-img"  src="切图/tupian.png"></img></div>
-      
-      <div class="swiper-slide">
-      <img class="slider-img"  src="切图/tupian.png"></img></div> 
- 
-    </div> 
+          <div class="swiper-slide">
+          <img class="slider-img" src="切图/tupian.png"></img></div>
+          
+          <div class="swiper-slide">
+          <img class="slider-img"  src="切图/tupian.png"></img></div>
+          
+          <div class="swiper-slide">
+          <img class="slider-img"  src="切图/tupian.png"></img></div>  -->
+     
+        </div> 
+      </div>
+      <div id="leftArrow" style="position: absolute; left: 10px; margin-top: -80%; z-index: 1;">
+      <img src="切图/leftarrow.png"> </div> 
+
+      <div id="rightarrow" style="position: absolute; right: 10px; margin-top: -80%; z-index: 1;">
+      <img src="切图/rightarrow.png"> </div> 
+     
+      <div style="width: 100%;height: 80px;margin-top: 0px;display: flex;justify-content: flex-start;flex-direction: column;align-items: center;">
+          <button style="background-color: #DC5CE4;border-radius: 15px;height: 30px; width: 100px; color: #fff;" >下载博拍</button>
+          <label style="color: #949494;font-size: 10px;">了解博拍</label>
+          <img style="width: 16px;height: 10px;" src="切图/uparrow.png"></img>
+      </div>
+  
+
   </div>
 
-  <div id="leftArrow" style="position: absolute; left: 10px; margin-top: -50%; z-index: 1;">
-  <img src="切图/leftarrow.png"> </div> 
 
-  <div id="rightarrow" style="position: absolute; right: 10px; margin-top: -50%; z-index: 1;">
-  <img src="切图/rightarrow.png"> </div> 
+  <script> 
+    // for (var i = 0; i < 5; i++) {
+    //   console.log('idx:',i);
+    //   // $('#swiperitems').add('label').css('background','red');      
+    //   $("<div class=\"swiper-slide\"><img style=\"width: 100%;height: 100%;\" src=\"切图/tupian.png\"></img></div>").appendTo("#swiperitems");
+    // }
 
-  <script src="../dist/js/swiper.min.js"></script>
-
-  <!-- Initialize Swiper -->
-  <script>
-    var swiper = new Swiper('.swiper-container', {
-      slidesPerView: 1.4,
-      spaceBetween: 0,
-      centeredSlides: true,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '#leftArrow',
-        prevEl: '#rightarrow',
-      },
-    });
-
-    let that = swiper;
-    swiper.on('slideChange', function (e) {
-      console.log('slide changed',that.clickedIndex,that.realIndex);
-      if (that.realIndex == 0) { $('#rightarrow').hide() }
-      else{
-         $('#rightarrow').show() 
-      }
-      if (that.realIndex == 5) { $('#leftArrow').hide() }
-      else{
-        $('#leftArrow').show()
-      }
-    });
     //swiper文档 http://idangero.us/swiper/api/
     //zeptojs文档 http://www.css88.com/doc/zeptojs_api/#index
 
     // $("#leftArrow").click(function(e){
     //       alert("click");
     //   });
-  </script>
-
+</script>
 
 <!-- <div style="float:right;margin-left:10px;margin-top:7px;color: #DC5CE4;margin-right:16px;border-radius: 7.8px;
     border: 2px solid #DC5CE4;text-align: center;padding: 3px 12px;font-family: PingFangSC-Medium;font-size: 13px;color: #DC5CE4;border: 1.5px solid #DC5CE4;border-radius: 8px;">到APP查看</div>
