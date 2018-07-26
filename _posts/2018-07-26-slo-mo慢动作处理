@@ -1,0 +1,309 @@
+---
+layout: post
+title:  slo-mo慢动作视频处理
+tag: React Native
+date: 2018-07-26 
+
+---
+
+#slo-mo慢动作视频处理
+slo-mo模式是iOS系统拍摄模式的一种，跟其他模式在存储方式上面和有着本质的区别,如下慢动作演示
+ 
+<iframe 
+    height=450 
+    width=800  src="https://test.noizztv.com/article/share?id=9208285652934558845&s_bucket=na" 
+    frameborder=0 
+    allowfullscreen>
+</iframe>
+文章主要解决以下问题 
+>1. 慢动作视频时长
+>2.  慢动作视频播放原理
+>3. 导出视频
+>4. 慢动作视频的编辑更新
+
+---
+###  iOS系统相册的bug
+系统相册有个bug，慢动作视频时长显示的是其拍摄时长，而非视频真实播放时长
+![实际时长为8秒](https://upload-images.jianshu.io/upload_images/1091358-27ceb5bf639aea44.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+### iOS系统如何播放慢动作视频的
+
+slo-mo模式的视频在相册中存储的是正常拍摄的原视频，其在播放的时候读取本地拍摄时存储的慢拍信息，控制播放速度，而不是生成慢动作视频，这样做猜测是为了播放和展示效率，`因为视频导出是很慢的`，ps：重要的事高亮说。
+
+### iOS系统如何编辑慢拍视频
+普通的视频只有裁剪的功能，而slo-mo慢动作模式的视频支持慢放区域的选取，这个影响真实时长，但是不会合成为新的慢拍视频，只是更新慢拍信息，控制播放时候播放速率
+
+![image.png](https://upload-images.jianshu.io/upload_images/1091358-f2a95666c0e2e74f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+----
+
+有个认知前提，iOS目前获取视频获取相册都是通过PHFetchResult
+### 获取所有相册
+
+```
+
+/**
+ 获取所有内容不为空的的相册
+ */
+- (NSArray <PHAssetCollection *> *)_PHFetchAllUserAlbum:(YYPLFetchOptions *)options{
+    NSMutableArray *assetAlbums = [NSMutableArray array];
+    PHFetchResult *result = nil;
+    if (options.disableSmartAlbum) {
+        // 相机胶卷
+        result = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil];
+        
+    } else {
+        // 所有智能相册
+        result = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAny options:nil];
+    }
+    // 系统相册+用户创建
+    for (id elem in result) {
+        if ([elem isKindOfClass:[PHAssetCollection class]]) {
+            [assetAlbums addObject:elem];
+        }
+    }
+    PHFetchResult *userCreate = [PHCollectionList fetchTopLevelUserCollectionsWithOptions:nil];
+    for (id elem in userCreate) {
+        if ([elem isKindOfClass:[PHAssetCollection class]]) {
+            [assetAlbums addObject:elem];
+        }
+    }
+    return [assetAlbums copy];
+}
+
+```
+
+### 检测慢拍动作的视频,99%的人都会犯的错
+requestAVAssetForVideo回调过来的asset绝大多数时候都是AVURLAsset，
+所谓AVURLAsset就是可以根据URL直接索引到这个视频，然而当有慢动作这类型的视频的时候就不是这种类型了，而是AVComposition模式。
+
+问题来了，为什么多数时候都不会报错呢，如果是类型不匹配早就崩溃了，
+这是因为` options.version =  PHVideoRequestOptionsVersionCurrent;`这句话，大多数时候都是写成`options.version =  PHVideoRequestOptionsVersionOriginal;` 直接取的原视频，原图片，而不是编辑之后的，因为相机拍完一定是存了一个原视频的，根据这个original去取一定会返回urlasset的。
+
+```
+- (NSString *)PH_requestRealFilePath
+{
+    __block NSString *filePath = nil;
+    PHImageManager *imageManager = [PHImageManager defaultManager];
+    switch (self.PH_asset.mediaType) {
+        case PHAssetMediaTypeImage:
+        {
+            PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+            options.version = PHImageRequestOptionsVersionOriginal;
+            options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+            options.synchronous = YES; // use synchronous request
+            [imageManager requestImageDataForAsset:self.PH_asset options:options resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
+                NSURL *fileURL = info[@"PHImageFileURLKey"];
+                if (fileURL) {
+                    filePath = [fileURL absoluteString];
+                }
+            }];
+            return filePath;
+        }
+        
+        case PHAssetMediaTypeVideo:
+        {
+            dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+            PHVideoRequestOptions *options = [[PHVideoRequestOptions alloc] init];
+            options.version =  PHVideoRequestOptionsVersionCurrent;
+//            options.version =  PHVideoRequestOptionsVersionOriginal;
+            @weakify(self);
+            
+          [imageManager cancelImageRequest:self.phReqId];
+           __block PHImageRequestID   reqid = 0;
+            reqid =   [imageManager requestAVAssetForVideo:self.PH_asset options:options resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
+                @strongify(self)
+                if ([[asset class] isSubclassOfClass:[AVURLAsset class]]) {
+                    filePath = [[(AVURLAsset *)asset URL] absoluteString];
+                    self.AVURL_asset = (AVURLAsset*)asset;
+                    dispatch_semaphore_signal(semaphore);
+                }
+                else if ([[asset class] isSubclassOfClass:[AVComposition class]]){
+                   
+                   reqid = [YYPLAsset getVideoPathFromPHAsset:self.asset  Complete:^(AVURLAsset *avurlAsset,NSString *path, NSString *fileName) {
+                        LogInfo(@"YYPLAsset+PH", @"慢节奏视频：%@", path);
+                        filePath = path;
+                        self.AVURL_asset = avurlAsset;
+                        [self PH_duration];
+                        dispatch_semaphore_signal(semaphore);
+                   } progressblock:^(float progress) {
+                       
+                   }];
+                    self.phReqId = reqid;
+                }
+            }];
+            self.phReqId = reqid;
+            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+            return filePath;
+        }
+            
+        default:
+        {
+            [YYLogger error:@"YYPLAsset+PH" message:@"self.PH_asset.mediaType is out of switch %zd",self.PH_asset.mediaType];
+        }
+            break;
+    }
+    return nil;
+}
+```
+### 如何取得视频的真实时长
+有几种认识的层次，
+1. 直接从phasset中去取时长，
+2. phasset中的是不准确的
+3. 从导出之后的视频中去获取
+4. 或许还有其他的办法取得
+经过前面的铺垫想必你一定能达到第三个层次了，因为相册中的duration是不准确的，那只是拍摄时候的时长，但是从导出的视频中获取未免也太久了，`因为视频导出时间很耗时` ，同上，况且时长而已嘛，一定没有那么复杂，另外微信可以直接读取真实的慢拍时长，这个时间几乎忽略不计，于是还得再找找相关的方法，于是找到了这个
+
+```
+
+- (void)PH_getRealDuration:(void (^)(double dur))resultBlock
+{
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    PHVideoRequestOptions *options = [[PHVideoRequestOptions alloc] init];
+    //FIXME:选择使用非均匀速率视频需要改回来
+    options.version =  PHVideoRequestOptionsVersionCurrent;
+    __block double dur = 0;
+    [[PHImageManager defaultManager] requestPlayerItemForVideo:self.PH_asset options:options resultHandler:^(AVPlayerItem * _Nullable playerItem, NSDictionary * _Nullable info) {
+        dur = CMTimeGetSeconds(playerItem.duration);
+        //慢拍视频 playerItem.asset 是一个AVComposition的类
+        NSLog(@"获取真实文件时长:%.2f",dur);
+        dispatch_semaphore_signal(semaphore);
+    }];
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    if (!isnan(dur) && dur>0) {
+        resultBlock(dur);
+        return;
+    }
+    dur =  CMTimeGetSeconds(self.AVURL_asset.duration);
+    if (isnan(dur) || !dur) {
+        dur =  self.PH_asset.duration;
+    }
+    resultBlock(dur);
+}
+
+```
+
+`requestPlayerItemForVideo ` api可以获取playerItem，里面的duration可以转换为真实时长，此方法并不耗时。
+
+
+### 导出视频
+
+慢拍真实视频是不存在的，必须要通过自有的api导出，其原理是读取当时慢拍保存的信息tracks等进行分步合成。
+
+```
+ 
+static int getPHAssetRandomKey(){
+    static int curRandomKey;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        curRandomKey = arc4random()%1000;
+    });
+    return curRandomKey;
+}
+
+typedef void(^ResultPath)(AVURLAsset *avurlAsset,NSString *filePath, NSString *fileName);
+
++ (PHImageRequestID)getVideoPathFromPHAsset:(PHAsset *)asset
+                       Complete:(ResultPath)result
+                  progressblock:(void (^)(float progress))progressblock
+{
+    NSArray *assetResources = [PHAssetResource assetResourcesForAsset:asset];
+    PHAssetResource *resource;
+    
+    for (PHAssetResource *assetRes in assetResources) {
+        if (@available(iOS 9.1, *)) {
+            if (assetRes.type == PHAssetResourceTypePairedVideo ||
+                assetRes.type == PHAssetResourceTypeVideo) {
+                resource = assetRes;
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    NSString *fileName = @"tempAssetVideo.mov";
+    if (resource.originalFilename) {
+        fileName = resource.originalFilename;
+    }
+   
+    if (@available(iOS 9.1, *)) {
+        if (asset.mediaType == PHAssetMediaTypeVideo ||
+            asset.mediaSubtypes == PHAssetMediaSubtypePhotoLive) {
+            PHVideoRequestOptions *options = [[PHVideoRequestOptions alloc] init];
+            options.version = PHImageRequestOptionsVersionCurrent;
+            options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+             
+        
+            NSString *PATH_MOVIE_FILE = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"sol-mo-%d-%@",getPHAssetRandomKey(),fileName]];
+            
+            if ([[NSFileManager defaultManager] fileExistsAtPath:PATH_MOVIE_FILE]) {
+                NSURL * url = [NSURL fileURLWithPath:PATH_MOVIE_FILE] ;
+                NSDictionary *options = @{ AVURLAssetPreferPreciseDurationAndTimingKey : @YES };
+                AVURLAsset *avasset = [[AVURLAsset alloc] initWithURL:url options:options];
+                result(avasset,url.absoluteString,fileName);
+                return 0;
+            }
+            [[NSFileManager defaultManager] removeItemAtPath:PATH_MOVIE_FILE error:nil];
+
+            PHImageManager *manager = [PHImageManager defaultManager];
+            PHImageRequestID reqid = [manager requestExportSessionForVideo:asset options:options exportPreset:AVAssetExportPreset960x540 resultHandler:^(AVAssetExportSession * _Nullable exportSession, NSDictionary * _Nullable info) {
+                
+                NSString *savePath = PATH_MOVIE_FILE;
+                exportSession.outputURL = [NSURL fileURLWithPath:savePath];
+                exportSession.shouldOptimizeForNetworkUse = NO;
+                exportSession.outputFileType = AVFileTypeMPEG4;
+                [exportSession exportAsynchronouslyWithCompletionHandler:^{
+                    switch ([exportSession status]) {
+                        case AVAssetExportSessionStatusCompleted:
+                        {
+                            NSURL * fileurl = [NSURL fileURLWithPath:PATH_MOVIE_FILE];
+                            NSDictionary *options = @{ AVURLAssetPreferPreciseDurationAndTimingKey : @YES };
+                            AVURLAsset *avasset = [[AVURLAsset alloc] initWithURL:fileurl options:options];
+                            
+                            result(avasset,fileurl.absoluteString,fileName);
+                            break;
+                        }
+                        case AVAssetExportSessionStatusFailed:
+                        case AVAssetExportSessionStatusCancelled:
+                        default:
+                        {
+                            [[NSFileManager defaultManager] removeItemAtPath:PATH_MOVIE_FILE error:nil];
+                            result(nil,nil, nil);
+                            break;
+                        }
+                    }
+                }];
+                
+            }];
+            return reqid;
+        } else {
+            result(nil,nil, nil);
+        }
+    } else {
+        // Fallback on earlier versions
+    }
+    return 0;
+}
+```
+
+再次说一句，导出时长是比较漫长的，大概一分钟真实时长导出需要十多秒，这样子的情况测试是会提bug的，产品可能是不会接受的，那么如何优化呢
+
+### 优化导出时长
+由于涉及到系统的api使用，目前从导出时长上面是无法缩短到明显的地步的
+但是，让用户感觉时长没那么久，那就可以做很多事情了
+有以下思路
+1. 加进度，导出的进度没有回调，没有kvo监听，但是有个progress可以实时获取，这里可以给一个定时器实时去取AVAssetExportSession的progress
+苹果的api如是说，
+```
+
+/* Specifies the progress of the export on a scale from 0 to 1.0.  A value of 0 means the export has not yet begun, A value of 1.0 means the export is complete. This property is not key-value observable. */
+@property (nonatomic, readonly) float progress;
+```
+
+2. 后台去合成，不阻塞用户当前操作
+但是要同时处理合成成功和失败的时机，在业务上做对应处理
+
+3. 播放器直接支持AVCompont格式创建播放器
+这个方式几乎不用任何等待，直接进入下一步操作，与ios相册播放器一样处理，确保用户体验友好。但是代价大，需要重写你的播放器生成方式。
+
+4. 或许你还有其他的更好方式，欢迎留言
