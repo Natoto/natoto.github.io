@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  手把手教你编译Flutter engine
-tag: flutter
+tag: flutter engine
 date: 2019-05-29 
 ---
 
@@ -55,6 +55,8 @@ solutions = [
 ```
 
 * 1.5    切换到engine目录
+
+
 ```
 $ cd engine
 ```
@@ -66,6 +68,9 @@ $ gclient sync
 ```
 
 * 1.7  进入src/flutter目录，拉取操作
+
+
+
 ```
 $ cd src/flutter
 $ git remote add upstream git@github.com:flutter/engine.git
@@ -76,10 +81,13 @@ $ git pull upstream master
 #### 2 回滚
 *  2.1   找到当前flutter对应的engine版本
 类似
+
 ```
 $  cat /Users/boo/Documents/flutter/bin/internal/engine.version 
 ```
+
 如1.5.4 hot fix版的engine版本号，这是一个commit号
+
 ```
 52c7a1e849a170be4b2b2fe34142ca2c0a6fea1f
 ```
@@ -93,13 +101,18 @@ HEAD is now at 52c7a1 Fix dart/create_updated_flutter_deps script so it actually
 ```
 
 查看当前版本号
+
 ```
 $  git rev-parse HEAD
 ```
+
 只同步指定commit版本命令
+
+
 ```
 gclient sync --with_branch_heads --with_tags  
 ```
+
 #### 3. 创建engine工程
 编译选项具体可以参考 [https://github.com/Natoto/flutterOnExistApp/wiki/%E5%B8%B8%E7%94%A8%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4](https://github.com/Natoto/flutterOnExistApp/wiki/%E5%B8%B8%E7%94%A8%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4)
 
