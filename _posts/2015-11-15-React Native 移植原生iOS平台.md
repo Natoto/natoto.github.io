@@ -5,18 +5,20 @@ tag: React Native
 date: 2015-11-15 
 ---
 
-#【React Native】React Native 移植原生iOS平台
+
+# 【React Native】React Native 移植原生iOS平台
 
 主要命令：
+
 ```
   (JS_DIR=`pwd`/ReactComponent; cd Pods/React/packager;  node packager.js  --root $JS_DIR)
 ```
-##(一)前言
+## (一)前言
 
 今天我们来看一下React Native移植到iOS原生应用,通过本节讲解,相信大家对于正在开发的iOS原生项目就可以移植到React Native平台中来,或者采取原生加RN混合开发模式啦。
 
 
-##(二)准备工作
+## (二)准备工作
 
 1.安装CocoaPods     -这个相应大家如果之前做过iOS开发应该都清除的吧。安装命令:gem install  cocoapods  注意如果出现安装权限问题,可以运行sudo gem install cocoapods命令
 
@@ -26,7 +28,7 @@ date: 2015-11-15
 
 以上步骤完成之后，在你项目根目录上面会存在一个React Native包，该命名为node_modules，和.xcodeproj文件平级。
 
-##(三)使用CocoaPods进行安装React Native库
+## (三)使用CocoaPods进行安装React Native库
 
 CocoaPods是iOS/Mac开发中的包管理器，我们需要使用CocoaPods来进行下载React Native。如果你到现在还没有安装CocoaPods，那么请点击了解安装向导  ，至于具体怎么样安装相信大家看官方向导或者百度一下，就会了。
 
@@ -48,7 +50,7 @@ pod 'React', :path => './node_modules/react-native', :subspecs => [
 
 然后运行命令进行安装: pod install
 
-##(四)创建React Native应用
+## (四)创建React Native应用
 
 下面你两个注意步骤:
 
@@ -206,7 +208,7 @@ class ReactView: UIView {
 
 如果大家没有这样做，那么可能会遇到Could not connect to development server的错误哦
 
-##(十)编译和运行
+## (十)编译和运行
 
 现在开始编译和运行你的应用，你会发现你的React Native应用运行在ReactView视图容器中了，具体截图如下
 
