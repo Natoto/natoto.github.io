@@ -4,7 +4,7 @@ SEOTitle: 共田君的博客 | WHENBAR.COM
 header-img: img/home-bg.jpg
 email: nonato@foxmail.com
 description: "长方体混凝土瞬间移动工程师 专职移动开发，略懂前端，略懂脚本，略懂机器学习"
-keyword: "ios"
+keywords: "ios,python,whenbar,共田君"
 url: "http://whenbar.com"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
